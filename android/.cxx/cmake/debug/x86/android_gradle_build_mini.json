@@ -1,16 +1,16 @@
 {
   "buildFiles": [
-    "/Users/efraespada/Documents/Github/stringcare/android/CMakeLists.txt"
+    "/Users/efraespada/Documents/stringcare/android/CMakeLists.txt"
   ],
   "cleanCommands": [
-    "/Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/efraespada/Documents/Github/stringcare/android/.cxx/cmake/debug/x86 --target clean"
+    "/Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/efraespada/Documents/stringcare/android/.cxx/cmake/debug/x86 --target clean"
   ],
   "libraries": {
     "stringcare-Debug-x86": {
       "artifactName": "stringcare",
-      "buildCommand": "/Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/efraespada/Documents/Github/stringcare/android/.cxx/cmake/debug/x86 --target stringcare",
+      "buildCommand": "/Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/efraespada/Documents/stringcare/android/.cxx/cmake/debug/x86 --target stringcare",
       "abi": "x86",
-      "output": "/Users/efraespada/Documents/Github/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/x86/libstringcare.so"
+      "output": "/Users/efraespada/Documents/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/x86/libstringcare.so"
     }
   }
 }

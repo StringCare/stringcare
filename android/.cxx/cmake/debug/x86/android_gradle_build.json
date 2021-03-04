@@ -1,12 +1,9 @@
 
 {
-	"buildFiles" : 
-	[
-		"/Users/efraespada/Documents/Github/stringcare/android/CMakeLists.txt"
-	],
+	"buildFiles" : [ "/Users/efraespada/Documents/stringcare/android/CMakeLists.txt" ],
 	"cleanCommands" : 
 	[
-		"/Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/efraespada/Documents/Github/stringcare/android/.cxx/cmake/debug/x86 --target clean"
+		"/Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/efraespada/Documents/stringcare/android/.cxx/cmake/debug/x86 --target clean"
 	],
 	"cppFileExtensions" : [ "cpp" ],
 	"libraries" : 
@@ -15,18 +12,18 @@
 		{
 			"abi" : "x86",
 			"artifactName" : "stringcare",
-			"buildCommand" : "/Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/efraespada/Documents/Github/stringcare/android/.cxx/cmake/debug/x86 --target stringcare",
+			"buildCommand" : "/Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/efraespada/Documents/stringcare/android/.cxx/cmake/debug/x86 --target stringcare",
 			"buildType" : "debug",
 			"files" : 
 			[
 				
 				{
 					"flags" : "  --target=i686-none-linux-android16 --gcc-toolchain=/Users/efraespada/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/efraespada/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -Dstringcare_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC    -c ",
-					"src" : "/Users/efraespada/Documents/Github/stringcare/ios/Classes/stringcare.cpp",
-					"workingDirectory" : "/Users/efraespada/Documents/Github/stringcare/android/.cxx/cmake/debug/x86"
+					"src" : "/Users/efraespada/Documents/stringcare/ios/Classes/stringcare.cpp",
+					"workingDirectory" : "/Users/efraespada/Documents/stringcare/android/.cxx/cmake/debug/x86"
 				}
 			],
-			"output" : "/Users/efraespada/Documents/Github/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/x86/libstringcare.so",
+			"output" : "/Users/efraespada/Documents/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/x86/libstringcare.so",
 			"toolchain" : "9773426447392027603"
 		}
 	},
