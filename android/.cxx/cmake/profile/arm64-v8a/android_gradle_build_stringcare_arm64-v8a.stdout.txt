@@ -1,0 +1,2 @@
+[1/2] Building CXX object CMakeFiles/stringcare.dir/Users/efraespada/Documents/Github/stringcare/ios/Classes/stringcare.cpp.o
+[2/2] Linking CXX shared library /Users/efraespada/Documents/Github/landa_flutter/build/stringcare/intermediates/cmake/profile/obj/arm64-v8a/libstringcare.so

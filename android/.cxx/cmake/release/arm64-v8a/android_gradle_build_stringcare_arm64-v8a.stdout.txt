@@ -1,0 +1,1 @@
+[1/1] Linking CXX shared library /Users/efraespada/Documents/Github/landa_flutter/build/stringcare/intermediates/cmake/release/obj/arm64-v8a/libstringcare.so

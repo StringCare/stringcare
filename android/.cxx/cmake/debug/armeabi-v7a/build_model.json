@@ -1,0 +1,70 @@
+{
+  "variant": {
+    "module": {
+      "rootBuildGradleFolder": "/Users/efraespada/Documents/Github/stringcare/example/android",
+      "sdkFolder": "/Users/efraespada/Library/Android/sdk",
+      "isNativeCompilerSettingsCacheEnabled": false,
+      "isBuildOnlyTargetAbiEnabled": true,
+      "splitsAbiFilterSet": [],
+      "intermediatesFolder": "/Users/efraespada/Documents/Github/stringcare/example/build/stringcare/intermediates",
+      "gradleModulePathName": ":stringcare",
+      "moduleRootFolder": "/Users/efraespada/Documents/Github/stringcare/android",
+      "makeFile": "/Users/efraespada/Documents/Github/stringcare/android/CMakeLists.txt",
+      "buildSystem": "CMAKE",
+      "compilerSettingsCacheFolder": "/Users/efraespada/Documents/Github/stringcare/example/android/.cxx",
+      "cxxFolder": "/Users/efraespada/Documents/Github/stringcare/android/.cxx",
+      "ndkFolder": "/Users/efraespada/Library/Android/sdk/ndk/21.3.6528147",
+      "ndkVersion": "21.3.6528147",
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "cmakeToolchainFile": "."
+    },
+    "buildSystemArgumentList": [],
+    "cFlagList": [],
+    "cppFlagsList": [],
+    "variantName": "debug",
+    "soFolder": "/Users/efraespada/Documents/Github/stringcare/example/build/stringcare/intermediates/cmake/debug/lib",
+    "objFolder": "/Users/efraespada/Documents/Github/stringcare/example/build/stringcare/intermediates/cmake/debug/obj",
+    "jsonFolder": "/Users/efraespada/Documents/Github/stringcare/android/.cxx/cmake/debug",
+    "gradleBuildOutputFolder": "/Users/efraespada/Documents/Github/stringcare/android/.cxx/cxx/debug",
+    "isDebuggableEnabled": true,
+    "validAbiList": [
+      "ARMEABI_V7A",
+      "ARM64_V8A",
+      "X86",
+      "X86_64"
+    ],
+    "buildTargetSet": []
+  },
+  "abi": "ARMEABI_V7A",
+  "abiPlatformVersion": 16,
+  "cxxBuildFolder": "/Users/efraespada/Documents/Github/stringcare/android/.cxx/cmake/debug/armeabi-v7a",
+  "jsonFile": "/Users/efraespada/Documents/Github/stringcare/android/.cxx/cmake/debug/armeabi-v7a/android_gradle_build.json",
+  "gradleBuildOutputFolder": "/Users/efraespada/Documents/Github/stringcare/android/.cxx/cxx/debug/armeabi-v7a",
+  "objFolder": "/Users/efraespada/Documents/Github/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/armeabi-v7a",
+  "buildCommandFile": "/Users/efraespada/Documents/Github/stringcare/android/.cxx/cmake/debug/armeabi-v7a/build_command.txt",
+  "buildOutputFile": "/Users/efraespada/Documents/Github/stringcare/android/.cxx/cmake/debug/armeabi-v7a/build_output.txt",
+  "modelOutputFile": "/Users/efraespada/Documents/Github/stringcare/android/.cxx/cmake/debug/armeabi-v7a/build_model.json",
+  "cmake": {
+    "cmakeListsWrapperFile": "/Users/efraespada/Documents/Github/stringcare/android/.cxx/cxx/debug/armeabi-v7a/CMakeLists.txt",
+    "toolchainWrapperFile": "/Users/efraespada/Documents/Github/stringcare/android/.cxx/cxx/debug/armeabi-v7a/android_gradle_build.toolchain.cmake",
+    "buildGenerationStateFile": "/Users/efraespada/Documents/Github/stringcare/android/.cxx/cxx/debug/armeabi-v7a/build_generation_state.json",
+    "cacheKeyFile": "/Users/efraespada/Documents/Github/stringcare/android/.cxx/cxx/debug/armeabi-v7a/compiler_cache_key.json",
+    "compilerCacheUseFile": "/Users/efraespada/Documents/Github/stringcare/android/.cxx/cxx/debug/armeabi-v7a/compiler_cache_use.json",
+    "compilerCacheWriteFile": "/Users/efraespada/Documents/Github/stringcare/android/.cxx/cxx/debug/armeabi-v7a/compiler_cache_write.json",
+    "toolchainSettingsFromCacheFile": "/Users/efraespada/Documents/Github/stringcare/android/.cxx/cxx/debug/armeabi-v7a/compiler_settings_cache.cmake",
+    "cmakeWrappingBaseFolder": "."
+  },
+  "jsonGenerationLoggingRecordFile": "/Users/efraespada/Documents/Github/stringcare/android/.cxx/cmake/debug/armeabi-v7a/json_generation_record.json",
+  "compileCommandsJsonFile": "/Users/efraespada/Documents/Github/stringcare/android/.cxx/cmake/debug/armeabi-v7a/compile_commands.json"
+}
