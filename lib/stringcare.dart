@@ -73,9 +73,7 @@ class Stringcare {
       var data = _stringToInt32(value);
 
       var res = _getStringBytesFromIntList(
-          obfuscate(
-              key.toNativeUtf8(), data, key.length, intSize),
-          intSize);
+          obfuscate(key.toNativeUtf8(), data, key.length, intSize), intSize);
 
       malloc.free(data);
 
@@ -84,6 +82,10 @@ class Stringcare {
       print(e);
       return "";
     }
+  }
+
+  static Uint8List obfuscateData(Uint8List value) {
+    return obfuscateDataWith([], value);
   }
 
   static Uint8List obfuscateDataWith(List<String> keys, Uint8List value) {
@@ -158,9 +160,7 @@ class Stringcare {
       var data = _stringByteToInt32(value);
 
       var res = _getBytesFromObfuscated(
-          reveal(key.toNativeUtf8(), data, key.length,
-              intSize),
-          intSize);
+          reveal(key.toNativeUtf8(), data, key.length, intSize), intSize);
 
       malloc.free(data);
 
@@ -169,6 +169,10 @@ class Stringcare {
       print(e);
       return "";
     }
+  }
+
+  static Uint8List revealData(Uint8List value) {
+    return revealDataWith([], value);
   }
 
   static Uint8List revealDataWith(List<String> keys, Uint8List value) {
@@ -198,8 +202,7 @@ class Stringcare {
       var data = _dataToInt32(value);
 
       var res = _getBytesFromIntList(
-          reveal(key.toNativeUtf8(), data, key.length,
-              value.length),
+          reveal(key.toNativeUtf8(), data, key.length, value.length),
           value.length);
 
       malloc.free(data);

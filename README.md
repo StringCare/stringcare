@@ -27,9 +27,58 @@ dependencies:
 
 Add the C++ file to the `Runner` targets.
 
+You can locate the `stringcare.cpp` file in:
+
+```
+stringcare/ios/classes/Classes/stringcare.cpp
+```
+
 If XCode ask for include the `Runner-Bridging-Header.h` file to the project, do it.
 
 ![setup](https://github.com/StringCare/stringcare/raw/master/images/ios_macos_setup.png?raw=true)
+
+#### Key setup
+
+This is not a precompiled library (`dylib`, `dll`, `so`) so it is strongly recommended to change the default values in the C++ file.
+
+You can locate the `stringcare.cpp` file in:
+
+```
+stringcare/ios/classes/Classes/stringcare.cpp
+```
+
+```cpp
+std::string sign(std::string key) {
+    std::string val = "";
+    int i = 0;
+    int u = 0;
+    for (char &c : key) {
+        val[u] = c;
+        u++;
+        # i = i + (int) c + ((2 + 3 + 6) * (4 + 2) * (3 * 1) * u); default
+        i = i + (int) c + ((4 + 2) * (3 * 1) * u);
+        val += std::to_string(i);
+        u = u + (std::to_string(i).length() - 1);
+    }
+    return val;
+}
+```
+
+```cpp
+extern "C" __attribute__((visibility("default"))) __attribute__((used))
+int *obfuscate(char const *key, int *value, int const keySize, int const valueSize) {
+    std::string pd = "hello_world";
+    # ...
+}
+```
+
+```cpp
+extern "C" __attribute__((visibility("default"))) __attribute__((used))
+int *reveal(char const *key, int *value, int const keySize, int const valueSize) {
+    std::string pd = "hello_world";
+    # ...
+}
+```
 
 ### Values usage 
 

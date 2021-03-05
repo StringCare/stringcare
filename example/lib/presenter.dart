@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/services.dart' show ByteData, rootBundle;
@@ -11,6 +12,8 @@ class Presenter {
 
   ByteData imageBytes;
 
+  String obfuscatedHello;
+  String revealedHello;
   String obfuscatedEmoji;
   String revealedEmoji;
   String signatureEmoji;
@@ -26,6 +29,8 @@ class Presenter {
   bool otherSignatureTestLorem;
 
   Presenter() {
+    obfuscatedHello = Stringcare.obfuscateWith([p2, p1, p3], Vars.hello);
+    revealedHello = Stringcare.revealWith([p1, p3, p2], obfuscatedHello);
     obfuscatedEmoji = Stringcare.obfuscateWith([p2, p1, p3], Vars.emojis);
     revealedEmoji = Stringcare.revealWith([p1, p3, p2], obfuscatedEmoji);
     signatureEmoji = Stringcare.getSignature([p1, p2, p3]);
@@ -50,6 +55,7 @@ class Presenter {
       imageBytes = value;
       var list = value.buffer.asUint8List();
       print(list.toString());
+      var file = File("");
       var obfuscatedImage = Stringcare.obfuscateDataWith([p2, p1], list);
       print(obfuscatedImage.toString());
       var revealedImage = Stringcare.revealDataWith([p1, p2], obfuscatedImage);

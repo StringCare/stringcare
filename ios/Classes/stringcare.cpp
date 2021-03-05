@@ -4,12 +4,6 @@
 #include <iostream>
 #include <string>
 
-
-extern "C" __attribute__((visibility("default"))) __attribute__((used))
-int32_t native_add(int32_t x, int32_t y) {
-    return x + y;
-}
-
 char *string2Char(const std::string &str) {
     char *cstr = new char[str.length() + 1];
     std::strcpy(cstr, str.c_str());
@@ -30,129 +24,119 @@ std::string sign(std::string key) {
         u++;
         i = i + (int) c + ((2 + 3 + 6) * (4 + 2) * (3 * 1) * u);
         val += std::to_string(i);
-        u = u + (std::to_string(i).length() - 1);
+        u = u + ((int) std::to_string(i).length() - 1);
     }
     return val;
 }
 
 extern "C" __attribute__((visibility("default"))) __attribute__((used))
-char const *hello(char const *str) {
-
-
-    std::string a = char2String(str);
-    std::string s = "Hello World! " + a;
-    char *cstr = string2Char(s);
-
-    return cstr;
-}
-
-extern "C" __attribute__((visibility("default"))) __attribute__((used))
-int *obfuscate(char const *key, int *value, int const keyS, int const valueSize) {
+int *obfuscate(char const *key, int *value, int const keySize, int const valueSize) {
+    std::string pd = "hello_world";
     std::string strKey = char2String(key);
-    std::string hash = strKey + "hello_world";
+    std::string hash = strKey + pd;
     std::string na = sign(hash);
 
-    int keySize = keyS + 11;
+    int keyS = keySize +  (int) pd.length();
 
     for (unsigned int a = 19; a < valueSize + 20; a = a + 20) {
-        if (a >= keySize) {
+        if (a >= keyS) {
             if (a - 19 < valueSize) {
-                int reminder = (a - 19) % keySize;
+                int reminder = (a - 19) % keyS;
                 int mark = na[reminder];
                 value[a - 19] = value[a - 19] + mark;
             }
             if (a - 18 < valueSize) {
-                int reminder = (a - 18) % keySize;
+                int reminder = (a - 18) % keyS;
                 int mark = na[reminder];
                 value[a - 18] = value[a - 18] + mark;
             }
             if (a - 17 < valueSize) {
-                int reminder = (a - 17) % keySize;
+                int reminder = (a - 17) % keyS;
                 int mark = na[reminder];
                 value[a - 17] = value[a - 17] + mark;
             }
             if (a - 16 < valueSize) {
-                int reminder = (a - 16) % keySize;
+                int reminder = (a - 16) % keyS;
                 int mark = na[reminder];
                 value[a - 16] = value[a - 16] + mark;
             }
             if (a - 15 < valueSize) {
-                int reminder = (a - 15) % keySize;
+                int reminder = (a - 15) % keyS;
                 int mark = na[reminder];
                 value[a - 15] = value[a - 15] + mark;
             }
             if (a - 14 < valueSize) {
-                int reminder = (a - 14) % keySize;
+                int reminder = (a - 14) % keyS;
                 int mark = na[reminder];
                 value[a - 14] = value[a - 14] + mark;
             }
             if (a - 13 < valueSize) {
-                int reminder = (a - 13) % keySize;
+                int reminder = (a - 13) % keyS;
                 int mark = na[reminder];
                 value[a - 13] = value[a - 13] + mark;
             }
             if (a - 12 < valueSize) {
-                int reminder = (a - 12) % keySize;
+                int reminder = (a - 12) % keyS;
                 int mark = na[reminder];
                 value[a - 12] = value[a - 12] + mark;
             }
             if (a - 11 < valueSize) {
-                int reminder = (a - 11) % keySize;
+                int reminder = (a - 11) % keyS;
                 int mark = na[reminder];
                 value[a - 11] = value[a - 11] + mark;
             }
             if (a - 10 < valueSize) {
-                int reminder = (a - 10) % keySize;
+                int reminder = (a - 10) % keyS;
                 int mark = na[reminder];
                 value[a - 10] = value[a - 10] + mark;
             }
             if (a - 9 < valueSize) {
-                int reminder = (a - 9) % keySize;
+                int reminder = (a - 9) % keyS;
                 int mark = na[reminder];
                 value[a - 9] = value[a - 9] + mark;
             }
             if (a - 8 < valueSize) {
-                int reminder = (a - 8) % keySize;
+                int reminder = (a - 8) % keyS;
                 int mark = na[reminder];
                 value[a - 8] = value[a - 8] + mark;
             }
             if (a - 7 < valueSize) {
-                int reminder = (a - 7) % keySize;
+                int reminder = (a - 7) % keyS;
                 int mark = na[reminder];
                 value[a - 7] = value[a - 7] + mark;
             }
             if (a - 6 < valueSize) {
-                int reminder = (a - 6) % keySize;
+                int reminder = (a - 6) % keyS;
                 int mark = na[reminder];
                 value[a - 6] = value[a - 6] + mark;
             }
             if (a - 5 < valueSize) {
-                int reminder = (a - 5) % keySize;
+                int reminder = (a - 5) % keyS;
                 int mark = na[reminder];
                 value[a - 5] = value[a - 5] + mark;
             }
             if (a - 4 < valueSize) {
-                int reminder = (a - 4) % keySize;
+                int reminder = (a - 4) % keyS;
                 int mark = na[reminder];
                 value[a - 4] = value[a - 4] + mark;
             }
             if (a - 3 < valueSize) {
-                int reminder = (a - 3) % keySize;
+                int reminder = (a - 3) % keyS;
                 int mark = na[reminder];
                 value[a - 3] = value[a - 3] + mark;
             }
             if (a - 2 < valueSize) {
-                int reminder = (a - 2) % keySize;
+                int reminder = (a - 2) % keyS;
                 int mark = na[reminder];
                 value[a - 2] = value[a - 2] + mark;
             }
             if (a - 1 < valueSize) {
-                int reminder = (a - 1) % keySize;
+                int reminder = (a - 1) % keyS;
                 int mark = na[reminder];
                 value[a - 1] = value[a - 1] + mark;
             }
             if (a < valueSize) {
-                int reminder = a % keySize;
+                int reminder = a % keyS;
                 int mark = na[reminder];
                 value[a] = value[a] + mark;
             }
@@ -224,112 +208,113 @@ int *obfuscate(char const *key, int *value, int const keyS, int const valueSize)
 }
 
 extern "C" __attribute__((visibility("default"))) __attribute__((used))
-int *reveal(char const *key, int *value, int const keyS, int const valueSize) {
+int *reveal(char const *key, int *value, int const keySize, int const valueSize) {
+    std::string pd = "hello_world";
     std::string strKey = char2String(key);
-    std::string hash = strKey + "hello_world";
+    std::string hash = strKey + pd;
     std::string na = sign(hash);
 
-    int keySize = keyS + 11;
+    int keyS = keySize +  (int) pd.length();
 
     for (unsigned int a = 19; a < valueSize + 20; a = a + 20) {
-        if (a >= keySize) {
+        if (a >= keyS) {
             if (a - 19 < valueSize) {
-                int reminder = (a - 19) % keySize;
+                int reminder = (a - 19) % keyS;
                 int mark = na[reminder];
                 value[a - 19] = value[a - 19] - mark;
             }
             if (a - 18 < valueSize) {
-                int reminder = (a - 18) % keySize;
+                int reminder = (a - 18) % keyS;
                 int mark = na[reminder];
                 value[a - 18] = value[a - 18] - mark;
             }
             if (a - 17 < valueSize) {
-                int reminder = (a - 17) % keySize;
+                int reminder = (a - 17) % keyS;
                 int mark = na[reminder];
                 value[a - 17] = value[a - 17] - mark;
             }
             if (a - 16 < valueSize) {
-                int reminder = (a - 16) % keySize;
+                int reminder = (a - 16) % keyS;
                 int mark = na[reminder];
                 value[a - 16] = value[a - 16] - mark;
             }
             if (a - 15 < valueSize) {
-                int reminder = (a - 15) % keySize;
+                int reminder = (a - 15) % keyS;
                 int mark = na[reminder];
                 value[a - 15] = value[a - 15] - mark;
             }
             if (a - 14 < valueSize) {
-                int reminder = (a - 14) % keySize;
+                int reminder = (a - 14) % keyS;
                 int mark = na[reminder];
                 value[a - 14] = value[a - 14] - mark;
             }
             if (a - 13 < valueSize) {
-                int reminder = (a - 13) % keySize;
+                int reminder = (a - 13) % keyS;
                 int mark = na[reminder];
                 value[a - 13] = value[a - 13] - mark;
             }
             if (a - 12 < valueSize) {
-                int reminder = (a - 12) % keySize;
+                int reminder = (a - 12) % keyS;
                 int mark = na[reminder];
                 value[a - 12] = value[a - 12] - mark;
             }
             if (a - 11 < valueSize) {
-                int reminder = (a - 11) % keySize;
+                int reminder = (a - 11) % keyS;
                 int mark = na[reminder];
                 value[a - 11] = value[a - 11] - mark;
             }
             if (a - 10 < valueSize) {
-                int reminder = (a - 10) % keySize;
+                int reminder = (a - 10) % keyS;
                 int mark = na[reminder];
                 value[a - 10] = value[a - 10] - mark;
             }
             if (a - 9 < valueSize) {
-                int reminder = (a - 9) % keySize;
+                int reminder = (a - 9) % keyS;
                 int mark = na[reminder];
                 value[a - 9] = value[a - 9] - mark;
             }
             if (a - 8 < valueSize) {
-                int reminder = (a - 8) % keySize;
+                int reminder = (a - 8) % keyS;
                 int mark = na[reminder];
                 value[a - 8] = value[a - 8] - mark;
             }
             if (a - 7 < valueSize) {
-                int reminder = (a - 7) % keySize;
+                int reminder = (a - 7) % keyS;
                 int mark = na[reminder];
                 value[a - 7] = value[a - 7] - mark;
             }
             if (a - 6 < valueSize) {
-                int reminder = (a - 6) % keySize;
+                int reminder = (a - 6) % keyS;
                 int mark = na[reminder];
                 value[a - 6] = value[a - 6] - mark;
             }
             if (a - 5 < valueSize) {
-                int reminder = (a - 5) % keySize;
+                int reminder = (a - 5) % keyS;
                 int mark = na[reminder];
                 value[a - 5] = value[a - 5] - mark;
             }
             if (a - 4 < valueSize) {
-                int reminder = (a - 4) % keySize;
+                int reminder = (a - 4) % keyS;
                 int mark = na[reminder];
                 value[a - 4] = value[a - 4] - mark;
             }
             if (a - 3 < valueSize) {
-                int reminder = (a - 3) % keySize;
+                int reminder = (a - 3) % keyS;
                 int mark = na[reminder];
                 value[a - 3] = value[a - 3] - mark;
             }
             if (a - 2 < valueSize) {
-                int reminder = (a - 2) % keySize;
+                int reminder = (a - 2) % keyS;
                 int mark = na[reminder];
                 value[a - 2] = value[a - 2] - mark;
             }
             if (a - 1 < valueSize) {
-                int reminder = (a - 1) % keySize;
+                int reminder = (a - 1) % keyS;
                 int mark = na[reminder];
                 value[a - 1] = value[a - 1] - mark;
             }
             if (a < valueSize) {
-                int reminder = a % keySize;
+                int reminder = a % keyS;
                 int mark = na[reminder];
                 value[a] = value[a] - mark;
             }
