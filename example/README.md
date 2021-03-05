@@ -29,7 +29,7 @@ Add the C++ file to the `Runner` targets.
 
 If XCode ask for include the `Runner-Bridging-Header.h` file to the project, do it.
 
-<p align="center"><img width="80%" src="https://github.com/StringCare/stringcare/raw/master/images/ios_macos_setup.png"></p>
+![setup](https://github.com/StringCare/stringcare/raw/master/images/ios_macos_setup.png?raw=true)
 
 ### Values usage 
 
