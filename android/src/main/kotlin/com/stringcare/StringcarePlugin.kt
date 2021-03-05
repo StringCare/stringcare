@@ -1,4 +1,4 @@
-package com.example.stringcare
+package com.stringcare
 
 import androidx.annotation.NonNull
 

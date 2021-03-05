@@ -60,18 +60,25 @@ class Stringcare {
           : DynamicLibrary.process();
 
       final Pointer<Int32> Function(
-              Pointer<Utf8> key, Pointer<Int32> val, int keySize, int valueSize) obfuscate =
-          stringcareLib
+              Pointer<Utf8> key, Pointer<Int32> val, int keySize, int valueSize)
+          obfuscate = stringcareLib
               .lookup<
                   NativeFunction<
-                      Pointer<Int32> Function(
-                          Pointer<Utf8>, Pointer<Int32>, Int32, Int32)>>("obfuscate")
+                      Pointer<Int32> Function(Pointer<Utf8>, Pointer<Int32>,
+                          Int32, Int32)>>("obfuscate")
               .asFunction();
 
       var intSize = _originalStringInt32Size(value);
 
+      var data = _stringToInt32(value);
+
       var res = _getStringBytesFromIntList(
-          obfuscate(Utf8.toUtf8(key), _stringToInt32(value), key.length, intSize), intSize);
+          obfuscate(
+              key.toNativeUtf8(), data, key.length, intSize),
+          intSize);
+
+      malloc.free(data);
+
       return res;
     } catch (e) {
       print(e);
@@ -95,17 +102,21 @@ class Stringcare {
           : DynamicLibrary.process();
 
       final Pointer<Int32> Function(
-              Pointer<Utf8> key, Pointer<Int32> val, int keySize, int valueSize) obfuscate =
-          stringcareLib
+              Pointer<Utf8> key, Pointer<Int32> val, int keySize, int valueSize)
+          obfuscate = stringcareLib
               .lookup<
                   NativeFunction<
-                      Pointer<Int32> Function(
-                          Pointer<Utf8>, Pointer<Int32>, Int32, Int32)>>("obfuscate")
+                      Pointer<Int32> Function(Pointer<Utf8>, Pointer<Int32>,
+                          Int32, Int32)>>("obfuscate")
               .asFunction();
 
+      var data = _dataToInt32(value);
+
       var res = _getBytesFromIntList(
-          obfuscate(Utf8.toUtf8(key), _dataToInt32(value), key.length, value.length),
+          obfuscate(key.toNativeUtf8(), data, key.length, value.length),
           value.length);
+
+      malloc.free(data);
 
       return res;
     } catch (e) {
@@ -134,19 +145,24 @@ class Stringcare {
           : DynamicLibrary.process();
 
       final Pointer<Int32> Function(
-              Pointer<Utf8> key, Pointer<Int32> val, int keySize, int valueSize) reveal =
-          stringcareLib
+              Pointer<Utf8> key, Pointer<Int32> val, int keySize, int valueSize)
+          reveal = stringcareLib
               .lookup<
                   NativeFunction<
-                      Pointer<Int32> Function(
-                          Pointer<Utf8>, Pointer<Int32>, Int32, Int32)>>("reveal")
+                      Pointer<Int32> Function(Pointer<Utf8>, Pointer<Int32>,
+                          Int32, Int32)>>("reveal")
               .asFunction();
 
       var intSize = _obfuscatedInt32Lent(value);
 
+      var data = _stringByteToInt32(value);
+
       var res = _getBytesFromObfuscated(
-          reveal(Utf8.toUtf8(key), _stringByteToInt32(value), key.length, intSize),
+          reveal(key.toNativeUtf8(), data, key.length,
+              intSize),
           intSize);
+
+      malloc.free(data);
 
       return res;
     } catch (e) {
@@ -171,17 +187,22 @@ class Stringcare {
           : DynamicLibrary.process();
 
       final Pointer<Int32> Function(
-              Pointer<Utf8> key, Pointer<Int32> val, int keySize, int valueSize) reveal =
-          stringcareLib
+              Pointer<Utf8> key, Pointer<Int32> val, int keySize, int valueSize)
+          reveal = stringcareLib
               .lookup<
                   NativeFunction<
-                      Pointer<Int32> Function(
-                          Pointer<Utf8>, Pointer<Int32>, Int32, Int32)>>("reveal")
+                      Pointer<Int32> Function(Pointer<Utf8>, Pointer<Int32>,
+                          Int32, Int32)>>("reveal")
               .asFunction();
 
+      var data = _dataToInt32(value);
+
       var res = _getBytesFromIntList(
-          reveal(Utf8.toUtf8(key), _dataToInt32(value), key.length, value.length),
+          reveal(key.toNativeUtf8(), data, key.length,
+              value.length),
           value.length);
+
+      malloc.free(data);
 
       return res;
     } catch (e) {
@@ -245,25 +266,25 @@ class Stringcare {
 
   static Pointer<Int32> _dataToInt32(Uint8List value) {
     var list = value.toList();
-    final Pointer<Int32> result = allocate<Int32>(count: list.length);
+    final Pointer<Int32> result = malloc<Int32>(list.length);
     final Int32List nativeArray = result.asTypedList(list.length);
     nativeArray.setAll(0, list);
-    return result.cast();
+    return result;
   }
 
   static Pointer<Int32> _stringToInt32(String string) {
     final units = utf8.encode(string);
-    final Pointer<Int32> result = allocate<Int32>(count: units.length);
+    final Pointer<Int32> result = malloc<Int32>(units.length);
     final Int32List nativeArray = result.asTypedList(units.length);
     nativeArray.setAll(0, units);
-    return result.cast();
+    return result;
   }
 
   static Pointer<Int32> _stringByteToInt32(String string) {
     final array = string.split(",").map((e) => int.parse(e));
-    final Pointer<Int32> result = allocate<Int32>(count: array.length);
+    final Pointer<Int32> result = malloc<Int32>(array.length);
     final Int32List nativeArray = result.asTypedList(array.length);
     nativeArray.setAll(0, array);
-    return result.cast();
+    return result;
   }
 }

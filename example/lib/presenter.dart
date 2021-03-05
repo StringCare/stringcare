@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/services.dart' show ByteData, rootBundle;
 import 'package:stringcare/stringcare.dart';
-import 'package:stringcare_example/textVariables.dart';
+import 'package:stringcare_example/vars.dart';
 
 class Presenter {
   String p1 = "dsgfjkbndsgfbldsgbdjns";

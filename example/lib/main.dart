@@ -73,7 +73,10 @@ class _MyAppState extends State<MyApp> {
                           ListTile(
                             title: Text("Obfuscation emojis"),
                           ),
-                          Text(widget.presenter.obfuscatedEmoji),
+                          Text(widget.presenter.obfuscatedEmoji
+                              .split(",")
+                              .getRange(0, 30)
+                              .toString()),
                           Padding(padding: EdgeInsets.all(8)),
                           ListTile(
                             title: Text("Reveal emojis"),
@@ -117,7 +120,10 @@ class _MyAppState extends State<MyApp> {
                           ListTile(
                             title: Text("Obfuscation lorem"),
                           ),
-                          Text(widget.presenter.obfuscatedLorem),
+                          Text(widget.presenter.obfuscatedLorem
+                              .split(",")
+                              .getRange(0, 30)
+                              .toString()),
                           Padding(padding: EdgeInsets.all(8)),
                           ListTile(
                             title: Text("Reveal lorem"),
