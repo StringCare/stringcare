@@ -47,6 +47,8 @@ You can locate the `stringcare.cpp` file in:
 stringcare/ios/classes/Classes/stringcare.cpp
 ```
 
+Change how the key is generated:
+
 ```cpp
 std::string sign(std::string key) {
     std::string val = "";
@@ -55,8 +57,8 @@ std::string sign(std::string key) {
     for (char &c : key) {
         val[u] = c;
         u++;
-        # i = i + (int) c + ((2 + 3 + 6) * (4 + 2) * (3 * 1) * u); default
-        i = i + (int) c + ((4 + 2) * (3 * 1) * u);
+        // i = i + (int) c + ((2 + 3 + 6) * (4 + 2) * (3 * 1) * u); default
+        i = i + (int) c + ((4 + 2) * (3 * 1) * u); // other option
         val += std::to_string(i);
         u = u + (std::to_string(i).length() - 1);
     }
@@ -64,11 +66,13 @@ std::string sign(std::string key) {
 }
 ```
 
+Change the `pd` value in both methods:
+
 ```cpp
 extern "C" __attribute__((visibility("default"))) __attribute__((used))
 int *obfuscate(char const *key, int *value, int const keySize, int const valueSize) {
     std::string pd = "hello_world";
-    # ...
+    // ...
 }
 ```
 
@@ -76,7 +80,7 @@ int *obfuscate(char const *key, int *value, int const keySize, int const valueSi
 extern "C" __attribute__((visibility("default"))) __attribute__((used))
 int *reveal(char const *key, int *value, int const keySize, int const valueSize) {
     std::string pd = "hello_world";
-    # ...
+    // ...
 }
 ```
 
