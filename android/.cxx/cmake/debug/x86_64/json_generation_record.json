@@ -9,15 +9,15 @@
   },
   {
     "level": "INFO",
-    "message": "- command changed from previous, will remove stale json folder"
+    "message": "- a dependent build file changed"
   },
   {
     "level": "INFO",
-    "message": "removing stale contents from \u0027/Users/efraespada/Documents/stringcare/android/.cxx/cmake/debug/x86_64\u0027"
+    "message": "  - /Users/efraespada/Documents/stringcare/android/CMakeLists.txt"
   },
   {
     "level": "INFO",
-    "message": "created folder \u0027/Users/efraespada/Documents/stringcare/android/.cxx/cmake/debug/x86_64\u0027"
+    "message": "keeping json folder \u0027/Users/efraespada/Documents/stringcare/android/.cxx/cmake/debug/x86_64\u0027 but regenerating project"
   },
   {
     "level": "INFO",
