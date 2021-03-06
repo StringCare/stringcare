@@ -1,14 +1,15 @@
 
 <p align="center"><img width="10%" vspace="10" src="https://github.com/StringCare/stringcare/raw/master/images/ic_launcher/res/mipmap-xxxhdpi/ic_launcher.png"></p>
 
-<h3 align="center" style="margin-bottom:30px" vspace="20">Stringcare for Flutter</h3>
+<h2 align="center" style="margin-bottom:30px" vspace="20">Stringcare for Flutter</h2>
+<h3 align="center" style="margin-bottom:30px" vspace="20">[Land-a dependency](https://landa-app.com/)</h3>
 
 <p align="center"><img width="10%" vspace="20" src="https://github.com/StringCare/AndroidLibrary/raw/develop/white.png"></p>
 
 
 - Platforms supported: Android, iOS, macOS
 
-This is a Flutter plugin for encrypt/decrypt `string` values and files with C++ code. 
+This is a Flutter plugin for encrypt/decrypt `String` and `Uint8List` objects with C++ code. 
 
 Only `ffi` and `crypto` dependencies are used.
 
@@ -56,7 +57,7 @@ std::string pd = "your_pasword";
 
 > Feel free to change anything you want in this C++ file. I recommend you to change the numeric values of the `sign` method in this file.
 
-### Values usage 
+### String usage 
 
 #### Simple
 
@@ -79,14 +80,15 @@ String revealed = Stringcare.revealWith([p1, p3, p2], obfuscated);
 print(revealed); // prints "hello there 😀"
 ```
 
-### Files usage 
+### Uint8List usage 
 
 #### Simple
 
 ```dart
 var file = File("file/path");
+Uint8List original = file.readAsBytesSync(); 
 
-Uint8List obfuscated = Stringcare.obfuscateData(file.readAsBytesSync());
+Uint8List obfuscated = Stringcare.obfuscateData(original);
 file.writeAsBytesSync(obfuscated);
 
 Uint8List revealed = Stringcare.revealData(obfuscated);
@@ -100,8 +102,9 @@ String p2 = "sfvsfdgvsdfvsfdvsfvsrf";
 String p3 = "dtlbkjdnsfvsftrglbjknd";
 
 var file = File("file/path");
+Uint8List original = file.readAsBytesSync(); 
 
-Uint8List obfuscated = Stringcare.obfuscateDataWith([p2, p1, p3], file.readAsBytesSync());
+Uint8List obfuscated = Stringcare.obfuscateDataWith([p2, p1, p3], original);
 file.writeAsBytesSync(obfuscated);
 
 Uint8List revealed = Stringcare.revealDataWith([p1, p3, p2], obfuscated);
