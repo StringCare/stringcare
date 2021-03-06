@@ -45,7 +45,7 @@ Implement your own key by changing the `pd` value:
 > stringcare/ios/Classes/stringcare.cpp
 
 ```cpp
-std::string pd = "z35KeTy r95pHr7m";
+std::string pd = "your_pasword";
 ```
 
 ### Values usage 
