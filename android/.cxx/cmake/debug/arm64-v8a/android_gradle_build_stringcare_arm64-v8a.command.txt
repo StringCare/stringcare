@@ -1,7 +1,7 @@
-Executable : /Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/cmake
+Executable : C:\Users\efrae\AppData\Local\Android\Sdk\cmake\3.6.4111459\bin\cmake.exe
 arguments : 
 --build
-/Users/efraespada/Documents/stringcare/android/.cxx/cmake/debug/arm64-v8a
+C:\Users\efrae\Documents\Github\stringcare\android\.cxx\cmake\debug\arm64-v8a
 --target
 stringcare
 jvmArgs : 

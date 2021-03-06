@@ -16,6 +16,20 @@ class Stringcare {
     return version;
   }
 
+  static DynamicLibrary getLibrary() {
+    DynamicLibrary stringcareLib;
+    if (Platform.isAndroid) {
+      stringcareLib = DynamicLibrary.open("libstringcare.so");
+    } else if (Platform.isIOS) {
+      stringcareLib = DynamicLibrary.process();
+    } else if (Platform.isMacOS) {
+      stringcareLib = DynamicLibrary.process();
+    } else if (Platform.isWindows) {
+      stringcareLib = DynamicLibrary.open('stringcare.dll');
+    }
+    return stringcareLib;
+  }
+
   static String getSignature(List<String> keys) {
     return sha256.convert(utf8.encode(_prepareKey(keys))).toString();
   }
@@ -55,9 +69,7 @@ class Stringcare {
         key = _prepareKey(keys);
       }
 
-      final DynamicLibrary stringcareLib = Platform.isAndroid
-          ? DynamicLibrary.open("libstringcare.so")
-          : DynamicLibrary.process();
+      final DynamicLibrary stringcareLib = getLibrary();
 
       final Pointer<Int32> Function(
               Pointer<Utf8> key, Pointer<Int32> val, int keySize, int valueSize)
@@ -99,9 +111,7 @@ class Stringcare {
         key = _prepareKey(keys);
       }
 
-      final DynamicLibrary stringcareLib = Platform.isAndroid
-          ? DynamicLibrary.open("libstringcare.so")
-          : DynamicLibrary.process();
+      final DynamicLibrary stringcareLib = getLibrary();
 
       final Pointer<Int32> Function(
               Pointer<Utf8> key, Pointer<Int32> val, int keySize, int valueSize)
@@ -142,9 +152,7 @@ class Stringcare {
         key = _prepareKey(keys);
       }
 
-      final DynamicLibrary stringcareLib = Platform.isAndroid
-          ? DynamicLibrary.open("libstringcare.so")
-          : DynamicLibrary.process();
+      final DynamicLibrary stringcareLib = getLibrary();
 
       final Pointer<Int32> Function(
               Pointer<Utf8> key, Pointer<Int32> val, int keySize, int valueSize)
@@ -186,9 +194,7 @@ class Stringcare {
         key = _prepareKey(keys);
       }
 
-      final DynamicLibrary stringcareLib = Platform.isAndroid
-          ? DynamicLibrary.open("libstringcare.so")
-          : DynamicLibrary.process();
+      final DynamicLibrary stringcareLib = getLibrary();
 
       final Pointer<Int32> Function(
               Pointer<Utf8> key, Pointer<Int32> val, int keySize, int valueSize)

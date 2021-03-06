@@ -1,16 +1,16 @@
 {
   "buildFiles": [
-    "/Users/efraespada/Documents/stringcare/android/CMakeLists.txt"
+    "C:\\Users\\efrae\\Documents\\Github\\stringcare\\android\\CMakeLists.txt"
   ],
   "cleanCommands": [
-    "/Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/efraespada/Documents/stringcare/android/.cxx/cmake/debug/arm64-v8a --target clean"
+    "C:\\Users\\efrae\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build C:\\Users\\efrae\\Documents\\Github\\stringcare\\android\\.cxx\\cmake\\debug\\arm64-v8a --target clean"
   ],
   "libraries": {
     "stringcare-Debug-arm64-v8a": {
       "artifactName": "stringcare",
-      "buildCommand": "/Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/efraespada/Documents/stringcare/android/.cxx/cmake/debug/arm64-v8a --target stringcare",
+      "buildCommand": "C:\\Users\\efrae\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build C:\\Users\\efrae\\Documents\\Github\\stringcare\\android\\.cxx\\cmake\\debug\\arm64-v8a --target stringcare",
       "abi": "arm64-v8a",
-      "output": "/Users/efraespada/Documents/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/arm64-v8a/libstringcare.so"
+      "output": "C:\\Users\\efrae\\Documents\\Github\\stringcare\\example\\build\\stringcare\\intermediates\\cmake\\debug\\obj\\arm64-v8a\\libstringcare.so"
     }
   }
 }

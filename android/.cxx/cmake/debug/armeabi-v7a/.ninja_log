@@ -1,5 +1,3 @@
 # ninja log v5
-0	678	0	CMakeFiles/stringcare.dir/Users/efraespada/Documents/stringcare/ios/Classes/stringcare.cpp.o	98019258ce194e82
-679	743	0	/Users/efraespada/Documents/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/armeabi-v7a/libstringcare.so	dc0106a40804106a
-2	1439	0	CMakeFiles/stringcare.dir/Users/efraespada/Documents/stringcare/ios/Classes/stringcare.cpp.o	98019258ce194e82
-1440	1571	0	/Users/efraespada/Documents/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/armeabi-v7a/libstringcare.so	dc0106a40804106a
+1	2112	0	CMakeFiles/stringcare.dir/C_/Users/efrae/Documents/Github/stringcare/ios/Classes/stringcare.cpp.o	9cdf7c749bd02227
+2115	2356	0	C:/Users/efrae/Documents/Github/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/armeabi-v7a/libstringcare.so	32acd264ee374356

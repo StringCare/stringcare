@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/services.dart' show ByteData, rootBundle;
@@ -55,7 +54,6 @@ class Presenter {
       imageBytes = value;
       var list = value.buffer.asUint8List();
       print(list.toString());
-      var file = File("");
       var obfuscatedImage = Stringcare.obfuscateDataWith([p2, p1], list);
       print(obfuscatedImage.toString());
       var revealedImage = Stringcare.revealDataWith([p1, p2], obfuscatedImage);
