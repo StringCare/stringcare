@@ -1,4 +1,10 @@
-# Stringcare for Flutter
+
+<p align="center"><img width="10%" vspace="10" src="https://github.com/StringCare/stringcare/raw/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"></p>
+
+<h3 align="center" style="margin-bottom:30px" vspace="20">Stringcare for Flutter</h3>
+
+<p align="center"><img width="10%" vspace="20" src="https://github.com/StringCare/AndroidLibrary/raw/develop/white.png"></p>
+
 
 - Platforms supported: Android, iOS, macOS
 
