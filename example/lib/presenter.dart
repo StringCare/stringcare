@@ -11,6 +11,8 @@ class Presenter {
 
   ByteData imageBytes;
 
+  String obfuscatedBlank;
+  String revealedBlank;
   String obfuscatedHello;
   String revealedHello;
   String obfuscatedEmoji;
@@ -28,6 +30,8 @@ class Presenter {
   bool otherSignatureTestLorem;
 
   Presenter() {
+    obfuscatedBlank = Stringcare.obfuscate(Vars.blank);
+    revealedBlank = Stringcare.reveal(obfuscatedBlank);
     obfuscatedHello = Stringcare.obfuscateWith([p2, p1, p3], Vars.hello);
     revealedHello = Stringcare.revealWith([p1, p3, p2], obfuscatedHello);
     obfuscatedEmoji = Stringcare.obfuscateWith([p2, p1, p3], Vars.emojis);

@@ -25,6 +25,7 @@ class Stringcare {
     } else if (Platform.isMacOS) {
       stringcareLib = DynamicLibrary.process();
     } else if (Platform.isWindows) {
+      // not supported yet
       stringcareLib = DynamicLibrary.open('stringcare.dll');
     }
     return stringcareLib;

@@ -3,6 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  stringcare
 )
 
 set(PLUGIN_BUNDLED_LIBRARIES)

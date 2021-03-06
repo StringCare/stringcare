@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 
+std::string pd = "a6ExQWqgF67n4OTMWgztgPExNjsGx2bsfmvjjtbJOoMiQlkWfwYNLfyPq88GowmvzJ1kdiPGbB5QC1wNc6lPSP0RQxAItqVIRzJTeaPsrCaXByvUesQK1hh5JXjNZraWcW4s4TR5TTOhEJ9UsCJqa3J9erM1s5JjjJMur88ksRJFHaUHUWq0kG76UHwJkMNu6FFrEGJ63kdBeh1qzywvXbIfNYZKDKUIRs1VfCxSMzwszgH2JPMZfrCLDlrZTMCIo0QUWwlnyLAW9ty1OT5jZkcPYoJJ7nFgGJh1OAG7q0CRxTBehOQ6sSBsF2m0rlzoW4d0BskTs2JH6mtldJiI";
+
 char *string2Char(const std::string &str) {
     char *cstr = new char[str.length() + 1];
     std::strcpy(cstr, str.c_str());
@@ -15,25 +17,72 @@ std::string char2String(char const *chars) {
     return str;
 }
 
+// Joins the key with the auxiliar
+std::string join(std::string aux, std::string key) {
+    if (aux.length() == 0) {
+        return key;
+    } else {
+        int size = aux.length() + key.length();
+        std::string val = "";
+        
+        int a = 0;
+        int b = 0;
+        for (int i = 0; i < size; i++) {
+            if (a == b && a < aux.length()) {
+                val += aux[a];
+                a++;
+            } else if (a > b && b < key.length()) {
+                val += key[b];
+                b++;
+            } else if (a < aux.length()) {
+                val += aux[a];
+                a++;
+            } else if (b < key.length()) {
+                val += key[b];
+                b++;
+            }
+        }
+        return val;
+    }
+}
+
+std::string reverse(std::string str) {
+    std::string r = "";
+    for (int i = str.length() - 1; i >= 0; i--)
+        r += str[i];
+    return r;
+}
+
 std::string sign(std::string key) {
     std::string val = "";
     int i = 0;
     int u = 0;
     for (char &c : key) {
-        val[u] = c;
-        u++;
-        i = i + (int) c + ((2 + 3 + 6) * (4 + 2) * (3 * 1) * u);
-        val += std::to_string(i);
-        u = u + ((int) std::to_string(i).length() - 1);
+        i = i + (int) c + ((i * 3) + ((int) c * 2) + (3 + i) + u);
+        if (c % 2 == 0) {
+            i = i + (int) c + ((i * 3) + ((int) c * 2) + (i / 2) + u);
+            u = u + 13;  
+        } else if (u % 2 == 0) {
+            i = i + (int) c + ((u * 5) + ((int) c * 7) + (i * 3) + i);
+            u = u + 13;  
+        } else if (i % 2 == 0) {
+            i =  u + ((i * 6) + ((int) c * 3) + (c / 6) + i);
+            u = u + 37;  
+        } else {
+            i = u + (int) c + ((i * 2) + ((int) c * 6) + (3 * i) + c);
+            u = u + 56;
+        }
+        char v = i;
+        val += v;
+        val = reverse(val);
     }
-    return val;
+    return reverse(val);
 }
 
 extern "C" __attribute__((visibility("default"))) __attribute__((used))
 int *obfuscate(char const *key, int *value, int const keySize, int const valueSize) {
-    std::string pd = "hello_world";
     std::string strKey = char2String(key);
-    std::string hash = strKey + pd;
+    std::string hash = join(strKey, pd);
     std::string na = sign(hash);
 
     int keyS = keySize +  (int) pd.length();
@@ -209,9 +258,8 @@ int *obfuscate(char const *key, int *value, int const keySize, int const valueSi
 
 extern "C" __attribute__((visibility("default"))) __attribute__((used))
 int *reveal(char const *key, int *value, int const keySize, int const valueSize) {
-    std::string pd = "hello_world";
     std::string strKey = char2String(key);
-    std::string hash = strKey + pd;
+    std::string hash = join(strKey, pd);
     std::string na = sign(hash);
 
     int keyS = keySize +  (int) pd.length();

@@ -30,7 +30,7 @@ Add the C++ file to the `Runner` targets.
 You can locate the `stringcare.cpp` file in:
 
 ```
-stringcare/ios/classes/Classes/stringcare.cpp
+stringcare/ios/Classes/stringcare.cpp
 ```
 
 If XCode ask for include the `Runner-Bridging-Header.h` file to the project, do it.
@@ -39,49 +39,13 @@ If XCode ask for include the `Runner-Bridging-Header.h` file to the project, do 
 
 #### Key setup
 
-This is not a precompiled library (`dylib`, `dll`, `so`) so it is strongly recommended to change the default values in the C++ file.
+This is the default key used when no extra keys are provided.
+Implement your own key by changing the `pd` value:
 
-You can locate the `stringcare.cpp` file in:
-
-```
-stringcare/ios/classes/Classes/stringcare.cpp
-```
-
-Change how the key is generated:
+> stringcare/ios/Classes/stringcare.cpp
 
 ```cpp
-std::string sign(std::string key) {
-    std::string val = "";
-    int i = 0;
-    int u = 0;
-    for (char &c : key) {
-        val[u] = c;
-        u++;
-        // i = i + (int) c + ((2 + 3 + 6) * (4 + 2) * (3 * 1) * u); default
-        i = i + (int) c + ((4 + 2) * (3 * 1) * u); // other option
-        val += std::to_string(i);
-        u = u + (std::to_string(i).length() - 1);
-    }
-    return val;
-}
-```
-
-Change the `pd` value in both methods:
-
-```cpp
-extern "C" __attribute__((visibility("default"))) __attribute__((used))
-int *obfuscate(char const *key, int *value, int const keySize, int const valueSize) {
-    std::string pd = "hello_world";
-    // ...
-}
-```
-
-```cpp
-extern "C" __attribute__((visibility("default"))) __attribute__((used))
-int *reveal(char const *key, int *value, int const keySize, int const valueSize) {
-    std::string pd = "hello_world";
-    // ...
-}
+std::string pd = "z35KeTy r95pHr7m";
 ```
 
 ### Values usage 

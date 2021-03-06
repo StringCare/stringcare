@@ -36,6 +36,8 @@ flutter:
         pluginClass: StringcarePlugin
       macos:
         pluginClass: StringcarePlugin
+      windows:
+        pluginClass: StringcarePlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
