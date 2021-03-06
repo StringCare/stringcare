@@ -1,15 +1,15 @@
 # Stringcare for Flutter
 
-- Platforms supported: Android, iOS, MacOS
+- Platforms supported: Android, iOS, macOS
 
 This is a Flutter plugin for encrypt/decrypt `string` values and files with C++ code. 
 
-Only `ffi` and `crypto ` dependencies are used.
+Only `ffi` and `crypto` dependencies are used.
 
 ### Installation
 
 It is not possible to use the plugin directly by adding the dependency to the `pubspec.yaml` file.
-Due to some limitations when adding the C++ file to the iOS and MacOS runner targets, you need to download the repository.
+Due to some limitations when adding the C++ file to the iOS and macOS runner targets, you need to download the repository.
 
 ```bash
 git clone https://github.com/StringCare/stringcare.git
@@ -23,7 +23,7 @@ dependencies:
         path: ../stringcare
 ```
 
-#### iOS and MacOS setup
+#### iOS and macOS setup
 
 Add the C++ file to the `Runner` targets.
 
@@ -47,6 +47,8 @@ Implement your own key by changing the `pd` value:
 ```cpp
 std::string pd = "your_pasword";
 ```
+
+> Feel free to change anything you want in this C++ file. I recommend you to change the numeric values of the `sign` method in this file.
 
 ### Values usage 
 
