@@ -1,5 +1,5 @@
 
-<p align="center"><img width="10%" vspace="10" src="https://github.com/StringCare/stringcare/raw/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"></p>
+<p align="center"><img width="10%" vspace="10" src="https://github.com/StringCare/stringcare/raw/master/images/ic_launcher/res/mipmap-xxxhdpi/ic_launcher.png"></p>
 
 <h3 align="center" style="margin-bottom:30px" vspace="20">Stringcare for Flutter</h3>
 
