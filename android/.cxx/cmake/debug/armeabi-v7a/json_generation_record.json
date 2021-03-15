@@ -21,7 +21,7 @@
   },
   {
     "level": "INFO",
-    "message": "rebuilding JSON /Users/efraespada/Documents/stringcare/android/.cxx/cmake/debug/armeabi-v7a/android_gradle_build.json due to:"
+    "message": "rebuilding JSON /Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/armeabi-v7a/android_gradle_build.json due to:"
   },
   {
     "level": "INFO",
@@ -29,27 +29,19 @@
   },
   {
     "level": "INFO",
-    "message": "- a dependent build file changed"
+    "message": "removing stale contents from \u0027/Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/armeabi-v7a\u0027"
   },
   {
     "level": "INFO",
-    "message": "  - /Users/efraespada/.gradle/daemon/5.6.2/C:\\Users\\efrae\\Documents\\Github\\stringcare\\android\\CMakeLists.txt"
+    "message": "created folder \u0027/Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/armeabi-v7a\u0027"
   },
   {
     "level": "INFO",
-    "message": "removing stale contents from \u0027/Users/efraespada/Documents/stringcare/android/.cxx/cmake/debug/armeabi-v7a\u0027"
+    "message": "executing cmake Executable : /Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/cmake\narguments : \n-H/Users/efraespada/Documents/Github/landa/stringcare/android\n-B/Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/armeabi-v7a\n-DANDROID_ABI\u003darmeabi-v7a\n-DANDROID_PLATFORM\u003dandroid-16\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/efraespada/Documents/Github/landa/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/armeabi-v7a\n-DCMAKE_BUILD_TYPE\u003dDebug\n-DANDROID_NDK\u003d/Users/efraespada/Library/Android/sdk/ndk/21.3.6528147\n-DCMAKE_TOOLCHAIN_FILE\u003d/Users/efraespada/Library/Android/sdk/ndk/21.3.6528147/build/cmake/android.toolchain.cmake\n-DCMAKE_MAKE_PROGRAM\u003d/Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/ninja\n-GAndroid Gradle - Ninja\njvmArgs : \n\n"
   },
   {
     "level": "INFO",
-    "message": "created folder \u0027/Users/efraespada/Documents/stringcare/android/.cxx/cmake/debug/armeabi-v7a\u0027"
-  },
-  {
-    "level": "INFO",
-    "message": "executing cmake Executable : /Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/cmake\narguments : \n-H/Users/efraespada/Documents/stringcare/android\n-B/Users/efraespada/Documents/stringcare/android/.cxx/cmake/debug/armeabi-v7a\n-DANDROID_ABI\u003darmeabi-v7a\n-DANDROID_PLATFORM\u003dandroid-16\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/efraespada/Documents/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/armeabi-v7a\n-DCMAKE_BUILD_TYPE\u003dDebug\n-DANDROID_NDK\u003d/Users/efraespada/Library/Android/sdk/ndk/21.3.6528147\n-DCMAKE_TOOLCHAIN_FILE\u003d/Users/efraespada/Library/Android/sdk/ndk/21.3.6528147/build/cmake/android.toolchain.cmake\n-DCMAKE_MAKE_PROGRAM\u003d/Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/ninja\n-GAndroid Gradle - Ninja\njvmArgs : \n\n"
-  },
-  {
-    "level": "INFO",
-    "message": "Executable : /Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/cmake\narguments : \n-H/Users/efraespada/Documents/stringcare/android\n-B/Users/efraespada/Documents/stringcare/android/.cxx/cmake/debug/armeabi-v7a\n-DANDROID_ABI\u003darmeabi-v7a\n-DANDROID_PLATFORM\u003dandroid-16\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/efraespada/Documents/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/armeabi-v7a\n-DCMAKE_BUILD_TYPE\u003dDebug\n-DANDROID_NDK\u003d/Users/efraespada/Library/Android/sdk/ndk/21.3.6528147\n-DCMAKE_TOOLCHAIN_FILE\u003d/Users/efraespada/Library/Android/sdk/ndk/21.3.6528147/build/cmake/android.toolchain.cmake\n-DCMAKE_MAKE_PROGRAM\u003d/Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/ninja\n-GAndroid Gradle - Ninja\njvmArgs : \n\n"
+    "message": "Executable : /Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/cmake\narguments : \n-H/Users/efraespada/Documents/Github/landa/stringcare/android\n-B/Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/armeabi-v7a\n-DANDROID_ABI\u003darmeabi-v7a\n-DANDROID_PLATFORM\u003dandroid-16\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/efraespada/Documents/Github/landa/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/armeabi-v7a\n-DCMAKE_BUILD_TYPE\u003dDebug\n-DANDROID_NDK\u003d/Users/efraespada/Library/Android/sdk/ndk/21.3.6528147\n-DCMAKE_TOOLCHAIN_FILE\u003d/Users/efraespada/Library/Android/sdk/ndk/21.3.6528147/build/cmake/android.toolchain.cmake\n-DCMAKE_MAKE_PROGRAM\u003d/Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/ninja\n-GAndroid Gradle - Ninja\njvmArgs : \n\n"
   },
   {
     "level": "INFO",
@@ -57,11 +49,11 @@
   },
   {
     "level": "INFO",
-    "message": "write build output /Users/efraespada/Documents/stringcare/android/.cxx/cmake/debug/armeabi-v7a/build_output.txt"
+    "message": "write build output /Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/armeabi-v7a/build_output.txt"
   },
   {
     "level": "INFO",
-    "message": "write command file /Users/efraespada/Documents/stringcare/android/.cxx/cmake/debug/armeabi-v7a/build_command.txt"
+    "message": "write command file /Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/armeabi-v7a/build_command.txt"
   },
   {
     "level": "INFO",

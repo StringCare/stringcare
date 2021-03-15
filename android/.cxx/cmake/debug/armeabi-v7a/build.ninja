@@ -34,7 +34,7 @@ include rules.ninja
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/efraespada/Documents/stringcare/android/.cxx/cmake/debug/armeabi-v7a && /Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/armeabi-v7a && /Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 build edit_cache: phony CMakeFiles/edit_cache.util
@@ -43,7 +43,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/efraespada/Documents/stringcare/android/.cxx/cmake/debug/armeabi-v7a && /Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/cmake -H/Users/efraespada/Documents/stringcare/android -B/Users/efraespada/Documents/stringcare/android/.cxx/cmake/debug/armeabi-v7a
+  COMMAND = cd /Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/armeabi-v7a && /Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/cmake -H/Users/efraespada/Documents/Github/landa/stringcare/android -B/Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/armeabi-v7a
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -51,22 +51,22 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Object build statements for SHARED_LIBRARY target stringcare
 
-build CMakeFiles/stringcare.dir/Users/efraespada/Documents/stringcare/ios/Classes/stringcare.cpp.o: CXX_COMPILER__stringcare /Users/efraespada/Documents/stringcare/ios/Classes/stringcare.cpp
+build CMakeFiles/stringcare.dir/Users/efraespada/Documents/Github/landa/stringcare/ios/Classes/stringcare.cpp.o: CXX_COMPILER__stringcare /Users/efraespada/Documents/Github/landa/stringcare/ios/Classes/stringcare.cpp
   DEFINES = -Dstringcare_EXPORTS
-  DEP_FILE = CMakeFiles/stringcare.dir/Users/efraespada/Documents/stringcare/ios/Classes/stringcare.cpp.o.d
+  DEP_FILE = CMakeFiles/stringcare.dir/Users/efraespada/Documents/Github/landa/stringcare/ios/Classes/stringcare.cpp.o.d
   FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC
-  IN_ABS = /Users/efraespada/Documents/stringcare/ios/Classes/stringcare.cpp
+  IN_ABS = /Users/efraespada/Documents/Github/landa/stringcare/ios/Classes/stringcare.cpp
   OBJECT_DIR = CMakeFiles/stringcare.dir
-  OBJECT_FILE_DIR = CMakeFiles/stringcare.dir/Users/efraespada/Documents/stringcare/ios/Classes
+  OBJECT_FILE_DIR = CMakeFiles/stringcare.dir/Users/efraespada/Documents/Github/landa/stringcare/ios/Classes
 
 # =============================================================================
 # Link build statements for SHARED_LIBRARY target stringcare
 
 
 #############################################
-# Link the shared library /Users/efraespada/Documents/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/armeabi-v7a/libstringcare.so
+# Link the shared library /Users/efraespada/Documents/Github/landa/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/armeabi-v7a/libstringcare.so
 
-build /Users/efraespada/Documents/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/armeabi-v7a/libstringcare.so: CXX_SHARED_LIBRARY_LINKER__stringcare CMakeFiles/stringcare.dir/Users/efraespada/Documents/stringcare/ios/Classes/stringcare.cpp.o
+build /Users/efraespada/Documents/Github/landa/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/armeabi-v7a/libstringcare.so: CXX_SHARED_LIBRARY_LINKER__stringcare CMakeFiles/stringcare.dir/Users/efraespada/Documents/Github/landa/stringcare/ios/Classes/stringcare.cpp.o
   LANGUAGE_COMPILE_FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -O0 -fno-limit-debug-info
   LINK_FLAGS = -Wl,--exclude-libs,libgcc.a -Wl,--exclude-libs,libgcc_real.a -Wl,--exclude-libs,libatomic.a -static-libstdc++ -Wl,--build-id -Wl,--fatal-warnings -Wl,--exclude-libs,libunwind.a -Wl,--no-undefined -Qunused-arguments
   LINK_LIBRARIES = -latomic -lm
@@ -75,13 +75,13 @@ build /Users/efraespada/Documents/stringcare/example/build/stringcare/intermedia
   PRE_LINK = :
   SONAME = libstringcare.so
   SONAME_FLAG = -Wl,-soname,
-  TARGET_FILE = /Users/efraespada/Documents/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/armeabi-v7a/libstringcare.so
+  TARGET_FILE = /Users/efraespada/Documents/Github/landa/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/armeabi-v7a/libstringcare.so
   TARGET_PDB = stringcare.so.dbg
 # =============================================================================
 # Target aliases.
 
-build libstringcare.so: phony /Users/efraespada/Documents/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/armeabi-v7a/libstringcare.so
-build stringcare: phony /Users/efraespada/Documents/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/armeabi-v7a/libstringcare.so
+build libstringcare.so: phony /Users/efraespada/Documents/Github/landa/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/armeabi-v7a/libstringcare.so
+build stringcare: phony /Users/efraespada/Documents/Github/landa/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/armeabi-v7a/libstringcare.so
 # =============================================================================
 # Folder targets.
 
@@ -93,7 +93,7 @@ build stringcare: phony /Users/efraespada/Documents/stringcare/example/build/str
 #############################################
 # The main all target.
 
-build all: phony /Users/efraespada/Documents/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/armeabi-v7a/libstringcare.so
+build all: phony /Users/efraespada/Documents/Github/landa/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/armeabi-v7a/libstringcare.so
 
 #############################################
 # Make the all target the default.

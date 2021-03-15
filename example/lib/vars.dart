@@ -1,7 +1,7 @@
 class Vars {
   static String blank =
       "                                                                                           ";
-  static String hello = "hello";
+  static String hello = "C02Z42KZLVDF";
   static String emojis = [
     "🐶",
     "🐱",

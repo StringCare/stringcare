@@ -1,2 +1,1 @@
-[1/2] Building CXX object CMakeFiles/stringcare.dir/Users/efraespada/Documents/stringcare/ios/Classes/stringcare.cpp.o
-[2/2] Linking CXX shared library /Users/efraespada/Documents/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/x86/libstringcare.so
+ninja: no work to do.

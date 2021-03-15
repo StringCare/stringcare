@@ -1,4 +1,4 @@
-# Install script for directory: /Users/efraespada/Documents/stringcare/android
+# Install script for directory: /Users/efraespada/Documents/Github/landa/stringcare/android
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/efraespada/Documents/stringcare/android/.cxx/cmake/debug/x86_64/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/x86_64/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

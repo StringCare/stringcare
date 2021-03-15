@@ -22,7 +22,7 @@ std::string join(std::string aux, std::string key) {
     if (aux.length() == 0) {
         return key;
     } else {
-        int size = aux.length() + key.length();
+        int size = (int) aux.length() + (int) key.length();
         std::string val = "";
         
         int a = 0;
@@ -48,33 +48,30 @@ std::string join(std::string aux, std::string key) {
 
 std::string reverse(std::string str) {
     std::string r = "";
-    for (int i = str.length() - 1; i >= 0; i--)
+    for (int i = (int) str.length() - 1; i >= 0; i--)
         r += str[i];
     return r;
 }
 
 std::string sign(std::string key) {
     std::string val = "";
+
     int i = 0;
     int u = 0;
     for (char &c : key) {
-        i = i + (int) c + ((i * 3) + ((int) c * 2) + (3 + i) + u);
-        if (c % 2 == 0) {
-            i = i + (int) c + ((i * 3) + ((int) c * 2) + (i / 2) + u);
-            u = u + 13;  
+        val[u] = c;
+        u++;
+        i++;
+        if (i % 2 == 0) {
+            i = (i + (int) c + (3 * u) + 5 * i / 2) + 4 * u;
         } else if (u % 2 == 0) {
-            i = i + (int) c + ((u * 5) + ((int) c * 7) + (i * 3) + i);
-            u = u + 13;  
-        } else if (i % 2 == 0) {
-            i =  u + ((i * 6) + ((int) c * 3) + (c / 6) + i);
-            u = u + 37;  
+            i = (i * 3 - (int) c + (2 * u) + 3 * i / 4) + 2 * u;
         } else {
-            i = u + (int) c + ((i * 2) + ((int) c * 6) + (3 * i) + c);
-            u = u + 56;
+            i = (i / 2 + (int) c + (6 * u) + 2 * i / 3) + 8 * u;
         }
-        char v = i;
-        val += v;
+        val += std::to_string(i);
         val = reverse(val);
+        u = u + (std::to_string(i).length() - 1);
     }
     return reverse(val);
 }
