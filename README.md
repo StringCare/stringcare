@@ -19,11 +19,27 @@ Due to some limitations when adding the C++ file to the iOS and macOS runner tar
 
 > In order to increase the security, it is recommended to modify the code (how the keys are generated) in your fork before use it.
 
-> Make your fork private.
+> Make your fork "private".
 
-Clone your private fork to your local machine.
+Prepare your empty private repository. For example:
+
+```
+https://github.com/YOUR-USERNAME/stringcare
+```
+
+In your machine, duplicate this repo to yours:
 
 ```bash
+// clone original
+git clone --bare https://github.com/StringCare/stringcare.git
+cd stringcare.git/
+git push --mirror https://github.com/YOUR-USERNAME/stringcare.git
+
+// remove old repository
+cd ..
+rm -rf stringcare
+
+// clone yours
 git clone https://github.com/YOUR-USERNAME/stringcare.git
 ```
 
