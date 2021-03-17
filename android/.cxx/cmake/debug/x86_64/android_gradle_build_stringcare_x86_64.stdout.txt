@@ -1,2 +1,0 @@
-ninja: Entering directory `/Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/x86_64'
-[1/1] Linking CXX shared library /Users/efraespada/Documents/Github/landa/landa/build/stringcare/intermediates/cmake/debug/obj/x86_64/libstringcare.so

@@ -2,6 +2,7 @@
 <p align="center"><img width="10%" vspace="10" src="https://github.com/StringCare/stringcare/raw/master/images/ic_launcher/res/mipmap-xxxhdpi/ic_launcher.png"></p>
 
 <h2 align="center" style="margin-bottom:30px" vspace="20">Stringcare for Flutter</h2>
+<p align="center"><a href="https://landa-app.com/">Land-a dependency</a></p>
 <p align="center"><img width="10%" vspace="20" src="https://github.com/StringCare/AndroidLibrary/raw/develop/white.png"></p>
 
 
@@ -17,6 +18,7 @@ It is not possible to use the plugin directly by adding the dependency to the `p
 Due to some limitations when adding the C++ file to the iOS and macOS runner targets, you need to fork/clone the repository.
 
 > In order to increase the security, it is recommended to modify the code (how the keys are generated) in your fork before use it.
+
 > Make your fork private.
 
 Clone your private fork to your local machine.
