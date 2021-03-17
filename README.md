@@ -15,11 +15,13 @@ Only `ffi` and `crypto` dependencies are used.
 ### Installation
 
 It is not possible to use the plugin directly by adding the dependency to the `pubspec.yaml` file.
-Due to some limitations when adding the C++ file to the iOS and macOS runner targets, you need to fork/clone the repository.
+Due to some limitations when adding the C++ file to the iOS and macOS runner targets and some other (recommended) modifications, you need to fork/clone the repository.
 
-> In order to increase the security, it is recommended to modify the code (how the keys are generated) in your fork before use it.
+> In order to increase the security, it is recommended to modify the code (how the keys are generated) in your repository before use it.
 
-> Make your fork "private".
+> Make your repository private.
+
+#### Prepare your private repository
 
 Prepare your empty private repository. For example:
 
