@@ -1,41 +1,43 @@
-
 {
-	"buildFiles" : 
-	[
-		"/Users/efraespada/Documents/Github/landa/stringcare/android/CMakeLists.txt"
-	],
-	"cleanCommands" : 
-	[
-		"/Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/arm64-v8a --target clean"
-	],
-	"cppFileExtensions" : [ "cpp" ],
-	"libraries" : 
-	{
-		"stringcare-Debug-arm64-v8a" : 
-		{
-			"abi" : "arm64-v8a",
-			"artifactName" : "stringcare",
-			"buildCommand" : "/Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/cmake --build /Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/arm64-v8a --target stringcare",
-			"buildType" : "debug",
-			"files" : 
-			[
-				
-				{
-					"flags" : "  --target=aarch64-none-linux-android21 --gcc-toolchain=/Users/efraespada/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/efraespada/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -Dstringcare_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC    -c ",
-					"src" : "/Users/efraespada/Documents/Github/landa/stringcare/ios/Classes/stringcare.cpp",
-					"workingDirectory" : "/Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/arm64-v8a"
-				}
-			],
-			"output" : "/Users/efraespada/Documents/Github/landa/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/arm64-v8a/libstringcare.so",
-			"toolchain" : "9773426447392027603"
-		}
-	},
-	"toolchains" : 
-	{
-		"9773426447392027603" : 
-		{
-			"cCompilerExecutable" : "/Users/efraespada/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang",
-			"cppCompilerExecutable" : "/Users/efraespada/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
-		}
-	}
+  "stringTable": {
+    "0": "/Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/arm64-v8a",
+    "1": "--target=aarch64-none-linux-android21 --gcc-toolchain=/Users/efraespada/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/efraespada/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dstringcare_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC"
+  },
+  "buildFiles": [
+    "/Users/efraespada/Documents/Github/landa/stringcare/android/CMakeLists.txt",
+    "/Users/efraespada/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
+    "/Users/efraespada/Library/Android/sdk/ndk/21.1.6352462/build/cmake/platforms.cmake"
+  ],
+  "cleanCommands": [
+    "/Users/efraespada/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/arm64-v8a\" clean"
+  ],
+  "buildTargetsCommand": "/Users/efraespada/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/arm64-v8a\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "stringcare-Debug-arm64-v8a": {
+      "buildCommand": "/Users/efraespada/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/arm64-v8a\" stringcare",
+      "buildType": "debug",
+      "toolchain": "1839260677",
+      "abi": "arm64-v8a",
+      "artifactName": "stringcare",
+      "files": [
+        {
+          "src": "/Users/efraespada/Documents/Github/landa/stringcare/ios/Classes/stringcare.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/Users/efraespada/Documents/Github/landa/landa/build/stringcare/intermediates/cmake/debug/obj/arm64-v8a/libstringcare.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "1839260677": {
+      "cppCompilerExecutable": "/Users/efraespada/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
 }

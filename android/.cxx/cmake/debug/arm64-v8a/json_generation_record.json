@@ -1,46 +1,44 @@
 [
   {
     "level": "INFO",
-    "message": "Start JSON generation. Platform version: 16 min SDK version: arm64-v8a"
+    "message": "Start JSON generation. Platform version: 16 min SDK version: arm64-v8a",
+    "file": "/Users/efraespada/Documents/Github/landa/stringcare/android/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
   },
   {
     "level": "INFO",
-    "message": "rebuilding JSON /Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/arm64-v8a/android_gradle_build.json due to:"
+    "message": "No CMake version was specified in build.gradle. Using default version 3.10.2.",
+    "file": "/Users/efraespada/Documents/Github/landa/stringcare/android/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
   },
   {
     "level": "INFO",
-    "message": "- command changed from previous, will remove stale json folder"
+    "message": "Trying to locate CMake in local SDK repository.",
+    "file": "/Users/efraespada/Documents/Github/landa/stringcare/android/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
   },
   {
     "level": "INFO",
-    "message": "removing stale contents from \u0027/Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/arm64-v8a\u0027"
+    "message": "- CMake found in SDK at \u0027/Users/efraespada/Library/Android/sdk/cmake/3.10.2.4988404\u0027 had version \u00273.10.2\u0027",
+    "file": "/Users/efraespada/Documents/Github/landa/stringcare/android/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
   },
   {
     "level": "INFO",
-    "message": "created folder \u0027/Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/arm64-v8a\u0027"
+    "message": "CMake \u00273.6.0\u0027 found in SDK did not match requested version \u00273.10.2\u0027.",
+    "file": "/Users/efraespada/Documents/Github/landa/stringcare/android/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
   },
   {
     "level": "INFO",
-    "message": "executing cmake Executable : /Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/cmake\narguments : \n-H/Users/efraespada/Documents/Github/landa/stringcare/android\n-B/Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/arm64-v8a\n-DANDROID_ABI\u003darm64-v8a\n-DANDROID_PLATFORM\u003dandroid-16\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/efraespada/Documents/Github/landa/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/arm64-v8a\n-DCMAKE_BUILD_TYPE\u003dDebug\n-DANDROID_NDK\u003d/Users/efraespada/Library/Android/sdk/ndk/21.3.6528147\n-DCMAKE_TOOLCHAIN_FILE\u003d/Users/efraespada/Library/Android/sdk/ndk/21.3.6528147/build/cmake/android.toolchain.cmake\n-DCMAKE_MAKE_PROGRAM\u003d/Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/ninja\n-GAndroid Gradle - Ninja\njvmArgs : \n\n"
+    "message": "JSON \u0027/Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/arm64-v8a/android_gradle_build.json\u0027 was up-to-date",
+    "file": "/Users/efraespada/Documents/Github/landa/stringcare/android/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
   },
   {
     "level": "INFO",
-    "message": "Executable : /Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/cmake\narguments : \n-H/Users/efraespada/Documents/Github/landa/stringcare/android\n-B/Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/arm64-v8a\n-DANDROID_ABI\u003darm64-v8a\n-DANDROID_PLATFORM\u003dandroid-16\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/efraespada/Documents/Github/landa/stringcare/example/build/stringcare/intermediates/cmake/debug/obj/arm64-v8a\n-DCMAKE_BUILD_TYPE\u003dDebug\n-DANDROID_NDK\u003d/Users/efraespada/Library/Android/sdk/ndk/21.3.6528147\n-DCMAKE_TOOLCHAIN_FILE\u003d/Users/efraespada/Library/Android/sdk/ndk/21.3.6528147/build/cmake/android.toolchain.cmake\n-DCMAKE_MAKE_PROGRAM\u003d/Users/efraespada/Library/Android/sdk/cmake/3.6.4111459/bin/ninja\n-GAndroid Gradle - Ninja\njvmArgs : \n\n"
-  },
-  {
-    "level": "INFO",
-    "message": "done executing cmake"
-  },
-  {
-    "level": "INFO",
-    "message": "write build output /Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/arm64-v8a/build_output.txt"
-  },
-  {
-    "level": "INFO",
-    "message": "write command file /Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/arm64-v8a/build_command.txt"
-  },
-  {
-    "level": "INFO",
-    "message": "JSON generation completed without problems"
+    "message": "JSON generation completed without problems",
+    "file": "/Users/efraespada/Documents/Github/landa/stringcare/android/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
   }
 ]

@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/Users/efraespada/Documents/Github/landa/stringcare/android/.cxx/cmake/debug/armeabi-v7a",
+  "command": "/Users/efraespada/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=armv7-none-linux-androideabi16 --gcc-toolchain=/Users/efraespada/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/efraespada/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -Dstringcare_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/stringcare.dir/Users/efraespada/Documents/Github/landa/stringcare/ios/Classes/stringcare.cpp.o -c /Users/efraespada/Documents/Github/landa/stringcare/ios/Classes/stringcare.cpp",
+  "file": "/Users/efraespada/Documents/Github/landa/stringcare/ios/Classes/stringcare.cpp"
+}
+]
