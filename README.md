@@ -60,7 +60,7 @@ dependencies:
 
 Add the C++ file to the `Runner` targets.
 
-You can locate the `stringcare.cpp` file in your cloned private fork:
+You can locate the `stringcare.cpp` file in your cloned private repository:
 
 ```
 stringcare/ios/Classes/stringcare.cpp
@@ -85,7 +85,7 @@ std::string pd = "your_pasword";
 
 ### Finish the setup
 
-Once you modify the C++ file as you want, you need to push those changes to your private fork. For updating the plugin from a git repository you can:
+Once you modify the C++ file as you want, you need to push those changes to your private repository. For updating the plugin from a git repository you can:
 
 ```bash
 // remove stringcare from your pubspec.yaml
