@@ -7,17 +7,22 @@
 
 - Platforms supported: Android, iOS, macOS
 
-This is a Flutter plugin for encrypt/decrypt `String` and `Uint8List` objects with C++ code. 
+This is a Flutter plugin for encrypt/decrypt `String` and `Uint8List` objects easily with C++ code. 
 
 Only `ffi` and `crypto` dependencies are used.
 
 ### Installation
 
 It is not possible to use the plugin directly by adding the dependency to the `pubspec.yaml` file.
-Due to some limitations when adding the C++ file to the iOS and macOS runner targets, you need to download the repository.
+Due to some limitations when adding the C++ file to the iOS and macOS runner targets, you need to fork/clone the repository.
+
+> In order to increase the security, it is recommended to modify the code (how the keys are generated) in your fork before use it.
+> Make your fork private.
+
+Clone your private fork to your local machine.
 
 ```bash
-git clone https://github.com/StringCare/stringcare.git
+git clone https://github.com/YOUR-USERNAME/stringcare.git
 ```
 
 Then include the dependency to the `pubspec.yaml` file.
@@ -25,14 +30,17 @@ Then include the dependency to the `pubspec.yaml` file.
 ```yaml
 dependencies:
     stringcare:
-        path: ../stringcare
+        git:
+            url: https://github.com/YOUR-USERNAME/stringcare.git
 ```
+
+> Since Flutter 2, I noticed dangerous problems when indexing the project after adding the local dependency by `path: ../whatever`. That's why I recommend to implement the plugin by `git: url: https://..`.
 
 #### iOS and macOS setup
 
 Add the C++ file to the `Runner` targets.
 
-You can locate the `stringcare.cpp` file in:
+You can locate the `stringcare.cpp` file in your cloned private fork:
 
 ```
 stringcare/ios/Classes/stringcare.cpp
@@ -54,6 +62,20 @@ std::string pd = "your_pasword";
 ```
 
 > Feel free to change anything you want in this C++ file. I recommend you to change the numeric values of the `sign` method in this file.
+
+### Finish the setup
+
+Once you modify the C++ file as you want, you need to push those changes to your private fork. For updating the plugin from a git repository you can:
+
+```bash
+// remove stringcare from your pubspec.yaml
+
+flutter pub get
+
+// add stringcare again to your pubspec.yaml
+
+flutter pub get
+```
 
 ### String usage 
 
