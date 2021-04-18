@@ -76,7 +76,11 @@ std::string sign(std::string key) {
     return reverse(val);
 }
 
-extern "C" __attribute__((visibility("default"))) __attribute__((used))
+#if defined _WIN32 || defined __CYGWIN__
+    extern "C" __declspec(dllexport)
+#else
+    extern "C" __attribute__((visibility("default"))) __attribute__((used))
+#endif
 int *obfuscate(char const *key, int *value, int const keySize, int const valueSize) {
     std::string strKey = char2String(key);
     std::string hash = join(strKey, pd);
@@ -253,7 +257,11 @@ int *obfuscate(char const *key, int *value, int const keySize, int const valueSi
     return value;
 }
 
-extern "C" __attribute__((visibility("default"))) __attribute__((used))
+#if defined _WIN32 || defined __CYGWIN__
+    extern "C" __declspec(dllexport)
+#else
+    extern "C" __attribute__((visibility("default"))) __attribute__((used))
+#endif
 int *reveal(char const *key, int *value, int const keySize, int const valueSize) {
     std::string strKey = char2String(key);
     std::string hash = join(strKey, pd);
@@ -429,5 +437,4 @@ int *reveal(char const *key, int *value, int const keySize, int const valueSize)
 
     return value;
 }
-
 
