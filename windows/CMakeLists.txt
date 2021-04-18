@@ -27,4 +27,10 @@ set(stringcare_bundled_libraries
   PARENT_SCOPE
 )
 
-add_subdirectory("..\ios\Classes\stringcare.cpp")
+add_library( stringcare
+
+             # Sets the library as a shared library.
+             SHARED
+
+             # Provides a relative path to your source file(s).
+             ../ios/Classes/stringcare.cpp )
