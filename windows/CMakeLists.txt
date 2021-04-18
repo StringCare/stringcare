@@ -12,10 +12,6 @@ add_library(${PLUGIN_NAME} SHARED
   "stringcare_plugin.cpp"
 )
 
-add_library(${PLUGIN_LIB_NAME}, SHARED,
-"..\ios\Classes\stringcare.cpp"
-)
-
 apply_standard_settings(${PLUGIN_NAME})
 set_target_properties(${PLUGIN_NAME} PROPERTIES
   CXX_VISIBILITY_PRESET hidden)
@@ -27,6 +23,8 @@ target_link_libraries(${PLUGIN_NAME} PRIVATE flutter flutter_wrapper_plugin)
 # List of absolute paths to libraries that should be bundled with the plugin
 # $<TARGET_FILE:stringcare>
 set(stringcare_bundled_libraries
-  ""
+  "$<TARGET_FILE:stringcare>"
   PARENT_SCOPE
 )
+
+add_subdirectory("..\ios\Classes\stringcare.cpp")
