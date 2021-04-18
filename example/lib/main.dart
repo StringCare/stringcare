@@ -71,6 +71,28 @@ class _MyAppState extends State<MyApp> {
                       child: Column(
                         children: [
                           ListTile(
+                            title: Text("Obfuscation blank"),
+                          ),
+                          Text(widget.presenter.obfuscatedBlank),
+                          Padding(padding: EdgeInsets.all(8)),
+                          ListTile(
+                            title: Text("Reveal blank"),
+                          ),
+                          Text(widget.presenter.revealedBlank),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(padding: EdgeInsets.all(8)),
+                  Material(
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0)),
+                    child: Container(
+                      padding: EdgeInsets.all(15),
+                      child: Column(
+                        children: [
+                          ListTile(
                             title: Text("Obfuscation hello"),
                           ),
                           Text(widget.presenter.obfuscatedHello),

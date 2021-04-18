@@ -1,18 +1,48 @@
-# Stringcare for Flutter
 
-- Platforms supported: Android, iOS, MacOS
+<p align="center"><img width="10%" vspace="10" src="https://github.com/StringCare/stringcare/raw/master/images/ic_launcher/res/mipmap-xxxhdpi/ic_launcher.png"></p>
 
-This is a Flutter plugin for encrypt/decrypt `string` values and files with C++ code. 
+<h2 align="center" style="margin-bottom:30px" vspace="20">Stringcare for Flutter</h2>
+<p align="center"><a href="https://landa-app.com/">Land-a dependency</a></p>
+<p align="center"><img width="10%" vspace="20" src="https://github.com/StringCare/AndroidLibrary/raw/develop/white.png"></p>
 
-Only `ffi` and `crypto ` dependencies are used.
+
+- Platforms supported: Android, iOS, macOS
+
+This is a Flutter plugin for encrypt/decrypt `String` and `Uint8List` objects easily with C++ code. 
+
+Only `ffi` and `crypto` dependencies are used.
 
 ### Installation
 
 It is not possible to use the plugin directly by adding the dependency to the `pubspec.yaml` file.
-Due to some limitations when adding the C++ file to the iOS and MacOS runner targets, you need to download the repository.
+Due to some limitations when adding the C++ file to the iOS and macOS runner targets and some other (recommended) modifications, you need to fork/clone the repository.
+
+> In order to increase the security, it is recommended to modify the code (how the keys are generated) in your repository before use it.
+
+> Make your repository private.
+
+#### Prepare your private repository
+
+Prepare your empty private repository. For example:
+
+```
+https://github.com/YOUR-USERNAME/stringcare
+```
+
+In your machine, duplicate this repo to yours:
 
 ```bash
-git clone https://github.com/StringCare/stringcare.git
+// clone original
+git clone --bare https://github.com/StringCare/stringcare.git
+cd stringcare.git/
+git push --mirror https://github.com/YOUR-USERNAME/stringcare.git
+
+// remove old repository
+cd ..
+rm -rf stringcare
+
+// clone yours
+git clone https://github.com/YOUR-USERNAME/stringcare.git
 ```
 
 Then include the dependency to the `pubspec.yaml` file.
@@ -20,17 +50,20 @@ Then include the dependency to the `pubspec.yaml` file.
 ```yaml
 dependencies:
     stringcare:
-        path: ../stringcare
+        git:
+            url: https://github.com/YOUR-USERNAME/stringcare.git
 ```
 
-#### iOS and MacOS setup
+> Since Flutter 2, I noticed dangerous problems when indexing the project after adding the local dependency by `path: ../whatever`. That's why I recommend to implement the plugin by `git: url: https://..`.
+
+#### iOS and macOS setup
 
 Add the C++ file to the `Runner` targets.
 
-You can locate the `stringcare.cpp` file in:
+You can locate the `stringcare.cpp` file in your cloned private repository:
 
 ```
-stringcare/ios/classes/Classes/stringcare.cpp
+stringcare/ios/Classes/stringcare.cpp
 ```
 
 If XCode ask for include the `Runner-Bridging-Header.h` file to the project, do it.
@@ -39,52 +72,32 @@ If XCode ask for include the `Runner-Bridging-Header.h` file to the project, do 
 
 #### Key setup
 
-This is not a precompiled library (`dylib`, `dll`, `so`) so it is strongly recommended to change the default values in the C++ file.
+This is the default key used when no extra keys are provided.
+Implement your own key by changing the `pd` value:
 
-You can locate the `stringcare.cpp` file in:
-
-```
-stringcare/ios/classes/Classes/stringcare.cpp
-```
-
-Change how the key is generated:
+> stringcare/ios/Classes/stringcare.cpp
 
 ```cpp
-std::string sign(std::string key) {
-    std::string val = "";
-    int i = 0;
-    int u = 0;
-    for (char &c : key) {
-        val[u] = c;
-        u++;
-        // i = i + (int) c + ((2 + 3 + 6) * (4 + 2) * (3 * 1) * u); default
-        i = i + (int) c + ((4 + 2) * (3 * 1) * u); // other option
-        val += std::to_string(i);
-        u = u + (std::to_string(i).length() - 1);
-    }
-    return val;
-}
+std::string pd = "your_pasword";
 ```
 
-Change the `pd` value in both methods:
+> Feel free to change anything you want in this C++ file. I recommend you to change the numeric values of the `sign` method in this file.
 
-```cpp
-extern "C" __attribute__((visibility("default"))) __attribute__((used))
-int *obfuscate(char const *key, int *value, int const keySize, int const valueSize) {
-    std::string pd = "hello_world";
-    // ...
-}
+### Finish the setup
+
+Once you modify the C++ file as you want, you need to push those changes to your private repository. For updating the plugin from a git repository you can:
+
+```bash
+// remove stringcare from your pubspec.yaml
+
+flutter pub get
+
+// add stringcare again to your pubspec.yaml
+
+flutter pub get
 ```
 
-```cpp
-extern "C" __attribute__((visibility("default"))) __attribute__((used))
-int *reveal(char const *key, int *value, int const keySize, int const valueSize) {
-    std::string pd = "hello_world";
-    // ...
-}
-```
-
-### Values usage 
+### String usage 
 
 #### Simple
 
@@ -107,14 +120,15 @@ String revealed = Stringcare.revealWith([p1, p3, p2], obfuscated);
 print(revealed); // prints "hello there 😀"
 ```
 
-### Files usage 
+### Uint8List usage 
 
 #### Simple
 
 ```dart
 var file = File("file/path");
+Uint8List original = file.readAsBytesSync(); 
 
-Uint8List obfuscated = Stringcare.obfuscateData(file.readAsBytesSync());
+Uint8List obfuscated = Stringcare.obfuscateData(original);
 file.writeAsBytesSync(obfuscated);
 
 Uint8List revealed = Stringcare.revealData(obfuscated);
@@ -128,8 +142,9 @@ String p2 = "sfvsfdgvsdfvsfdvsfvsrf";
 String p3 = "dtlbkjdnsfvsftrglbjknd";
 
 var file = File("file/path");
+Uint8List original = file.readAsBytesSync(); 
 
-Uint8List obfuscated = Stringcare.obfuscateDataWith([p2, p1, p3], file.readAsBytesSync());
+Uint8List obfuscated = Stringcare.obfuscateDataWith([p2, p1, p3], original);
 file.writeAsBytesSync(obfuscated);
 
 Uint8List revealed = Stringcare.revealDataWith([p1, p3, p2], obfuscated);

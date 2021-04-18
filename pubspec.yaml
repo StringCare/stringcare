@@ -1,8 +1,8 @@
 name: stringcare
 description: A new flutter plugin project.
 version: 0.0.1
-author:
-homepage:
+author: Efraín Espada Fraile
+homepage: https://github.com/StringCare/stringcare
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -35,6 +35,8 @@ flutter:
       ios:
         pluginClass: StringcarePlugin
       macos:
+        pluginClass: StringcarePlugin
+      windows:
         pluginClass: StringcarePlugin
 
   # To add assets to your plugin package, add an assets section, like this:
