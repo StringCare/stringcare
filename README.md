@@ -6,7 +6,7 @@
 <p align="center"><img width="10%" vspace="20" src="https://github.com/StringCare/AndroidLibrary/raw/develop/white.png"></p>
 
 
-- Platforms supported: Android, iOS, macOS
+- Platforms supported: Android, iOS, MacOS, Windows
 
 This is a Flutter plugin for encrypt/decrypt `String` and `Uint8List` objects easily with C++ code. 
 
