@@ -1,8 +1,7 @@
 import 'dart:typed_data';
 import 'dart:convert';
-import 'package:characters/characters.dart';
 
-String pd = "a6ExQWqgF67n4OTMWgztgPExNjsGx2bsfmvjjtbJOoMiQlkWfwYNLfyPq88GowmvzJ1kdiPGbB5QC1wNc6lPSP0RQxAItqVIRzJTeaPsrCaXByvUesQK1hh5JXjNZraWcW4s4TR5TTOhEJ9UsCJqa3J9erM1s5JjjJMur88ksRJFHaUHUWq0kG76UHwJkMNu6FFrEGJ63kdBeh1qzywvXbIfNYZKDKUIRs1VfCxSMzwszgH2JPMZfrCLDlrZTMCIo0QUWwlnyLAW9ty1OT5jZkcPYoJJ7nFgGJh1OAG7q0CRxTBehOQ6sSBsF2m0rlzoW4d0BskTs2JH6mtldJiI";
+String pd = "jejejejejejejejejeje";
 
 String ba2String(Uint8List data) {
   return utf8.decode(data);
@@ -105,7 +104,7 @@ String sign(String key) {
 
     int i = 0;
     int u = 0;
-    for (String c in key.characters) {
+    for (String c in key.split("")) {
       val = replaceCharAt(val, u, c);
       u++;
       i++;
