@@ -24,7 +24,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     initPlatformState();
-    widget.presenter.prepareImages();
+    // widget.presenter.prepareImages();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -49,6 +49,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    var obEmoji = widget.presenter.obfuscatedEmoji.split(",");
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -71,6 +72,18 @@ class _MyAppState extends State<MyApp> {
                       child: Column(
                         children: [
                           ListTile(
+                            title: Text("Test hash"),
+                          ),
+                          Text(Stringcare.testHash([
+                            "xfgbxsfgbdxfgnbxfgnbxfgnbsfgbxfgbxfgbxfgcvb xcvb"
+                          ])),
+                          ListTile(
+                            title: Text("Test sign"),
+                          ),
+                          Text(Stringcare.testSign([
+                            "xfgbxsfgbdxfgnbxfgnbxfgnbsfgbxfgbxfgbxfgcvb xcvb"
+                          ])),
+                          ListTile(
                             title: Text("Obfuscation blank"),
                           ),
                           Text(widget.presenter.obfuscatedBlank),
@@ -78,7 +91,7 @@ class _MyAppState extends State<MyApp> {
                           ListTile(
                             title: Text("Reveal blank"),
                           ),
-                          Text(widget.presenter.revealedBlank),
+                          Text("'${widget.presenter.revealedBlank}'"),
                         ],
                       ),
                     ),
@@ -117,9 +130,9 @@ class _MyAppState extends State<MyApp> {
                           ListTile(
                             title: Text("Obfuscation emojis"),
                           ),
-                          Text(widget.presenter.obfuscatedEmoji
-                              .split(",")
-                              .getRange(0, 30)
+                          Text(obEmoji
+                              .getRange(
+                                  0, obEmoji.length > 30 ? 30 : obEmoji.length)
                               .toString()),
                           Padding(padding: EdgeInsets.all(8)),
                           ListTile(

@@ -2,3 +2,7 @@
 /.idea
 *.lock
 *.iml
+
+.DS_Store
+.packages
+.metadata

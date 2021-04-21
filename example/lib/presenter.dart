@@ -34,6 +34,7 @@ class Presenter {
     revealedBlank = Stringcare.reveal(obfuscatedBlank);
     obfuscatedHello = Stringcare.obfuscate(Vars.hello);
     revealedHello = Stringcare.reveal(obfuscatedHello);
+
     obfuscatedEmoji = Stringcare.obfuscateWith([p2, p1, p3], Vars.emojis);
     revealedEmoji = Stringcare.revealWith([p1, p3, p2], obfuscatedEmoji);
     signatureEmoji = Stringcare.getSignature([p1, p2, p3]);

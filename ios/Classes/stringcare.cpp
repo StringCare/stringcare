@@ -63,17 +63,40 @@ std::string sign(std::string key) {
         u++;
         i++;
         if (i % 2 == 0) {
-            i = (i + (int) c + (3 * u) + 5 * i / 2) + 4 * u;
+            i = (i + (int) c + (3 * u));
         } else if (u % 2 == 0) {
-            i = (i * 3 - (int) c + (2 * u) + 3 * i / 4) + 2 * u;
+            i = (i * 3 - (int) c + (2 * u));
         } else {
-            i = (i / 2 + (int) c + (6 * u) + 2 * i / 3) + 8 * u;
+            i = (i / 2 + (int) c + (6 * u));
         }
         val += std::to_string(i);
         val = reverse(val);
         u = u + (std::to_string(i).length() - 1);
     }
     return reverse(val);
+}
+
+#if defined _WIN32 || defined __CYGWIN__
+    extern "C" __declspec(dllexport)
+#else
+    extern "C" __attribute__((visibility("default"))) __attribute__((used))
+#endif
+char* hashTest(char const *key) {
+    std::string strKey = char2String(key);
+    std::string hash = join(strKey, pd);
+    return string2Char(hash);
+}
+
+#if defined _WIN32 || defined __CYGWIN__
+    extern "C" __declspec(dllexport)
+#else
+    extern "C" __attribute__((visibility("default"))) __attribute__((used))
+#endif
+char* signTest(char const *key) {
+    std::string strKey = char2String(key);
+    std::string hash = join(strKey, pd);
+    std::string na = sign(hash);
+    return string2Char(na);
 }
 
 #if defined _WIN32 || defined __CYGWIN__
