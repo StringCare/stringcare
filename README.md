@@ -35,3 +35,4 @@ Only `ffi` and `crypto` dependencies are used.
 <p align="center"><img width="80%" vspace="10" src="https://github.com/StringCare/stringcare/raw/master/images/windows_sample.png"></p>
 
 
+<p align="center"><img width="80%" vspace="10" src="https://github.com/StringCare/stringcare/raw/master/images/linux_sample.png"></p>
