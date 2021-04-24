@@ -37,6 +37,8 @@ flutter:
         pluginClass: StringcarePlugin
       windows:
         pluginClass: StringcarePlugin
+      linux:
+        pluginClass: StringcarePlugin
       web:
         pluginClass: StringcareWeb
         fileName: stringcare_web.dart

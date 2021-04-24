@@ -19,6 +19,9 @@ class StringcareImpl extends StringcareCommons {
       stringcareLib = DynamicLibrary.process();
     } else if (Platform.isWindows) {
       stringcareLib = DynamicLibrary.open('stringcare.dll');
+    } else if (Platform.isLinux) {
+      stringcareLib =
+          DynamicLibrary.open(Platform.environment['LIBSTRINGCARE_PATH']);
     }
   }
 

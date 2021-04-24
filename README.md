@@ -18,7 +18,7 @@ Flutter plugin for encrypt/decrypt `String` and `Uint8List` objects easily with 
 
 |  | Android | iOS | [Web](https://flutter.dev/web) | [macOS](https://flutter.dev/desktop) | [Windows](https://flutter.dev/desktop) | [Linux](https://flutter.dev/desktop) | [Fuchsia](https://fuchsia.dev/) |
 | :-------------: | :-------------:| :-----: | :-----: | :-----: | :-----: | :-----: | :-----: |
-| Status | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :gear: [WIP] | ❌ |
+| Status | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | ❌ |
 | Language | C++ | C++ | Dart | C++ | C++ | C++ | |
 
 
