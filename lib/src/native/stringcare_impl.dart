@@ -3,11 +3,11 @@ import 'dart:io';
 
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
-import 'package:stringcare/src/commons/stringcare_commons.dart';
+import 'package:stringcare/src/commons/stringcare_method_channel.dart';
 
 import 'c_helper.dart';
 
-class StringcareImpl extends StringcareCommons {
+class StringcareImpl extends StringcareMethodChannel {
   DynamicLibrary stringcareLib;
 
   StringcareImpl() {

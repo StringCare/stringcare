@@ -17,6 +17,11 @@ dependencies:
 
   cupertino_icons: ^1.0.0
 
+stringcare:
+  assets_path: "assets"
+  assets_base_path: "assets_base"
+  # lang_path: "lang"
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
