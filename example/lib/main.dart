@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:stringcare/stringcare.dart';
+import 'package:flutter/services.dart' show ByteData, rootBundle;
+import 'dart:typed_data';
 
 import 'presenter.dart';
 
@@ -19,12 +21,13 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
+  Uint8List image;
 
   @override
   void initState() {
     super.initState();
     initPlatformState();
-    // widget.presenter.prepareImages();
+    initImageState();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -44,6 +47,23 @@ class _MyAppState extends State<MyApp> {
 
     setState(() {
       _platformVersion = platformVersion;
+    });
+  }
+
+  Future<void> initImageState() async {
+    rootBundle.load('assets/voyager.jpeg').then((value) {
+      var list = value.buffer.asUint8List();
+      var revealed = Stringcare.revealData(list);
+
+      print(Stringcare.getSignatureOfBytes(revealed));
+      // If the widget was removed from the tree while the asynchronous platform
+      // message was in flight, we want to discard the reply rather than calling
+      // setState to update our non-existent appearance.
+      if (!mounted) return;
+
+      setState(() {
+        image = revealed;
+      });
     });
   }
 
@@ -74,15 +94,11 @@ class _MyAppState extends State<MyApp> {
                           ListTile(
                             title: Text("Test hash"),
                           ),
-                          Text(Stringcare.testHash([
-                            "xfgbxsfgbdxfgnbxfgnbxfgnbsfgbxfgbxfgbxfgcvb xcvb"
-                          ])),
+                          Text(Stringcare.testHash([])),
                           ListTile(
                             title: Text("Test sign"),
                           ),
-                          Text(Stringcare.testSign([
-                            "xfgbxsfgbdxfgnbxfgnbxfgnbsfgbxfgbxfgbxfgcvb xcvb"
-                          ])),
+                          Text(Stringcare.testSign([])),
                           ListTile(
                             title: Text("Obfuscation blank"),
                           ),
@@ -212,6 +228,27 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                   ),
+                  if (image != null)
+                    Material(
+                      elevation: 2,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0)),
+                      child: Container(
+                        padding: EdgeInsets.all(15),
+                        child: Column(
+                          children: [
+                            ListTile(
+                              title: Text("Reveal voyager"),
+                            ),
+                            Image(
+                              width: 400,
+                              height: 400,
+                              image: MemoryImage(image),
+                              fit: BoxFit.fitHeight),  
+                          ],
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ),

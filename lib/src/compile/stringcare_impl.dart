@@ -93,7 +93,6 @@ class StringcareImpl extends StringcareCommons {
     }
   }
 
-  @override
   String testSign(List<String> keys) {
     var key = "";
     if (keys != null && keys.isNotEmpty && keys.join("").isNotEmpty) {
@@ -102,7 +101,6 @@ class StringcareImpl extends StringcareCommons {
     return c.testSign(key);
   }
 
-  @override
   String testHash(List<String> keys) {
     var key = "";
     if (keys != null && keys.isNotEmpty && keys.join("").isNotEmpty) {

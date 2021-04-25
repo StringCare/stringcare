@@ -10,11 +10,13 @@ import 'dart:typed_data';
 
 String introMessage(String version) => '''
   ════════════════════════════════════════════
-     Stringcare (v $version)                               
+     Stringcare (v $version)
+     Hash: ${StringcareImpl().testHash([])}                               
+     Sign: ${StringcareImpl().testSign([])}                               
   ════════════════════════════════════════════
   ''';
 
-String infoAssetsMessage(String assetsPath, String assetsBasePath) => '''
+String infoAssetsObfuscateMessage(String assetsPath, String assetsBasePath) => '''
   Generating obfuscated assets:
    - From "$assetsBasePath"
    - To "$assetsPath"                              
@@ -26,6 +28,18 @@ String infoAssetsFileObfuscationMessage(String originalFile, String obfuscatedFi
    - To "$obfuscatedFile"                              
   ''';
 
+String infoAssetsRevealedMessage(String assetsPath, String assetsBasePath) => '''
+  Generating revealed assets:
+   - From "$assetsBasePath"
+   - To "$assetsPath"                              
+  ''';
+
+String infoAssetsFileRevealedMessage(String originalFile, String revealedFile) => '''
+  Revealing:
+   - From "$originalFile"
+   - To "$revealedFile"                              
+  ''';
+
 void obfuscateFile(String originalFilePath, String obfuscatedFilePath) {
   final api = StringcareImpl();
 
@@ -33,11 +47,25 @@ void obfuscateFile(String originalFilePath, String obfuscatedFilePath) {
   var obfuscatedFile = File(obfuscatedFilePath);
 
   Uint8List originalData = originalFile.readAsBytesSync(); 
+  print("original hash: ${api.getSignatureOfBytes(originalData)}");
 
   Uint8List obfuscatedData = api.obfuscateData(originalData);
+  print("result hash: ${api.getSignatureOfBytes(obfuscatedData)}");
+
   obfuscatedFile.writeAsBytesSync(obfuscatedData);
 }
 
+void revealFile(String originalFilePath, String revealedFilePath) {
+  final api = StringcareImpl();
+
+  var originalFile = File(originalFilePath);
+  var revealedFile = File(revealedFilePath);
+
+  Uint8List originalData = originalFile.readAsBytesSync(); 
+
+  Uint8List revealedData = api.revealData(originalData);
+  revealedFile.writeAsBytesSync(revealedData);
+}
 
 Map<String, dynamic> loadConfigFile() {
   final File file = File("pubspec.yaml");

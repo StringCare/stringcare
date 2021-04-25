@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-std::string pd = "jejejejejejejejejeje";
+std::string pd = "jejejejejejejejejejejejejejejejejej";
 
 char *string2Char(const std::string &str) {
     char *cstr = new char[str.length() + 1];

@@ -1,6 +1,3 @@
-import 'dart:typed_data';
-
-import 'package:flutter/services.dart' show ByteData, rootBundle;
 import 'package:stringcare/stringcare.dart';
 import 'package:stringcare_example/vars.dart';
 
@@ -8,8 +5,6 @@ class Presenter {
   String p1 = "dsgfjkbndsgfbldsgbdjns";
   String p2 = "sfvsfdgvsdfvsfdvsfvsrf";
   String p3 = "dtlbkjdnsfvsftrglbjknd";
-
-  ByteData imageBytes;
 
   String obfuscatedBlank;
   String revealedBlank;
@@ -52,23 +47,5 @@ class Presenter {
         Stringcare.validSignature(signatureLorem, [p3, p1, p2]);
     otherSignatureTestLorem =
         Stringcare.validSignature(signatureLorem, [p2, p3]);
-  }
-
-  void prepareImages() {
-    rootBundle.load('assets/voyager.jpeg').then((value) {
-      imageBytes = value;
-      var list = value.buffer.asUint8List();
-      print(list.toString());
-      var obfuscatedImage = Stringcare.obfuscateDataWith([p2, p1], list);
-      print(obfuscatedImage.toString());
-      var revealedImage = Stringcare.revealDataWith([p1, p2], obfuscatedImage);
-      print(revealedImage.toString());
-
-      String signA = Stringcare.getSignatureOfBytes(list);
-      String signB = Stringcare.getSignatureOfBytes(revealedImage);
-      print("signA: $signA");
-      print("signB: $signB");
-      print("same signature: ${signA == signB}");
-    });
   }
 }

@@ -12,6 +12,7 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
 
+  image: ^3.0.2
   stringcare:
     path: ../
 
@@ -20,6 +21,7 @@ dependencies:
 stringcare:
   assets_path: "assets"
   assets_base_path: "assets_base"
+  assets_reveal_test_path: "assets_test"
   # lang_path: "lang"
 
 dev_dependencies:

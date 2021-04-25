@@ -9,7 +9,7 @@ void main(List<String> arguments) async {
   var assetsPath = config["assets_path"];
   var assetsBasePath = config["assets_base_path"];
 
-  print(infoAssetsMessage(assetsPath, assetsBasePath));
+  print(infoAssetsObfuscateMessage(assetsPath, assetsBasePath));
 
   final baseFiles = await dirContents(assetsBasePath);
 
