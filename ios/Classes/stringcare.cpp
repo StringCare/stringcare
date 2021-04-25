@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-std::string pd = "jejejejejejejejejejejejejejejejejej";
+std::string pd = "a6ExQWqgF67n4OTMWgztgPExNjsGx2bsfmvjjtbJOoMiQlkWfwYNLfyPq88GowmvzJ1kdiPGbB5QC1wNc6lPSP0RQxAItqVIRzJTeaPsrCaXByvUesQK1hh5JXjNZraWcW4s4TR5TTOhEJ9UsCJqa3J9erM1s5JjjJMur88ksRJFHaUHUWq0kG76UHwJkMNu6FFrEGJ63kdBeh1qzywvXbIfNYZKDKUIRs1VfCxSMzwszgH2JPMZfrCLDlrZTMCIo0QUWwlnyLAW9ty1OT5jZkcPYoJJ7nFgGJh1OAG7q0CRxTBehOQ6sSBsF2m0rlzoW4d0BskTs2JH6mtldJiI";
 
 char *string2Char(const std::string &str) {
     char *cstr = new char[str.length() + 1];
@@ -59,19 +59,21 @@ std::string sign(std::string key) {
     int i = 0;
     int u = 0;
     for (char &c : key) {
-        val[u] = c;
+        val = val + c;
+
         u++;
         i++;
+
         if (i % 2 == 0) {
-            i = (i + (int) c + (3 * u));
+            i = ((int) c + (3 * u));
         } else if (u % 2 == 0) {
-            i = (i * 3 - (int) c + (2 * u));
+            i = (u * 3 + (int) c + (4 * u));
         } else {
-            i = (i / 2 + (int) c + (6 * u));
+            i = (u * 2 + (int) c + (6 * u));
         }
+
         val += std::to_string(i);
         val = reverse(val);
-        u = u + (std::to_string(i).length() - 1);
     }
     return reverse(val);
 }

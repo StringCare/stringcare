@@ -228,6 +228,7 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                   ),
+                  Padding(padding: EdgeInsets.all(8)),
                   if (image != null)
                     Material(
                       elevation: 2,
