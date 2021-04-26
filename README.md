@@ -26,7 +26,7 @@ Flutter plugin for encrypt/decrypt `String` and `Uint8List` objects easily with 
 | Language | C++ | C++ | Dart | C++ | C++ | C++ | |
 
 
-Only `ffi` and `crypto` dependencies are used.
+Only `path`, `yaml`, `ffi` and `crypto` dependencies are used.
 
 -----
 
