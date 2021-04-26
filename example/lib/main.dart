@@ -8,8 +8,6 @@ import 'dart:typed_data';
 
 import 'presenter.dart';
 
-final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
-
 void main() {
   Stringcare.supportedLangs = ["en", "es"];
   runApp(MyApp());
@@ -33,9 +31,6 @@ class _MyAppState extends State<MyApp> {
       ],
       localizationsDelegates: Stringcare.delegates,
       localeResolutionCallback: Stringcare.localeResolutionCallback,
-      navigatorObservers: [
-        routeObserver
-      ],
       home: MyAppPage(presenter: widget.presenter)
     );
   }
@@ -136,6 +131,10 @@ class MyAppPageState extends State<MyAppPage> {
                           title: Text("Lang resource"),
                         ),
                         Text(Stringcare.translate(context, "hello_there")),
+                        ListTile(
+                          title: Text("Lang pattern resource"),
+                        ),
+                        Text(Stringcare.translate(context, "hello_format", values: ["Tom"])),
                         ListTile(
                           title: Text("Obfuscation blank"),
                         ),

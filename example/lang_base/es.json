@@ -1,3 +1,4 @@
 {
-  "hello_there": "Qué tal?"
+  "hello_there": "Qué tal?",
+  "hello_format": "Hola $1!"
 }
