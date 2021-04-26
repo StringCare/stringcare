@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'dart:convert';
 
-String pd = "jejejejejejejejejeje";
+String pd = "a6ExQWqgF67n4OTMWgztgPExNjsGx2bsfmvjjtbJOoMiQlkWfwYNLfyPq88GowmvzJ1kdiPGbB5QC1wNc6lPSP0RQxAItqVIRzJTeaPsrCaXByvUesQK1hh5JXjNZraWcW4s4TR5TTOhEJ9UsCJqa3J9erM1s5JjjJMur88ksRJFHaUHUWq0kG76UHwJkMNu6FFrEGJ63kdBeh1qzywvXbIfNYZKDKUIRs1VfCxSMzwszgH2JPMZfrCLDlrZTMCIo0QUWwlnyLAW9ty1OT5jZkcPYoJJ7nFgGJh1OAG7q0CRxTBehOQ6sSBsF2m0rlzoW4d0BskTs2JH6mtldJiI";
 
 String ba2String(Uint8List data) {
   return utf8.decode(data);
@@ -42,82 +42,27 @@ String join(String aux, String key) {
   }
 }
 
-String replaceCharAt(String oldString, int index, String newChar) {
-  try {
-    if (oldString.length <= index) {
-      int diff = index - oldString.length;
-      for (int c = 0; c < diff + 1; c++) {
-        oldString += " ";
-      }
-    }
-
-    var value = "";
-
-    if (index == 0) {
-      if (oldString.length <= 1) {
-        value = newChar;
-      } else {
-        value = newChar + oldString.substring(1);
-      }
-    }
-
-    if (index == oldString.length - 1) {
-      value = oldString.substring(0, index) + newChar;
-    }
-    value = oldString.substring(0, index) +
-        newChar +
-        oldString.substring(index + 1);
-    return value;
-  } catch (e) {
-    print("replace error: $e");
-    return "";
-  }
-}
-
-String toExact(double value) {
-  var sign = "";
-  if (value < 0) {
-    value = -value;
-    sign = "-";
-  }
-  var string = value.toString();
-  var e = string.lastIndexOf('e');
-  if (e < 0) return "$sign$string";
-  assert(string.indexOf('.') == 1);
-  var offset =
-      int.parse(string.substring(e + (string.startsWith('-', e + 1) ? 1 : 2)));
-  var digits = string.substring(0, 1) + string.substring(2, e);
-  if (offset < 0) {
-    return "${sign}0.${"0" * ~offset}$digits";
-  }
-  if (offset > 0) {
-    if (offset >= digits.length) return sign + digits.padRight(offset + 1, "0");
-    return "$sign${digits.substring(0, offset + 1)}"
-        ".${digits.substring(offset + 1)}";
-  }
-  return digits;
-}
-
 String sign(String key) {
   try {
     String val = "";
-
     int i = 0;
     int u = 0;
     for (String c in key.split("")) {
-      val = replaceCharAt(val, u, c);
+      val += c;
+      
       u++;
       i++;
+      
       if (i % 2 == 0) {
-        i = (i + c.codeUnits.first + (3 * u));
+        i = (c.codeUnits.first + (3 * u));
       } else if (u % 2 == 0) {
-        i = (i * 3 - c.codeUnits.first + (2 * u));
+        i = (u * 3 + c.codeUnits.first + (4 * u));
       } else {
-        i = (i ~/ 2 + c.codeUnits.first + (6 * u));
+        i = (u * 2 + c.codeUnits.first + (6 * u));
       }
-      val += toExact(i.toDouble());
+      
+      val += i.toString();
       val = reverse(val);
-      u = u + (toExact(i.toDouble()).length - 1);
     }
     return reverse(val);
   } catch (e) {

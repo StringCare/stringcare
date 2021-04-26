@@ -12,6 +12,10 @@
 
 #### [Uint8List Usage](https://github.com/StringCare/stringcare/wiki/Uint8List-Usage)
 
+#### [i18n](https://github.com/StringCare/stringcare/wiki/i18n)
+
+#### [Assets](https://github.com/StringCare/stringcare/wiki/Assets)
+
 -----
 
 Flutter plugin for encrypt/decrypt `String` and `Uint8List` objects easily with C++ code. 
@@ -22,7 +26,7 @@ Flutter plugin for encrypt/decrypt `String` and `Uint8List` objects easily with 
 | Language | C++ | C++ | Dart | C++ | C++ | C++ | |
 
 
-Only `ffi` and `crypto` dependencies are used.
+Only `path`, `yaml`, `ffi` and `crypto` dependencies are used.
 
 -----
 
