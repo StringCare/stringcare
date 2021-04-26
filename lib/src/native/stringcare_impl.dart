@@ -206,8 +206,6 @@ class StringcareImpl extends StringcareMethodChannel {
               "hashTest")
           .asFunction();
 
-      print("keys: $key");
-
       var res = getStringFromUtf8List(hashTest(key.toNativeUtf8()));
 
       return res;

@@ -6,19 +6,9 @@ void main(List<String> arguments) async {
 
   var config = loadConfigFile();
 
-  var assetsPath = config["assets_reveal_test_path"];
-  var assetsBasePath = config["assets_path"];
+  /// Prepare assets
+  await processAssetsReveal(config);
 
-  print(infoAssetsRevealedMessage(assetsPath, assetsBasePath));
-
-  final baseFiles = await dirContents(assetsBasePath);
-
-  for (var item in baseFiles) {
-    var originalFilePath = item.path;
-    var revealedFilePath = "${assetsPath}/${basename(item.path)}";
-    print(infoAssetsFileRevealedMessage(originalFilePath, revealedFilePath));
-
-    revealFile(originalFilePath, revealedFilePath);
-  }
-
+  /// Prepare lang
+  await processLangReveal(config);
 }

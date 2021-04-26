@@ -8,7 +8,10 @@ import 'dart:typed_data';
 
 import 'presenter.dart';
 
+final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
+
 void main() {
+  Stringcare.supportedLangs = ["en", "es"];
   runApp(MyApp());
 }
 
@@ -20,6 +23,37 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      supportedLocales: [
+        Locale('en', 'US'),
+        Locale('es', 'ES'),
+      ],
+      localizationsDelegates: Stringcare.delegates,
+      localeResolutionCallback: Stringcare.localeResolutionCallback,
+      navigatorObservers: [
+        routeObserver
+      ],
+      home: MyAppPage(presenter: widget.presenter)
+    );
+  }
+}
+
+class MyAppPage extends StatefulWidget {
+  final Presenter presenter;
+
+  MyAppPage(
+      {Key key,
+      this.presenter})
+      : super(key: key);
+
+  @override
+  MyAppPageState createState() => MyAppPageState();
+}
+
+class MyAppPageState extends State<MyAppPage> {
   String _platformVersion = 'Unknown';
   Uint8List image;
 
@@ -55,7 +89,6 @@ class _MyAppState extends State<MyApp> {
       var list = value.buffer.asUint8List();
       var revealed = Stringcare.revealData(list);
 
-      print(Stringcare.getSignatureOfBytes(revealed));
       // If the widget was removed from the tree while the asynchronous platform
       // message was in flight, we want to discard the reply rather than calling
       // setState to update our non-existent appearance.
@@ -67,22 +100,173 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     var obEmoji = widget.presenter.obfuscatedEmoji.split(",");
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Center(
-          child: SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.all(15),
-              child: Column(
-                children: [
-                  Text('Running on: $_platformVersion\n'),
-                  Padding(padding: EdgeInsets.all(8)),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Plugin example app'),
+      ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.all(15),
+            child: Column(
+              children: [
+                Text('Running on: $_platformVersion\n'),
+                Padding(padding: EdgeInsets.all(8)),
+                Material(
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0)),
+                  child: Container(
+                    padding: EdgeInsets.all(15),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          title: Text("Test hash"),
+                        ),
+                        Text(Stringcare.testHash([])),
+                        ListTile(
+                          title: Text("Test sign"),
+                        ),
+                        Text(Stringcare.testSign([])),
+                        ListTile(
+                          title: Text("Lang resource"),
+                        ),
+                        Text(Stringcare.translate(context, "hello_there")),
+                        ListTile(
+                          title: Text("Obfuscation blank"),
+                        ),
+                        Text(widget.presenter.obfuscatedBlank),
+                        Padding(padding: EdgeInsets.all(8)),
+                        ListTile(
+                          title: Text("Reveal blank"),
+                        ),
+                        Text("'${widget.presenter.revealedBlank}'"),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(padding: EdgeInsets.all(8)),
+                Material(
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0)),
+                  child: Container(
+                    padding: EdgeInsets.all(15),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          title: Text("Obfuscation hello"),
+                        ),
+                        Text(widget.presenter.obfuscatedHello),
+                        Padding(padding: EdgeInsets.all(8)),
+                        ListTile(
+                          title: Text("Reveal hello"),
+                        ),
+                        Text(widget.presenter.revealedHello),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(padding: EdgeInsets.all(8)),
+                Material(
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0)),
+                  child: Container(
+                    padding: EdgeInsets.all(15),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          title: Text("Obfuscation emojis"),
+                        ),
+                        Text(obEmoji
+                            .getRange(
+                            0, obEmoji.length > 30 ? 30 : obEmoji.length)
+                            .toString()),
+                        Padding(padding: EdgeInsets.all(8)),
+                        ListTile(
+                          title: Text("Reveal emojis"),
+                        ),
+                        Text(widget.presenter.revealedEmoji),
+                        Padding(padding: EdgeInsets.all(8)),
+                        ListTile(
+                          title: Text("Signature emojis"),
+                        ),
+                        Text(widget.presenter.signatureEmoji),
+                        Padding(padding: EdgeInsets.all(8)),
+                        ListTile(
+                          title: Text("Readable obfuscated emojis"),
+                        ),
+                        Text(widget.presenter.readableEmoji),
+                        Padding(padding: EdgeInsets.all(8)),
+                        ListTile(
+                          title: Text("Same signatureTest"),
+                        ),
+                        Text(widget.presenter.sameSignatureTestEmoji
+                            .toString()),
+                        Padding(padding: EdgeInsets.all(8)),
+                        ListTile(
+                          title: Text("Other signatureTest"),
+                        ),
+                        Text(widget.presenter.otherSignatureTestEmoji
+                            .toString()),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(padding: EdgeInsets.all(8)),
+                Material(
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0)),
+                  child: Container(
+                    padding: EdgeInsets.all(15),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          title: Text("Obfuscation lorem"),
+                        ),
+                        Text(widget.presenter.obfuscatedLorem
+                            .split(",")
+                            .getRange(0, 30)
+                            .toString()),
+                        Padding(padding: EdgeInsets.all(8)),
+                        ListTile(
+                          title: Text("Reveal lorem"),
+                        ),
+                        Text(widget.presenter.revealedLorem),
+                        Padding(padding: EdgeInsets.all(8)),
+                        ListTile(
+                          title: Text("Signature lorem"),
+                        ),
+                        Text(widget.presenter.signatureLorem),
+                        Padding(padding: EdgeInsets.all(8)),
+                        ListTile(
+                          title: Text("Readable obfuscated lorem"),
+                        ),
+                        Text(widget.presenter.readableLorem),
+                        Padding(padding: EdgeInsets.all(8)),
+                        ListTile(
+                          title: Text("Same signatureTest"),
+                        ),
+                        Text(widget.presenter.sameSignatureTestLorem
+                            .toString()),
+                        Padding(padding: EdgeInsets.all(8)),
+                        ListTile(
+                          title: Text("Other signatureTest"),
+                        ),
+                        Text(widget.presenter.otherSignatureTestLorem
+                            .toString()),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(padding: EdgeInsets.all(8)),
+                if (image != null)
                   Material(
                     elevation: 2,
                     shape: RoundedRectangleBorder(
@@ -92,166 +276,18 @@ class _MyAppState extends State<MyApp> {
                       child: Column(
                         children: [
                           ListTile(
-                            title: Text("Test hash"),
+                            title: Text("Reveal voyager"),
                           ),
-                          Text(Stringcare.testHash([])),
-                          ListTile(
-                            title: Text("Test sign"),
-                          ),
-                          Text(Stringcare.testSign([])),
-                          ListTile(
-                            title: Text("Obfuscation blank"),
-                          ),
-                          Text(widget.presenter.obfuscatedBlank),
-                          Padding(padding: EdgeInsets.all(8)),
-                          ListTile(
-                            title: Text("Reveal blank"),
-                          ),
-                          Text("'${widget.presenter.revealedBlank}'"),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(padding: EdgeInsets.all(8)),
-                  Material(
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0)),
-                    child: Container(
-                      padding: EdgeInsets.all(15),
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: Text("Obfuscation hello"),
-                          ),
-                          Text(widget.presenter.obfuscatedHello),
-                          Padding(padding: EdgeInsets.all(8)),
-                          ListTile(
-                            title: Text("Reveal hello"),
-                          ),
-                          Text(widget.presenter.revealedHello),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(padding: EdgeInsets.all(8)),
-                  Material(
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0)),
-                    child: Container(
-                      padding: EdgeInsets.all(15),
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: Text("Obfuscation emojis"),
-                          ),
-                          Text(obEmoji
-                              .getRange(
-                                  0, obEmoji.length > 30 ? 30 : obEmoji.length)
-                              .toString()),
-                          Padding(padding: EdgeInsets.all(8)),
-                          ListTile(
-                            title: Text("Reveal emojis"),
-                          ),
-                          Text(widget.presenter.revealedEmoji),
-                          Padding(padding: EdgeInsets.all(8)),
-                          ListTile(
-                            title: Text("Signature emojis"),
-                          ),
-                          Text(widget.presenter.signatureEmoji),
-                          Padding(padding: EdgeInsets.all(8)),
-                          ListTile(
-                            title: Text("Readable obfuscated emojis"),
-                          ),
-                          Text(widget.presenter.readableEmoji),
-                          Padding(padding: EdgeInsets.all(8)),
-                          ListTile(
-                            title: Text("Same signatureTest"),
-                          ),
-                          Text(widget.presenter.sameSignatureTestEmoji
-                              .toString()),
-                          Padding(padding: EdgeInsets.all(8)),
-                          ListTile(
-                            title: Text("Other signatureTest"),
-                          ),
-                          Text(widget.presenter.otherSignatureTestEmoji
-                              .toString()),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(padding: EdgeInsets.all(8)),
-                  Material(
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0)),
-                    child: Container(
-                      padding: EdgeInsets.all(15),
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: Text("Obfuscation lorem"),
-                          ),
-                          Text(widget.presenter.obfuscatedLorem
-                              .split(",")
-                              .getRange(0, 30)
-                              .toString()),
-                          Padding(padding: EdgeInsets.all(8)),
-                          ListTile(
-                            title: Text("Reveal lorem"),
-                          ),
-                          Text(widget.presenter.revealedLorem),
-                          Padding(padding: EdgeInsets.all(8)),
-                          ListTile(
-                            title: Text("Signature lorem"),
-                          ),
-                          Text(widget.presenter.signatureLorem),
-                          Padding(padding: EdgeInsets.all(8)),
-                          ListTile(
-                            title: Text("Readable obfuscated lorem"),
-                          ),
-                          Text(widget.presenter.readableLorem),
-                          Padding(padding: EdgeInsets.all(8)),
-                          ListTile(
-                            title: Text("Same signatureTest"),
-                          ),
-                          Text(widget.presenter.sameSignatureTestLorem
-                              .toString()),
-                          Padding(padding: EdgeInsets.all(8)),
-                          ListTile(
-                            title: Text("Other signatureTest"),
-                          ),
-                          Text(widget.presenter.otherSignatureTestLorem
-                              .toString()),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(padding: EdgeInsets.all(8)),
-                  if (image != null)
-                    Material(
-                      elevation: 2,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0)),
-                      child: Container(
-                        padding: EdgeInsets.all(15),
-                        child: Column(
-                          children: [
-                            ListTile(
-                              title: Text("Reveal voyager"),
-                            ),
-                            Image(
+                          Image(
                               width: 400,
                               height: 400,
                               image: MemoryImage(image),
-                              fit: BoxFit.fitHeight),  
-                          ],
-                        ),
+                              fit: BoxFit.fitHeight),
+                        ],
                       ),
                     ),
-                ],
-              ),
+                  ),
+              ],
             ),
           ),
         ),

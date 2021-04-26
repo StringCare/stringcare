@@ -1,4 +1,4 @@
-import 'package:path/path.dart' as path;
+import 'package:path/path.dart';
 import 'package:yaml/yaml.dart';
 import 'dart:async';
 import 'dart:io';
@@ -22,6 +22,12 @@ String infoAssetsObfuscateMessage(String assetsPath, String assetsBasePath) => '
    - To "$assetsPath"                              
   ''';
 
+String infoLangObfuscateMessage(String langPath, String langBasePath) => '''
+  Generating obfuscated langs:
+   - From "$langBasePath"
+   - To "$langPath"                              
+  ''';
+
 String infoAssetsFileObfuscationMessage(String originalFile, String obfuscatedFile) => '''
   Obfuscating:
    - From "$originalFile"
@@ -30,6 +36,12 @@ String infoAssetsFileObfuscationMessage(String originalFile, String obfuscatedFi
 
 String infoAssetsRevealedMessage(String assetsPath, String assetsBasePath) => '''
   Generating revealed assets:
+   - From "$assetsBasePath"
+   - To "$assetsPath"                              
+  ''';
+
+String infoLangRevealedMessage(String assetsPath, String assetsBasePath) => '''
+  Generating revealed lang:
    - From "$assetsBasePath"
    - To "$assetsPath"                              
   ''';
@@ -93,4 +105,88 @@ Future<List<FileSystemEntity>> dirContents(String path) {
   lister.listen((file) => files.add(file),
       onDone: () => completer.complete(files));
   return completer.future;
+}
+
+void processAssetsObfuscation(Map<String, dynamic> config) async {
+  if (!config.containsKey("assets_path") || !config.containsKey("assets_base_path")) {
+    return;
+  }
+  
+  var assetsPath = config["assets_path"];
+  var assetsBasePath = config["assets_base_path"];
+
+  print(infoAssetsObfuscateMessage(assetsPath, assetsBasePath));
+
+  final baseFiles = await dirContents(assetsBasePath);
+
+  for (var item in baseFiles) {
+    var originalFilePath = item.path;
+    var obfuscatedFilePath = "${assetsPath}/${basename(item.path)}";
+    print(infoAssetsFileObfuscationMessage(originalFilePath, obfuscatedFilePath));
+
+    obfuscateFile(originalFilePath, obfuscatedFilePath);
+  }
+}
+
+void processLangObfuscation(Map<String, dynamic> config) async {
+  if (!config.containsKey("lang_path") || !config.containsKey("lang_base_path")) {
+    return;
+  }
+  
+  var langPath = config["lang_path"];
+  var langBasePath = config["lang_base_path"];
+
+  print(infoLangObfuscateMessage(langPath, langBasePath));
+
+  final baseFiles = await dirContents(langBasePath);
+
+  for (var item in baseFiles) {
+    var originalFilePath = item.path;
+    var obfuscatedFilePath = "${langPath}/${basename(item.path)}";
+    print(infoAssetsFileObfuscationMessage(originalFilePath, obfuscatedFilePath));
+
+    obfuscateFile(originalFilePath, obfuscatedFilePath);
+  }
+}
+
+void processAssetsReveal(Map<String, dynamic> config) async {
+  if (!config.containsKey("assets_path") || !config.containsKey("assets_reveal_test_path")) {
+    return;
+  }
+  
+  var assetsPath = config["assets_path"];
+  var assetsTestPath = config["assets_reveal_test_path"];
+
+  print(infoAssetsRevealedMessage(assetsTestPath, assetsPath));
+
+  final baseFiles = await dirContents(assetsPath);
+
+  for (var item in baseFiles) {
+    var originalFilePath = item.path;
+    var revealedFilePath = "${assetsTestPath}/${basename(item.path)}";
+    print(infoAssetsFileRevealedMessage(originalFilePath, revealedFilePath));
+
+    revealFile(originalFilePath, revealedFilePath);
+  }
+}
+
+void processLangReveal(Map<String, dynamic> config) async {
+  if (!config.containsKey("lang_path") || !config.containsKey("lang_reveal_test_path")) {
+    return;
+  }
+  
+  var langPath = config["lang_path"];
+  var langTestPath = config["lang_reveal_test_path"];
+
+  print(infoLangRevealedMessage(langTestPath, langPath));
+
+  final baseFiles = await dirContents(langPath);
+
+  for (var item in baseFiles) {
+    var originalFilePath = item.path;
+    var revealedFilePath = "${langTestPath}/${basename(item.path)}";
+    print(infoAssetsFileRevealedMessage(originalFilePath, revealedFilePath));
+
+    revealFile(originalFilePath, revealedFilePath);
+  }
 }
