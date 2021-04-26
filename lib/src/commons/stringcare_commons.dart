@@ -1,16 +1,13 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:crypto/crypto.dart';
-import 'package:flutter/services.dart';
 
 import 'stringcare_platform.dart';
 
 abstract class StringcareCommons implements StringcarePlatform {
-  static const MethodChannel _channel = const MethodChannel('stringcare');
 
   Future<String> get platformVersion async {
-    final String version = await _channel.invokeMethod('getPlatformVersion');
-    return version;
+    return "version";
   }
 
   String obfuscate(String value) {

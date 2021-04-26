@@ -1,9 +1,40 @@
+import 'dart:ui';
 import 'dart:typed_data';
 import 'package:stringcare/src/web/stringcare_impl.dart'
     if (dart.library.io) 'package:stringcare/src/native/stringcare_impl.dart';
 import 'src/commons/stringcare_commons.dart';
+import 'src/i18n/app_localizations.dart';
+import 'src/i18n/fallback_cupertino_localizations_delegate.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter/src/widgets/localizations.dart';
+import 'package:flutter/material.dart';
 
 class Stringcare {
+  static var langPath = "lang";
+  static var supportedLangs = ['en'];
+
+  static List<LocalizationsDelegate<dynamic>> delegates = [
+        FallbackCupertinoLocalisationsDelegate(),
+        // A class which loads the translations from JSON files
+        AppLocalizations.delegate,
+        // Built-in localization of basic text for Material widgets
+        GlobalMaterialLocalizations.delegate,
+        // Built-in localization for text direction LTR/RTL
+        GlobalWidgetsLocalizations.delegate,
+      ];
+
+  static Locale Function(Locale, Iterable<Locale>) localeResolutionCallback = (locale, supportedLocales) {
+    for (var supportedLocale in supportedLocales) {
+      if (supportedLocale.languageCode == locale.languageCode) {
+        return supportedLocale;
+      }
+    }
+
+    // If the locale of the device is not supported, use the first one
+    // from the list (English, in this case).
+    return supportedLocales.first;
+  };
+
   static StringcareCommons api = StringcareImpl();
 
   static Future<String> get platformVersion async {
@@ -68,5 +99,13 @@ class Stringcare {
 
   static String readableObfuscate(String value) {
     return api.readableObfuscate(value);
+  }
+
+  static String translate(BuildContext context, String key, {List<String> values}) {
+    return AppLocalizations.of(context).translate(key, values: values);
+  }
+
+  static Future<String> translateWithLang(String lang, String key, {List<String> values}) {
+    return AppLocalizations.sTranslate(lang, key, values: values);
   }
 }

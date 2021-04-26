@@ -11,11 +11,18 @@ dependencies:
     sdk: flutter
   flutter_web_plugins:
     sdk: flutter
-
   stringcare:
     path: ../
 
   cupertino_icons: ^1.0.0
+
+stringcare:
+  assets_path: "assets"
+  assets_base_path: "assets_base"
+  assets_reveal_test_path: "assets_test"
+  lang_path: "lang"
+  lang_base_path: "lang_base"
+  lang_reveal_test_path: "lang_test"
 
 dev_dependencies:
   flutter_test:
@@ -26,4 +33,6 @@ flutter:
   uses-material-design: true
 
   assets:
+    - lang/en.json
+    - lang/es.json
     - assets/voyager.jpeg
