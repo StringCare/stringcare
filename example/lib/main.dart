@@ -51,12 +51,18 @@ class MyAppPage extends StatefulWidget {
 class MyAppPageState extends State<MyAppPage> {
   String _platformVersion = 'Unknown';
   Uint8List image;
+  String asyncValue = "";
 
   @override
   void initState() {
     super.initState();
     initPlatformState();
     initImageState();
+    Stringcare.translateWithLang("en", "hello_format", values: ["Tom"]).then((value) {
+      setState(() {
+        asyncValue = value;
+      });
+    });
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -135,6 +141,10 @@ class MyAppPageState extends State<MyAppPage> {
                           title: Text("Lang pattern resource"),
                         ),
                         Text(Stringcare.translate(context, "hello_format", values: ["Tom"])),
+                        ListTile(
+                          title: Text("Retrieving specific lang"),
+                        ),
+                        Text(asyncValue),
                         ListTile(
                           title: Text("Obfuscation blank"),
                         ),

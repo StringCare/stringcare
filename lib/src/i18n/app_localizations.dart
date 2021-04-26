@@ -45,9 +45,9 @@ class AppLocalizations {
       lang = language;
     }
 
-    String jsonString =
-    await rootBundle.loadString('${Stringcare.langPath}/$lang.json');
-    Map<String, dynamic> jsonMap = json.decode(jsonString);
+    var data = await rootBundle.load('${Stringcare.langPath}/$lang.json');
+    var jsonRevealed = Stringcare.revealData(data.buffer.asUint8List());
+    Map<String, dynamic> jsonMap = json.decode(utf8.decode(jsonRevealed, allowMalformed: true));
 
     Map<String, String> _localizedStrings = jsonMap.map((key, value) {
       return MapEntry(key, value.toString());

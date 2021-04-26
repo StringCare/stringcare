@@ -104,4 +104,8 @@ class Stringcare {
   static String translate(BuildContext context, String key, {List<String> values}) {
     return AppLocalizations.of(context).translate(key, values: values);
   }
+
+  static Future<String> translateWithLang(String lang, String key, {List<String> values}) {
+    return AppLocalizations.sTranslate(lang, key, values: values);
+  }
 }
