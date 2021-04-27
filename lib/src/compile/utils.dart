@@ -135,7 +135,7 @@ Future<List<String>> processAssetsObfuscation(Map<String, dynamic> config) async
     var folderDestiny = Directory(obfuscatedFilePath.replaceAll(basename(item.path), ""));
 
     if (!folderDestiny.existsSync()) {
-        folderDestiny.createSync();
+        folderDestiny.createSync(recursive: true);
     }
     paths.add("$assetsPath${obfuscatedFilePath.split(assetsPath)[1]}");
     print(infoAssetsFileObfuscationMessage(originalFilePath, obfuscatedFilePath));
@@ -210,7 +210,7 @@ void processAssetsReveal(Map<String, dynamic> config) async {
     var folderDestiny = Directory(revealedFilePath.replaceAll(basename(item.path), ""));
 
     if (!folderDestiny.existsSync()) {
-        folderDestiny.createSync();
+        folderDestiny.createSync(recursive: true);
     }
 
     print(infoAssetsFileRevealedMessage(originalFilePath, revealedFilePath));
