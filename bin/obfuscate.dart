@@ -6,8 +6,10 @@ void main(List<String> arguments) async {
   var config = loadConfigFile();
 
   /// Prepare assets
-  await processAssetsObfuscation(config);
+  var assetsPaths = await processAssetsObfuscation(config);
 
   /// Prepare lang
-  await processLangObfuscation(config);
+  var stringKeys = await processLangObfuscation(config);
+
+  buildRFile(config, assetsPaths, stringKeys);
 }

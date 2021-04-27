@@ -17,12 +17,17 @@ dependencies:
   cupertino_icons: ^1.0.0
 
 stringcare:
-  assets_path: "assets"
-  assets_base_path: "assets_base"
-  assets_reveal_test_path: "assets_test"
-  lang_path: "lang"
-  lang_base_path: "lang_base"
-  lang_reveal_test_path: "lang_test"
+  assets:
+    obfuscated: "assets"
+    original: "assets_base"
+    test: "assets_test"
+  lang:
+    obfuscated: "lang"
+    original: "lang_base"
+    test: "lang_test"
+  resources:
+    class_name: "R"
+    class_dir: "lib"
 
 dev_dependencies:
   flutter_test:
@@ -35,4 +40,4 @@ flutter:
   assets:
     - lang/en.json
     - lang/es.json
-    - assets/voyager.jpeg
+    - assets/images/voyager.jpeg

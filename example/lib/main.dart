@@ -7,6 +7,7 @@ import 'package:flutter/services.dart' show ByteData, rootBundle;
 import 'dart:typed_data';
 
 import 'presenter.dart';
+import 'r.dart';
 
 void main() {
   Stringcare.supportedLangs = ["en", "es"];
@@ -58,7 +59,7 @@ class MyAppPageState extends State<MyAppPage> {
     super.initState();
     initPlatformState();
     initImageState();
-    Stringcare.translateWithLang("en", "hello_format", values: ["Tom"]).then((value) {
+    Stringcare.translateWithLang("en", R.string.hello_format, values: ["Tom"]).then((value) {
       setState(() {
         asyncValue = value;
       });
@@ -86,18 +87,9 @@ class MyAppPageState extends State<MyAppPage> {
   }
 
   Future<void> initImageState() async {
-    rootBundle.load('assets/voyager.jpeg').then((value) {
-      var list = value.buffer.asUint8List();
-      var revealed = Stringcare.revealData(list);
-
-      // If the widget was removed from the tree while the asynchronous platform
-      // message was in flight, we want to discard the reply rather than calling
-      // setState to update our non-existent appearance.
-      if (!mounted) return;
-
-      setState(() {
-        image = revealed;
-      });
+    var data = await Stringcare.revealAsset(R.assets.images_voyager_jpeg);
+    setState(() {
+      image = data;
     });
   }
 
@@ -136,11 +128,11 @@ class MyAppPageState extends State<MyAppPage> {
                         ListTile(
                           title: Text("Lang resource"),
                         ),
-                        Text(Stringcare.translate(context, "hello_there")),
+                        Text(Stringcare.translate(context, R.string.hello_there)),
                         ListTile(
                           title: Text("Lang pattern resource"),
                         ),
-                        Text(Stringcare.translate(context, "hello_format", values: ["Tom"])),
+                        Text(Stringcare.translate(context, R.string.hello_format, values: ["Tom"])),
                         ListTile(
                           title: Text("Retrieving specific lang"),
                         ),

@@ -8,6 +8,7 @@ import 'src/i18n/fallback_cupertino_localizations_delegate.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/src/widgets/localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Stringcare {
   static var langPath = "lang";
@@ -107,5 +108,11 @@ class Stringcare {
 
   static Future<String> translateWithLang(String lang, String key, {List<String> values}) {
     return AppLocalizations.sTranslate(lang, key, values: values);
+  }
+
+  static Future<Uint8List> revealAsset(String key) async {
+    var asset = await rootBundle.load(key);
+    var list = asset.buffer.asUint8List();
+    return Stringcare.revealData(list);
   }
 }
