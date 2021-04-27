@@ -9,7 +9,7 @@ void main(List<String> arguments) async {
   var assetsPaths = await processAssetsObfuscation(config);
 
   /// Prepare lang
-  var langsPaths = await processLangObfuscation(config);
+  var stringKeys = await processLangObfuscation(config);
 
-  buildRFile(config, assetsPaths, langsPaths);
+  buildRFile(config, assetsPaths, stringKeys);
 }
