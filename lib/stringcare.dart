@@ -115,4 +115,8 @@ class Stringcare {
     var list = asset.buffer.asUint8List();
     return Stringcare.revealData(list);
   }
+
+  static String getLang(BuildContext context) {
+    return AppLocalizations.of(context).getLang();
+  }
 }

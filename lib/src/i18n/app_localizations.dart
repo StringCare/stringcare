@@ -89,7 +89,7 @@ class AppLocalizations {
     if (delegate.isSupported(locale)) {
       return locale.languageCode;
     }
-    return "en";
+    return Stringcare.supportedLangs[0];
   }
 }
 
