@@ -30,6 +30,22 @@ Only `path`, `yaml`, `ffi` and `crypto` dependencies are used.
 
 -----
 
+Simplify the way you work with secured resources or data:
+
+`en.json`
+
+```json
+{
+  "hello_there": "Hello there!"
+}
+```
+
+```dart
+Stringcare.translate(context, R.strings.hello_there);
+```
+
+-----
+
 <p align="center"><img width="35%" vspace="10" src="https://github.com/StringCare/stringcare/raw/master/images/android_sample.png"><img width="40%" vspace="10" src="https://github.com/StringCare/stringcare/raw/master/images/ios_sample.png"></p>
 
 <p align="center"><img width="80%" vspace="10" src="https://github.com/StringCare/stringcare/raw/master/images/web_sample.png"></p>

@@ -16,7 +16,7 @@ abstract class ScAssetBundleImageProvider
     extends ImageProvider<AssetBundleImageKey> {
   /// Abstract const constructor. This constructor enables subclasses to provide
   /// const constructors so that they can be used in const expressions.
-  const SCAssetBundleImageProvider();
+  const ScAssetBundleImageProvider();
 
   /// Converts a key into an [ImageStreamCompleter], and begins fetching the
   /// image.
@@ -74,7 +74,7 @@ class ScAssetImageProvider extends ScAssetBundleImageProvider {
   /// from the set of images to choose from. The [package] argument must be
   /// non-null when fetching an asset that is included in package. See the
   /// documentation for the [AssetImage] class itself for details.
-  const SCAssetImageProvider(
+  const ScAssetImageProvider(
     this.assetName, {
     this.bundle,
     this.package,
