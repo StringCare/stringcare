@@ -10,7 +10,13 @@ import 'presenter.dart';
 import 'r.dart';
 
 void main() {
-  Stringcare.supportedLangs = ["en", "es"];
+  Stringcare.locales = [
+    Locale('en', ''),
+    Locale('es', ''),
+    Locale('es', 'AR'),
+    Locale('es', 'ES'),
+    Locale('es', 'US')
+  ];
   runApp(MyApp());
 }
 
@@ -26,10 +32,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      supportedLocales: [
-        Locale('en', 'US'),
-        Locale('es', 'ES'),
-      ],
+      supportedLocales: Stringcare.locales,
       localizationsDelegates: Stringcare.delegates,
       localeResolutionCallback: Stringcare.localeResolutionCallback,
       home: MyAppPage(presenter: widget.presenter)
@@ -57,7 +60,7 @@ class MyAppPageState extends State<MyAppPage> {
   void initState() {
     super.initState();
     initPlatformState();
-    R.strings.hello_format.getLang("en", values: ["Tom"]).then((value) {
+    R.strings.hello_format.getLang("es-ES", values: ["Tom"]).then((value) {
       setState(() {
         asyncValue = value;
       });

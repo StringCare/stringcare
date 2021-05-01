@@ -25,9 +25,21 @@ class AppLocalizations {
 
   Future<bool> load() async {
     // Load the language JSON file from the "lang" folder
-    var data = await rootBundle.load('${Stringcare.langPath}/${locale.languageCode}.json');
-    var jsonRevealed = Stringcare.revealData(data.buffer.asUint8List());
-    Map<String, dynamic> jsonMap = json.decode(utf8.decode(jsonRevealed, allowMalformed: true));
+    Map<String, dynamic> jsonMap;
+
+    try {
+      var data = await rootBundle.load('${Stringcare.langPath}/${locale.languageCode}_${locale.countryCode}.json');
+      var jsonRevealed = Stringcare.revealData(data.buffer.asUint8List());
+      jsonMap = json.decode(utf8.decode(jsonRevealed, allowMalformed: true));
+    } catch (e) {
+      var data = await rootBundle.load(
+          '${Stringcare.langPath}/${locale.languageCode}.json');
+      var jsonRevealed = Stringcare.revealData(data.buffer.asUint8List());
+      jsonMap = json.decode(utf8.decode(jsonRevealed, allowMalformed: true));
+    } catch (e) {
+      _localizedStrings = Map();
+      return true;
+    }
 
     _localizedStrings = jsonMap.map((key, value) {
       return MapEntry(key, value.toString());
@@ -39,15 +51,35 @@ class AppLocalizations {
   static Future<String> sTranslate(String language, String key, {List<String> values}) async {
     // Load the language JSON file from the "lang" folder
     var lang;
+    var country = "";
     if (language.contains("-")) {
       lang = language.split("-")[0];
+      country = language.split("-")[1];
+    } else if (language.contains("_")) {
+      lang = language.split("_")[0];
+      country = language.split("_")[1];
     } else {
       lang = language;
     }
 
-    var data = await rootBundle.load('${Stringcare.langPath}/$lang.json');
-    var jsonRevealed = Stringcare.revealData(data.buffer.asUint8List());
-    Map<String, dynamic> jsonMap = json.decode(utf8.decode(jsonRevealed, allowMalformed: true));
+    Map<String, dynamic> jsonMap;
+
+    try {
+      var data;
+      if (country.isNotEmpty) {
+        data = await rootBundle.load('${Stringcare.langPath}/${lang}_${country}.json');
+      } else {
+        data = await rootBundle.load('${Stringcare.langPath}/${lang}.json');
+      }
+      var jsonRevealed = Stringcare.revealData(data.buffer.asUint8List());
+      jsonMap = json.decode(utf8.decode(jsonRevealed, allowMalformed: true));
+    } catch (e) {
+      var data = await rootBundle.load('${Stringcare.langPath}/$lang.json');
+      var jsonRevealed = Stringcare.revealData(data.buffer.asUint8List());
+      jsonMap = json.decode(utf8.decode(jsonRevealed, allowMalformed: true));
+    } catch (e) {
+      return "";
+    }
 
     Map<String, String> _localizedStrings = jsonMap.map((key, value) {
       return MapEntry(key, value.toString());
@@ -87,9 +119,9 @@ class AppLocalizations {
 
   String getLang() {
     if (delegate.isSupported(locale)) {
-      return locale.languageCode;
+      return "${locale.languageCode}_${locale.countryCode}";
     }
-    return Stringcare.supportedLangs[0];
+    return "${Stringcare.locales[0].languageCode}_${Stringcare.locales[0].countryCode}";
   }
 }
 
@@ -101,7 +133,13 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) {
-    return Stringcare.supportedLangs.contains(locale.languageCode);
+    for (Locale supportedLocale in Stringcare.locales) {
+      if (supportedLocale.languageCode == locale.languageCode
+        && supportedLocale.countryCode == locale.countryCode) {
+        return true;
+      }
+    }
+    return false;
   }
 
   @override

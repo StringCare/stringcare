@@ -16,7 +16,8 @@ export 'src/extension/stringcare_ext.dart';
 
 class Stringcare {
   static var langPath = "lang";
-  static var supportedLangs = ['en'];
+
+  static List<Locale> locales = [ Locale('en', 'US') ];
 
   static List<LocalizationsDelegate<dynamic>> delegates = [
         FallbackCupertinoLocalisationsDelegate(),
@@ -30,7 +31,15 @@ class Stringcare {
 
   static Locale Function(Locale, Iterable<Locale>) localeResolutionCallback = (locale, supportedLocales) {
     for (var supportedLocale in supportedLocales) {
-      if (supportedLocale.languageCode == locale.languageCode) {
+      if (supportedLocale.languageCode == locale.languageCode
+          && supportedLocale.countryCode == locale.countryCode) {
+        return supportedLocale;
+      }
+    }
+
+    for (var supportedLocale in supportedLocales) {
+      if (supportedLocale.languageCode == locale.languageCode
+          && supportedLocale.countryCode.isEmpty) {
         return supportedLocale;
       }
     }
