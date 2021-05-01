@@ -32,6 +32,10 @@ extension StringcareStringExt on String {
     return Stringcare.readableObfuscate(this);
   }
 
+  Future<Uint8List> revealAsset() async {
+    return Stringcare.revealAsset(this);
+  }
+
 }
 
 extension StringcareUint8ListExt on Uint8List {
