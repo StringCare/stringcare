@@ -269,7 +269,7 @@ void buildRFile(Map<String, dynamic> config, List<String> assets, List<String> k
     }
     var parts = asset.split("/");
     var cPart = parts.sublist(1, parts.length).join("/");
-    assetsContent += "String ${cPart.replaceAll("/", "_").replaceAll(".", "_")} = \"$asset\";\n";
+    assetsContent += "final String ${cPart.replaceAll("/", "_").replaceAll(".", "_")} = \"$asset\";\n";
     i++;
   }
 
@@ -281,7 +281,7 @@ void buildRFile(Map<String, dynamic> config, List<String> assets, List<String> k
     if (i > 0) {
       langsContent += "\t";
     }
-    langsContent += "String ${key} = \"$key\";\n";
+    langsContent += "final String ${key} = \"$key\";\n";
     i++;
   }
 
@@ -306,7 +306,7 @@ $langsContent
 
 class $className {
   static Assets assets = Assets();
-  static Strings string = Strings();
+  static Strings strings = Strings();
 }
   ''';
 
