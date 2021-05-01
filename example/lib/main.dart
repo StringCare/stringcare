@@ -51,14 +51,12 @@ class MyAppPage extends StatefulWidget {
 
 class MyAppPageState extends State<MyAppPage> {
   String _platformVersion = 'Unknown';
-  Uint8List image;
   String asyncValue = "";
 
   @override
   void initState() {
     super.initState();
     initPlatformState();
-    initImageState();
     Stringcare.translateWithLang("en", R.string.hello_format, values: ["Tom"]).then((value) {
       setState(() {
         asyncValue = value;
@@ -85,14 +83,6 @@ class MyAppPageState extends State<MyAppPage> {
       _platformVersion = platformVersion;
     });
   }
-
-  Future<void> initImageState() async {
-    var data = await Stringcare.revealAsset(R.assets.images_voyager_jpeg);
-    setState(() {
-      image = data;
-    });
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -267,27 +257,35 @@ class MyAppPageState extends State<MyAppPage> {
                   ),
                 ),
                 Padding(padding: EdgeInsets.all(8)),
-                if (image != null)
-                  Material(
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0)),
-                    child: Container(
-                      padding: EdgeInsets.all(15),
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: Text("Reveal voyager"),
-                          ),
-                          Image(
-                              width: 400,
-                              height: 400,
-                              image: MemoryImage(image),
-                              fit: BoxFit.fitHeight),
-                        ],
-                      ),
+                Material(
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0)),
+                  child: Container(
+                    padding: EdgeInsets.all(15),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          title: Text("Reveal voyager"),
+                        ),
+                        ScImageAsset(
+                          name: R.assets.images_voyager_jpeg,
+                          height: 400,
+                          width: 400,
+                        ),
+                        Container(
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  fit: BoxFit.none,
+                                  image: ScAssetImageProvider(
+                                      R.assets.images_voyager_jpeg),
+                                  repeat: ImageRepeat.repeat,
+                                )),
+                            child: Text("Voyager")),
+                      ],
                     ),
                   ),
+                ),
               ],
             ),
           ),

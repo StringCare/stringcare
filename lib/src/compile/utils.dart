@@ -291,6 +291,7 @@ void buildRFile(Map<String, dynamic> config, List<String> assets, List<String> k
 ///      flutter pub run stringcare:obfuscate
 /// 
 
+// ignore_for_file: non_constant_identifier_names
 class Assets {
   Assets();
 

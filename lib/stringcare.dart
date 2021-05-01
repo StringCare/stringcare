@@ -10,6 +10,9 @@ import 'package:flutter/src/widgets/localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+export 'src/widget/sc_asset_image_provider.dart';
+export 'src/widget/sc_image_asset.dart';
+
 class Stringcare {
   static var langPath = "lang";
   static var supportedLangs = ['en'];
