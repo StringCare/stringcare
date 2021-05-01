@@ -57,7 +57,7 @@ class MyAppPageState extends State<MyAppPage> {
   void initState() {
     super.initState();
     initPlatformState();
-    Stringcare.translateWithLang("en", R.string.hello_format, values: ["Tom"]).then((value) {
+    Stringcare.translateWithLang("en", R.strings.hello_format, values: ["Tom"]).then((value) {
       setState(() {
         asyncValue = value;
       });
@@ -118,11 +118,11 @@ class MyAppPageState extends State<MyAppPage> {
                         ListTile(
                           title: Text("Lang resource"),
                         ),
-                        Text(Stringcare.translate(context, R.string.hello_there)),
+                        Text(Stringcare.translate(context, R.strings.hello_there)),
                         ListTile(
                           title: Text("Lang pattern resource"),
                         ),
-                        Text(Stringcare.translate(context, R.string.hello_format, values: ["Tom"])),
+                        Text(Stringcare.translate(context, R.strings.hello_format, values: ["Tom"])),
                         ListTile(
                           title: Text("Retrieving specific lang"),
                         ),
