@@ -292,21 +292,21 @@ void buildRFile(Map<String, dynamic> config, List<String> assets, List<String> k
 /// 
 
 // ignore_for_file: non_constant_identifier_names
-class Assets {
-  Assets();
+class _Assets {
+  _Assets();
 
 $assetsContent
 }
 
-class Strings {
-  Strings();
+class _Strings {
+  _Strings();
 
 $langsContent
 }
 
 class $className {
-  static Assets assets = Assets();
-  static Strings strings = Strings();
+  static _Assets assets = _Assets();
+  static _Strings strings = _Strings();
 }
   ''';
 

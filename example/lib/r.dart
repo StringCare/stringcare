@@ -4,15 +4,15 @@
 /// 
 
 // ignore_for_file: non_constant_identifier_names
-class Assets {
-  Assets();
+class _Assets {
+  _Assets();
 
   final String images_voyager_jpeg = "assets/images/voyager.jpeg";
 
 }
 
-class Strings {
-  Strings();
+class _Strings {
+  _Strings();
 
   final String hello_there = "hello_there";
 	final String hello_format = "hello_format";
@@ -20,7 +20,7 @@ class Strings {
 }
 
 class R {
-  static Assets assets = Assets();
-  static Strings strings = Strings();
+  static _Assets assets = _Assets();
+  static _Strings strings = _Strings();
 }
   
