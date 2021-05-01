@@ -30,7 +30,11 @@ Only `path`, `yaml`, `ffi` and `crypto` dependencies are used.
 
 -----
 
-Simplify the way you work with secured resources or data:
+Simplify the way you work with secured resources, Strings and Uint8List objects:
+
+```dart
+"my_secret".obfuscate();
+```
 
 `en.json`
 
@@ -41,7 +45,7 @@ Simplify the way you work with secured resources or data:
 ```
 
 ```dart
-Stringcare.translate(context, R.strings.hello_there);
+R.strings.hello_there.on(context);
 ```
 
 -----

@@ -25,24 +25,24 @@ class Presenter {
   bool otherSignatureTestLorem;
 
   Presenter() {
-    obfuscatedBlank = Stringcare.obfuscate(Vars.blank);
-    revealedBlank = Stringcare.reveal(obfuscatedBlank);
-    obfuscatedHello = Stringcare.obfuscate(Vars.hello);
-    revealedHello = Stringcare.reveal(obfuscatedHello);
+    obfuscatedBlank = Vars.blank.obfuscate();
+    revealedBlank = obfuscatedBlank.reveal();
+    obfuscatedHello = Vars.hello.obfuscate();
+    revealedHello = obfuscatedHello.reveal();
 
-    obfuscatedEmoji = Stringcare.obfuscateWith([p2, p1, p3], Vars.emojis);
-    revealedEmoji = Stringcare.revealWith([p1, p3, p2], obfuscatedEmoji);
+    obfuscatedEmoji = Vars.emojis.obfuscateWith([p2, p1, p3]);
+    revealedEmoji = obfuscatedEmoji.revealWith([p1, p3, p2]);
     signatureEmoji = Stringcare.getSignature([p1, p2, p3]);
-    readableEmoji = Stringcare.readableObfuscate(obfuscatedEmoji);
+    readableEmoji = obfuscatedEmoji.readableObfuscate();
     sameSignatureTestEmoji =
         Stringcare.validSignature(signatureEmoji, [p3, p1, p2]);
     otherSignatureTestEmoji =
         Stringcare.validSignature(signatureEmoji, [p2, p3]);
 
-    obfuscatedLorem = Stringcare.obfuscateWith([p2, p1, p3], Vars.loremipsu);
-    revealedLorem = Stringcare.revealWith([p2, p1, p3], obfuscatedLorem);
+    obfuscatedLorem = Vars.loremipsu.obfuscateWith([p2, p1, p3]);
+    revealedLorem = obfuscatedLorem.revealWith([p2, p1, p3]);
     signatureLorem = Stringcare.getSignature([p1, p2, p3]);
-    readableLorem = Stringcare.readableObfuscate(obfuscatedLorem);
+    readableLorem = obfuscatedLorem.readableObfuscate();
     sameSignatureTestLorem =
         Stringcare.validSignature(signatureLorem, [p3, p1, p2]);
     otherSignatureTestLorem =
