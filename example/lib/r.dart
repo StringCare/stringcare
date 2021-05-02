@@ -7,7 +7,8 @@
 class _Assets {
   _Assets();
 
-  final String images_voyager_jpeg = "assets/images/voyager.jpeg";
+  final String images_coding_svg = "assets/images/coding.svg";
+	final String images_voyager_jpeg = "assets/images/voyager.jpeg";
 
 }
 
