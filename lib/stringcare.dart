@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 
 export 'src/widget/sc_asset_image_provider.dart';
 export 'src/widget/sc_image_asset.dart';
+export 'src/widget/sc_svg.dart';
 export 'src/extension/stringcare_ext.dart';
 
 class Stringcare {

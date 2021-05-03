@@ -28,7 +28,12 @@ class AppLocalizations {
     Map<String, dynamic> jsonMap;
 
     try {
-      var data = await rootBundle.load('${Stringcare.langPath}/${locale.languageCode}_${locale.countryCode}.json');
+      var data;
+      if (locale.countryCode != null && locale.countryCode.isNotEmpty) {
+        data = await rootBundle.load('${Stringcare.langPath}/${locale.languageCode}_${locale.countryCode}.json');
+      } else {
+        data = await rootBundle.load('${Stringcare.langPath}/${locale.languageCode}.json');
+      }
       var jsonRevealed = Stringcare.revealData(data.buffer.asUint8List());
       jsonMap = json.decode(utf8.decode(jsonRevealed, allowMalformed: true));
     } catch (e) {

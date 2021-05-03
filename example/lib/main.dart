@@ -289,6 +289,27 @@ class MyAppPageState extends State<MyAppPage> {
                     ),
                   ),
                 ),
+                Padding(padding: EdgeInsets.all(8)),
+                Material(
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0)),
+                  child: Container(
+                    padding: EdgeInsets.all(15),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          title: Text("Reveal SVG"),
+                        ),
+                        ScSvg(
+                          R.assets.images_coding_svg,
+                          height: 400,
+                          width: 400,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

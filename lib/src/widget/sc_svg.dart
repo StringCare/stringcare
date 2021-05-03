@@ -5,7 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stringcare/stringcare.dart';
 
 class ScSvg extends StatefulWidget {
-  final double aspectRatio;
   final String name;
   final double width;
   final double height;
@@ -24,7 +23,6 @@ class ScSvg extends StatefulWidget {
   ScSvg(
       this.name, {
         Key key,
-        this.aspectRatio,
         this.width,
         this.height,
         this.fit = BoxFit.contain,
@@ -62,24 +60,21 @@ class _ScSvgState extends State<ScSvg> {
     if (data == null) {
       return Container();
     }
-    return AspectRatio(
-      aspectRatio: widget.aspectRatio,
-      child: SvgPicture.memory(
-        data,
-        width: widget.width,
-        height: widget.height,
-        fit: widget.fit,
-        alignment: widget.alignment,
-        matchTextDirection: widget.matchTextDirection,
-        allowDrawingOutsideViewBox: widget.allowDrawingOutsideViewBox,
-        placeholderBuilder: widget.placeholderBuilder,
-        color: widget.color,
-        colorBlendMode: widget.colorBlendMode,
-        semanticsLabel: widget.semanticsLabel,
-        excludeFromSemantics: widget.excludeFromSemantics,
-        clipBehavior: widget.clipBehavior,
-        cacheColorFilter: widget.cacheColorFilter,
-      ),
+    return SvgPicture.memory(
+      data,
+      width: widget.width,
+      height: widget.height,
+      fit: widget.fit,
+      alignment: widget.alignment,
+      matchTextDirection: widget.matchTextDirection,
+      allowDrawingOutsideViewBox: widget.allowDrawingOutsideViewBox,
+      placeholderBuilder: widget.placeholderBuilder,
+      color: widget.color,
+      colorBlendMode: widget.colorBlendMode,
+      semanticsLabel: widget.semanticsLabel,
+      excludeFromSemantics: widget.excludeFromSemantics,
+      clipBehavior: widget.clipBehavior,
+      cacheColorFilter: widget.cacheColorFilter,
     );
   }
 }
