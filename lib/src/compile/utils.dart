@@ -8,6 +8,10 @@ import 'package:stringcare/src/compile/c_helper.dart' as helper;
 import 'package:stringcare/src/compile/exceptions.dart';
 import 'dart:typed_data';
 
+String get slash {
+  if (Platform.isWindows) return '\\';
+  return '/';
+}
 String introMessage(String version) => '''
   ════════════════════════════════════════════
      Stringcare (v $version)
@@ -169,7 +173,7 @@ Future<List<String>> processLangObfuscation(Map<String, dynamic> config) async {
 
   for (var item in baseFiles) {
     var originalFilePath = item.path;
-    var obfuscatedFilePath = "${langPath}/${basename(item.path)}";
+    var obfuscatedFilePath = "${langPath}$slash${basename(item.path)}";
     print(infoAssetsFileObfuscationMessage(originalFilePath, obfuscatedFilePath));
 
     var file = File(originalFilePath);
@@ -239,7 +243,7 @@ void processLangReveal(Map<String, dynamic> config) async {
 
   for (var item in baseFiles) {
     var originalFilePath = item.path;
-    var revealedFilePath = "${langTestPath}/${basename(item.path)}";
+    var revealedFilePath = "${langTestPath}$slash${basename(item.path)}";
     print(infoAssetsFileRevealedMessage(originalFilePath, revealedFilePath));
 
     revealFile(originalFilePath, revealedFilePath);
@@ -267,9 +271,13 @@ void buildRFile(Map<String, dynamic> config, List<String> assets, List<String> k
     if (i > 0) {
       assetsContent += "\t";
     }
-    var parts = asset.split("/");
-    var cPart = parts.sublist(1, parts.length).join("/");
-    assetsContent += "final String ${cPart.replaceAll("/", "_").replaceAll(".", "_")} = \"$asset\";\n";
+    var parts = asset.split(slash);
+    var cPart = parts.sublist(1, parts.length).join(slash);
+
+    if (Platform.isWindows) {
+      asset = asset.replaceAll("\\", "/");
+    }
+    assetsContent += "final String ${cPart.replaceAll(slash, "_").replaceAll(".", "_")} = '$asset';\n";
     i++;
   }
 
@@ -281,7 +289,7 @@ void buildRFile(Map<String, dynamic> config, List<String> assets, List<String> k
     if (i > 0) {
       langsContent += "\t";
     }
-    langsContent += "final String ${key} = \"$key\";\n";
+    langsContent += "final String ${key} = '$key';\n";
     i++;
   }
 
@@ -311,8 +319,8 @@ class $className {
   ''';
 
   var filePath = "$classDir";
-  if (!filePath.endsWith("/")) {
-    filePath += "/";
+  if (!filePath.endsWith(slash)) {
+    filePath += slash;
   } 
   filePath += "${className.toLowerCase()}.dart";
 
