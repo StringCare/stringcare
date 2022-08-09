@@ -6,23 +6,23 @@ import 'package:stringcare/stringcare.dart';
 
 class ScSvg extends StatefulWidget {
   final String name;
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   final BoxFit fit;
   final Alignment alignment;
   final bool matchTextDirection;
   final bool allowDrawingOutsideViewBox;
-  final Widget Function(BuildContext context) placeholderBuilder;
-  final Color color;
+  final Widget Function(BuildContext context)? placeholderBuilder;
+  final Color? color;
   final BlendMode colorBlendMode;
-  final String semanticsLabel;
+  final String? semanticsLabel;
   final bool excludeFromSemantics;
   final Clip clipBehavior;
   final bool cacheColorFilter;
 
   ScSvg(
       this.name, {
-        Key key,
+        Key? key,
         this.width,
         this.height,
         this.fit = BoxFit.contain,
@@ -43,7 +43,7 @@ class ScSvg extends StatefulWidget {
 }
 
 class _ScSvgState extends State<ScSvg> {
-  Uint8List data;
+  Uint8List? data;
 
   @override
   void initState() {
@@ -61,7 +61,7 @@ class _ScSvgState extends State<ScSvg> {
       return Container();
     }
     return SvgPicture.memory(
-      data,
+      data!,
       width: widget.width,
       height: widget.height,
       fit: widget.fit,

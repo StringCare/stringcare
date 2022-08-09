@@ -22,7 +22,7 @@ abstract class ScAssetBundleImageProvider
   /// image.
   @override
   ImageStreamCompleter load(AssetBundleImageKey key, DecoderCallback decode) {
-    InformationCollector collector;
+    InformationCollector? collector;
     assert(() {
       collector = () sync* {
         yield DiagnosticsProperty<ImageProvider>('Image provider', this);
@@ -47,7 +47,7 @@ abstract class ScAssetBundleImageProvider
     ByteData data;
     // Hot reload/restart could change whether an asset bundle or key in a
     // bundle are available, or if it is a network backed bundle.
-    Uint8List bytes;
+    Uint8List? bytes;
     try {
       data = await key.bundle.load(key.name);
       bytes = Stringcare.revealData(data.buffer.asUint8List());
@@ -55,15 +55,7 @@ abstract class ScAssetBundleImageProvider
       PaintingBinding.instance.imageCache.evict(key);
       rethrow;
     }
-    // `key.bundle.load` has a non-nullable return type, but might be null when
-    // running with weak checking, so we need to null check it anyway (and
-    // ignore the warning that the null-handling logic is dead code).
-    if (data == null) {
-      // ignore: dead_code
-      PaintingBinding.instance.imageCache.evict(key);
-      throw StateError('Unable to read data');
-    }
-    return await decode(bytes);
+    return await decode(bytes!);
   }
 }
 
@@ -78,7 +70,7 @@ class ScAssetImageProvider extends ScAssetBundleImageProvider {
     this.assetName, {
     this.bundle,
     this.package,
-  }) : assert(assetName != null);
+  });
 
   /// The name of the main asset from the set of images to choose from. See the
   /// documentation for the [AssetImage] class itself for details.
@@ -98,11 +90,11 @@ class ScAssetImageProvider extends ScAssetBundleImageProvider {
   ///
   /// The image is obtained by calling [AssetBundle.load] on the given [bundle]
   /// using the key given by [keyName].
-  final AssetBundle bundle;
+  final AssetBundle? bundle;
 
   /// The name of the package from which the image is included. See the
   /// documentation for the [AssetImage] class itself for details.
-  final String package;
+  final String? package;
 
   // We assume the main asset is designed for a device pixel ratio of 1.0
   static const double _naturalResolution = 1.0;
@@ -117,8 +109,8 @@ class ScAssetImageProvider extends ScAssetBundleImageProvider {
     // build/layout/paint sequence.)
     final AssetBundle chosenBundle =
         bundle ?? configuration.bundle ?? rootBundle;
-    Completer<AssetBundleImageKey> completer;
-    Future<AssetBundleImageKey> result;
+    Completer<AssetBundleImageKey>? completer;
+    Future<AssetBundleImageKey>? result;
 
     chosenBundle
         .loadStructuredData<Map<String, List<String>>>(
@@ -127,8 +119,8 @@ class ScAssetImageProvider extends ScAssetBundleImageProvider {
       final String chosenName = _chooseVariant(
         keyName,
         configuration,
-        manifest == null ? null : manifest[keyName],
-      );
+        manifest[keyName],
+      )!;
       final double chosenScale = _parseScale(chosenName);
       final AssetBundleImageKey key = AssetBundleImageKey(
         bundle: chosenBundle,
@@ -152,12 +144,12 @@ class ScAssetImageProvider extends ScAssetBundleImageProvider {
       // Forward the error to the caller.
       assert(completer != null);
       assert(result == null);
-      completer.completeError(error, stack);
+      completer!.completeError(error, stack);
     });
     if (result != null) {
       // The code above ran synchronously, and came up with an answer.
       // Return the SynchronousFuture that we created above.
-      return result;
+      return result!.then((value) => value);
     }
     // The code above hasn't yet run its "then" handler yet. Let's prepare a
     // completer for it to use when it does run.
@@ -166,8 +158,6 @@ class ScAssetImageProvider extends ScAssetBundleImageProvider {
   }
 
   static Future<Map<String, List<String>>> _manifestParser(String jsonData) {
-    if (jsonData == null)
-      return SynchronousFuture<Map<String, List<String>>>(null);
     // TODO(ianh): JSON decoding really shouldn't be on the main thread.
     final Map<String, dynamic> parsedJson =
         json.decode(jsonData) as Map<String, dynamic>;
@@ -181,13 +171,14 @@ class ScAssetImageProvider extends ScAssetBundleImageProvider {
     return SynchronousFuture<Map<String, List<String>>>(parsedManifest);
   }
 
-  String _chooseVariant(
-      String main, ImageConfiguration config, List<String> candidates) {
+  String? _chooseVariant(
+      String main, ImageConfiguration config, List<String>? candidates) {
     if (config.devicePixelRatio == null ||
         candidates == null ||
         candidates.isEmpty) return main;
     // TODO(ianh): Consider moving this parsing logic into _manifestParser.
-    final SplayTreeMap<double, String> mapping = SplayTreeMap<double, String>();
+    final SplayTreeMap<double?, String> mapping =
+        SplayTreeMap<double?, String>();
     for (final String candidate in candidates)
       mapping[_parseScale(candidate)] = candidate;
     // TODO(ianh): implement support for config.locale, config.textDirection,
@@ -208,11 +199,11 @@ class ScAssetImageProvider extends ScAssetBundleImageProvider {
   //   lowest key higher than `value`.
   // - If the screen has high device pixel ratio, choose the variant with the
   //   key nearest to `value`.
-  String _findBestVariant(
-      SplayTreeMap<double, String> candidates, double value) {
+  String? _findBestVariant(
+      SplayTreeMap<double?, String> candidates, double? value) {
     if (candidates.containsKey(value)) return candidates[value];
-    final double lower = candidates.lastKeyBefore(value);
-    final double upper = candidates.firstKeyAfter(value);
+    final double? lower = candidates.lastKeyBefore(value);
+    final double? upper = candidates.firstKeyAfter(value);
     if (lower == null) return candidates[upper];
     if (upper == null) return candidates[lower];
 
@@ -220,7 +211,7 @@ class ScAssetImageProvider extends ScAssetBundleImageProvider {
     // images are more visible than on screens with a higher device-pixel
     // ratios because the physical pixels are larger. Choose the higher
     // resolution image in that case instead of the nearest one.
-    if (value < _kLowDprLimit || value > (lower + upper) / 2)
+    if (value! < _kLowDprLimit || value > (lower + upper) / 2)
       return candidates[upper];
     else
       return candidates[lower];
@@ -239,9 +230,9 @@ class ScAssetImageProvider extends ScAssetBundleImageProvider {
       directoryPath = assetUri.pathSegments[assetUri.pathSegments.length - 2];
     }
 
-    final Match match = _extractRatioRegExp.firstMatch(directoryPath);
+    final Match? match = _extractRatioRegExp.firstMatch(directoryPath);
     if (match != null && match.groupCount > 0)
-      return double.parse(match.group(1));
+      return double.parse(match.group(1)!);
     return _naturalResolution; // i.e. default to 1.0x
   }
 

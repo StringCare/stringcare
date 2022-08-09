@@ -10,11 +10,11 @@ class StringcareImpl extends StringcareCommons {
   String obfuscateWith(List<String> keys, String value) {
     try {
       var key = "";
-      if (value == null || value.isEmpty) {
+      if (value.isEmpty) {
         return "";
       }
 
-      if (keys != null && keys.isNotEmpty && keys.join("").isNotEmpty) {
+      if (keys.isNotEmpty && keys.join("").isNotEmpty) {
         key = prepareKey(keys);
       }
 
@@ -30,14 +30,14 @@ class StringcareImpl extends StringcareCommons {
     }
   }
 
-  Uint8List obfuscateDataWith(List<String> keys, Uint8List value) {
+  Uint8List? obfuscateDataWith(List<String> keys, Uint8List value) {
     try {
       var key = "";
-      if (value == null || value.isEmpty) {
+      if (value.isEmpty) {
         return null;
       }
 
-      if (keys != null && keys.isNotEmpty && keys.join("").isNotEmpty) {
+      if (keys.isNotEmpty && keys.join("").isNotEmpty) {
         key = prepareKey(keys);
       }
 
@@ -53,11 +53,11 @@ class StringcareImpl extends StringcareCommons {
   String revealWith(List<String> keys, String value) {
     try {
       var key = "";
-      if (value == null || value.isEmpty) {
+      if (value.isEmpty) {
         return "";
       }
 
-      if (keys != null && keys.isNotEmpty && keys.join("").isNotEmpty) {
+      if (keys.isNotEmpty && keys.join("").isNotEmpty) {
         key = prepareKey(keys);
       }
 
@@ -73,14 +73,14 @@ class StringcareImpl extends StringcareCommons {
     }
   }
 
-  Uint8List revealDataWith(List<String> keys, Uint8List value) {
+  Uint8List? revealDataWith(List<String> keys, Uint8List? value) {
     try {
       var key = "";
       if (value == null || value.isEmpty) {
         return null;
       }
 
-      if (keys != null && keys.isNotEmpty && keys.join("").isNotEmpty) {
+      if (keys.isNotEmpty && keys.join("").isNotEmpty) {
         key = prepareKey(keys);
       }
 
@@ -95,7 +95,7 @@ class StringcareImpl extends StringcareCommons {
 
   String testSign(List<String> keys) {
     var key = "";
-    if (keys != null && keys.isNotEmpty && keys.join("").isNotEmpty) {
+    if (keys.isNotEmpty && keys.join("").isNotEmpty) {
       key = prepareKey(keys);
     }
     return c.testSign(key);
@@ -103,7 +103,7 @@ class StringcareImpl extends StringcareCommons {
 
   String testHash(List<String> keys) {
     var key = "";
-    if (keys != null && keys.isNotEmpty && keys.join("").isNotEmpty) {
+    if (keys.isNotEmpty && keys.join("").isNotEmpty) {
       key = prepareKey(keys);
     }
     return c.testHash(key);

@@ -8,7 +8,7 @@ String getStringFromRevealed(Uint8List listOfBytes) {
 Uint8List stringToUint8List(
   String string,
 ) {
-  return utf8.encode(string);
+  return utf8.encode(string) as Uint8List;
 }
 
 Uint8List stringByteToInt32(
