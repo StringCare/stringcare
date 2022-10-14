@@ -1,6 +1,6 @@
 name: stringcare
-description: A new flutter plugin project.
-version: 0.0.2
+description: Flutter plugin for obfuscate and reveal strings and any other data.
+version: 0.0.3
 homepage: https://github.com/StringCare/stringcare
 repository: https://github.com/StringCare/stringcare
 publish_to: none

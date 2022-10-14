@@ -21,22 +21,22 @@ class ScSvg extends StatefulWidget {
   final bool cacheColorFilter;
 
   ScSvg(
-      this.name, {
-        Key? key,
-        this.width,
-        this.height,
-        this.fit = BoxFit.contain,
-        this.alignment = Alignment.center,
-        this.matchTextDirection = false,
-        this.allowDrawingOutsideViewBox = false,
-        this.placeholderBuilder,
-        this.color,
-        this.colorBlendMode = BlendMode.srcIn,
-        this.semanticsLabel,
-        this.excludeFromSemantics = false,
-        this.clipBehavior = Clip.hardEdge,
-        this.cacheColorFilter = false,
-      }) : super(key: key);
+    this.name, {
+    Key? key,
+    this.width,
+    this.height,
+    this.fit = BoxFit.contain,
+    this.alignment = Alignment.center,
+    this.matchTextDirection = false,
+    this.allowDrawingOutsideViewBox = false,
+    this.placeholderBuilder,
+    this.color,
+    this.colorBlendMode = BlendMode.srcIn,
+    this.semanticsLabel,
+    this.excludeFromSemantics = false,
+    this.clipBehavior = Clip.hardEdge,
+    this.cacheColorFilter = false,
+  }) : super(key: key);
 
   @override
   _ScSvgState createState() => _ScSvgState();

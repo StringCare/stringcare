@@ -1,7 +1,7 @@
-import 'dart:typed_data';
-import 'dart:io';
-
 import 'dart:ffi';
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:ffi/ffi.dart';
 import 'package:stringcare/src/commons/stringcare_method_channel.dart';
 

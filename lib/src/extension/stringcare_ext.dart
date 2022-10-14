@@ -1,15 +1,15 @@
-import 'package:flutter/widgets.dart';
-import 'package:stringcare/stringcare.dart';
 import 'dart:typed_data';
 
-extension StringcareStringExt on String {
+import 'package:flutter/widgets.dart';
+import 'package:stringcare/stringcare.dart';
 
-  String? on(BuildContext context, {List<String>? values}) {
-    return Stringcare.translate(context, this, values: values);
+extension StringcareStringExt on String {
+  String on(BuildContext context, {List<String>? values}) {
+    return Stringcare.translate(context, this, values: values) ?? '';
   }
 
-  Future<String?> getLang(String lang, {List<String>? values}) {
-    return Stringcare.translateWithLang(lang, this, values: values);
+  Future<String> getLang(String lang, {List<String>? values}) async {
+    return await Stringcare.translateWithLang(lang, this, values: values) ?? '';
   }
 
   String obfuscate() {
@@ -35,11 +35,9 @@ extension StringcareStringExt on String {
   Future<Uint8List?> revealAsset() async {
     return Stringcare.revealAsset(this);
   }
-
 }
 
 extension StringcareUint8ListExt on Uint8List {
-
   Uint8List? obfuscateData() {
     return Stringcare.obfuscateData(this);
   }
@@ -55,5 +53,4 @@ extension StringcareUint8ListExt on Uint8List {
   Uint8List? revealDataWith(List<String> keys) {
     return Stringcare.revealDataWith(keys, this);
   }
-
 }
