@@ -86,7 +86,7 @@ class ScImageAsset extends StatefulWidget {
   /// }
   /// ```
   /// {@end-tool}
-  final ImageFrameBuilder frameBuilder;
+  final ImageFrameBuilder? frameBuilder;
 
   /// A builder function that is called if an error occurs during image loading.
   ///
@@ -123,7 +123,7 @@ class ScImageAsset extends StatefulWidget {
   /// }
   /// ```
   /// {@end-tool}
-  final ImageErrorWidgetBuilder errorBuilder;
+  final ImageErrorWidgetBuilder? errorBuilder;
 
   /// If non-null, require the image to have this width.
   ///
@@ -135,7 +135,7 @@ class ScImageAsset extends StatefulWidget {
   /// layout constraints, so that the image does not change size as it loads.
   /// Consider using [fit] to adapt the image's rendering to fit the given width
   /// and height if the exact image dimensions are not known in advance.
-  final double width;
+  final double? width;
 
   /// If non-null, require the image to have this height.
   ///
@@ -147,10 +147,10 @@ class ScImageAsset extends StatefulWidget {
   /// layout constraints, so that the image does not change size as it loads.
   /// Consider using [fit] to adapt the image's rendering to fit the given width
   /// and height if the exact image dimensions are not known in advance.
-  final double height;
+  final double? height;
 
   /// If non-null, this color is blended with each image pixel using [colorBlendMode].
-  final Color color;
+  final Color? color;
 
   /// Used to set the [FilterQuality] of the image.
   ///
@@ -167,13 +167,13 @@ class ScImageAsset extends StatefulWidget {
   /// See also:
   ///
   ///  * [BlendMode], which includes an illustration of the effect of each blend mode.
-  final BlendMode colorBlendMode;
+  final BlendMode? colorBlendMode;
 
   /// How to inscribe the image into the space allocated during layout.
   ///
   /// The default varies based on the other fields. See the discussion at
   /// [paintImage].
-  final BoxFit fit;
+  final BoxFit? fit;
 
   /// How to align the image within its bounds.
   ///
@@ -212,7 +212,7 @@ class ScImageAsset extends StatefulWidget {
   /// region of the image above and below the center slice will be stretched
   /// only horizontally and the region of the image to the left and right of
   /// the center slice will be stretched only vertically.
-  final Rect centerSlice;
+  final Rect? centerSlice;
 
   /// Whether to paint the image in the direction of the [TextDirection].
   ///
@@ -265,7 +265,7 @@ class ScImageAsset extends StatefulWidget {
   ///
   /// Used to provide a description of the image to TalkBack on Android, and
   /// VoiceOver on iOS.
-  final String semanticLabel;
+  final String? semanticLabel;
 
   /// Whether to exclude this image from semantics.
   ///
@@ -279,12 +279,12 @@ class ScImageAsset extends StatefulWidget {
   final bool isAntiAlias;
 
   final double scale;
-  final int cacheWidth;
-  final int cacheHeight;
-  final String name;
+  final int? cacheWidth;
+  final int? cacheHeight;
+  final String? name;
 
   ScImageAsset({
-    Key key,
+    Key? key,
     this.name,
     this.frameBuilder,
     this.errorBuilder,
@@ -312,12 +312,12 @@ class ScImageAsset extends StatefulWidget {
 }
 
 class _ScImageAssetState extends State<ScImageAsset> {
-  Uint8List image;
+  Uint8List? image;
 
   @override
   void initState() {
     super.initState();
-    Stringcare.revealAsset(widget.name).then((data) {
+    Stringcare.revealAsset(widget.name!).then((data) {
       setState(() {
         image = data;
       });
@@ -328,7 +328,7 @@ class _ScImageAssetState extends State<ScImageAsset> {
   Widget build(BuildContext context) {
     if (image != null) {
       return Image.memory(
-        image,
+        image!,
         width: widget.width,
         height: widget.height,
         fit: widget.fit,

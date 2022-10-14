@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:stringcare/stringcare.dart';
-import 'package:flutter/services.dart' show ByteData, rootBundle;
-import 'dart:typed_data';
 
 import 'presenter.dart';
 import 'r.dart';
@@ -28,25 +26,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      supportedLocales: Stringcare.locales,
-      localizationsDelegates: Stringcare.delegates,
-      localeResolutionCallback: Stringcare.localeResolutionCallback,
-      home: MyAppPage(presenter: widget.presenter)
-    );
+        supportedLocales: Stringcare.locales,
+        localizationsDelegates: Stringcare.delegates,
+        localeResolutionCallback: Stringcare.localeResolutionCallback,
+        home: MyAppPage(presenter: widget.presenter));
   }
 }
 
 class MyAppPage extends StatefulWidget {
   final Presenter presenter;
 
-  MyAppPage(
-      {Key key,
-      this.presenter})
-      : super(key: key);
+  MyAppPage({Key key, this.presenter}) : super(key: key);
 
   @override
   MyAppPageState createState() => MyAppPageState();
@@ -125,7 +118,8 @@ class MyAppPageState extends State<MyAppPage> {
                         ListTile(
                           title: Text("Lang pattern resource"),
                         ),
-                        Text(R.strings.hello_format.on(context, values: ["Tom"])),
+                        Text(R.strings.hello_format
+                            .on(context, values: ["Tom"])),
                         ListTile(
                           title: Text("Retrieving specific lang"),
                         ),
@@ -179,7 +173,7 @@ class MyAppPageState extends State<MyAppPage> {
                         ),
                         Text(obEmoji
                             .getRange(
-                            0, obEmoji.length > 30 ? 30 : obEmoji.length)
+                                0, obEmoji.length > 30 ? 30 : obEmoji.length)
                             .toString()),
                         Padding(padding: EdgeInsets.all(8)),
                         ListTile(
@@ -200,8 +194,8 @@ class MyAppPageState extends State<MyAppPage> {
                         ListTile(
                           title: Text("Same signatureTest"),
                         ),
-                        Text(widget.presenter.sameSignatureTestEmoji
-                            .toString()),
+                        Text(
+                            widget.presenter.sameSignatureTestEmoji.toString()),
                         Padding(padding: EdgeInsets.all(8)),
                         ListTile(
                           title: Text("Other signatureTest"),
@@ -247,8 +241,8 @@ class MyAppPageState extends State<MyAppPage> {
                         ListTile(
                           title: Text("Same signatureTest"),
                         ),
-                        Text(widget.presenter.sameSignatureTestLorem
-                            .toString()),
+                        Text(
+                            widget.presenter.sameSignatureTestLorem.toString()),
                         Padding(padding: EdgeInsets.all(8)),
                         ListTile(
                           title: Text("Other signatureTest"),
@@ -279,11 +273,11 @@ class MyAppPageState extends State<MyAppPage> {
                         Container(
                             decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  fit: BoxFit.none,
-                                  image: ScAssetImageProvider(
-                                      R.assets.images_voyager_jpeg),
-                                  repeat: ImageRepeat.repeat,
-                                )),
+                              fit: BoxFit.none,
+                              image: ScAssetImageProvider(
+                                  R.assets.images_voyager_jpeg),
+                              repeat: ImageRepeat.repeat,
+                            )),
                             child: Text("Voyager")),
                       ],
                     ),

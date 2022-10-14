@@ -4,11 +4,11 @@ import 'dart:typed_data';
 
 extension StringcareStringExt on String {
 
-  String on(BuildContext context, {List<String> values}) {
+  String? on(BuildContext context, {List<String>? values}) {
     return Stringcare.translate(context, this, values: values);
   }
 
-  Future<String> getLang(String lang, {List<String> values}) {
+  Future<String?> getLang(String lang, {List<String>? values}) {
     return Stringcare.translateWithLang(lang, this, values: values);
   }
 
@@ -32,7 +32,7 @@ extension StringcareStringExt on String {
     return Stringcare.readableObfuscate(this);
   }
 
-  Future<Uint8List> revealAsset() async {
+  Future<Uint8List?> revealAsset() async {
     return Stringcare.revealAsset(this);
   }
 
@@ -40,19 +40,19 @@ extension StringcareStringExt on String {
 
 extension StringcareUint8ListExt on Uint8List {
 
-  Uint8List obfuscateData() {
+  Uint8List? obfuscateData() {
     return Stringcare.obfuscateData(this);
   }
 
-  Uint8List obfuscateDataWith(List<String> keys) {
+  Uint8List? obfuscateDataWith(List<String> keys) {
     return Stringcare.obfuscateDataWith(keys, this);
   }
 
-  Uint8List revealData() {
+  Uint8List? revealData() {
     return Stringcare.revealData(this);
   }
 
-  Uint8List revealDataWith(List<String> keys) {
+  Uint8List? revealDataWith(List<String> keys) {
     return Stringcare.revealDataWith(keys, this);
   }
 

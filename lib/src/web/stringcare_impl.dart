@@ -13,7 +13,7 @@ class StringcareImpl extends StringcareMethodChannel {
     return compiler.obfuscateWith(keys, value);
   }
 
-  Uint8List obfuscateDataWith(List<String> keys, Uint8List value) {
+  Uint8List? obfuscateDataWith(List<String> keys, Uint8List value) {
     return compiler.obfuscateDataWith(keys, value);
   }
 
@@ -21,7 +21,7 @@ class StringcareImpl extends StringcareMethodChannel {
     return compiler.revealWith(keys, value);
   }
 
-  Uint8List revealDataWith(List<String> keys, Uint8List value) {
+  Uint8List? revealDataWith(List<String> keys, Uint8List? value) {
     return compiler.revealDataWith(keys, value);
   }
 
