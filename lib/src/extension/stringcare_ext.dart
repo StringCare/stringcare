@@ -4,7 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:stringcare/stringcare.dart';
 
 extension StringcareStringExt on String {
-  String on(BuildContext context, {List<String>? values}) {
+  String on(BuildContext? context, {List<String>? values}) {
+    if (context == null) return '';
     return Stringcare.translate(context, this, values: values) ?? '';
   }
 
