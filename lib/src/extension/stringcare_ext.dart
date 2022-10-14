@@ -9,7 +9,8 @@ extension StringcareStringExt on String {
     return Stringcare.translate(context, this, values: values) ?? '';
   }
 
-  Future<String> getLang(String lang, {List<String>? values}) async {
+  Future<String> getLang(String? lang, {List<String>? values}) async {
+    if (lang == null) return '';
     return await Stringcare.translateWithLang(lang, this, values: values) ?? '';
   }
 

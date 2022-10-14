@@ -133,7 +133,8 @@ class Stringcare {
     return Stringcare.revealData(list);
   }
 
-  static String getLang(BuildContext context) {
-    return AppLocalizations.of(context)!.getLang();
+  static String? getLang(BuildContext? context) {
+    if (context == null) return null;
+    return AppLocalizations.of(context)?.getLang();
   }
 }
