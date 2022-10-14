@@ -30,8 +30,10 @@ class Stringcare {
     GlobalWidgetsLocalizations.delegate,
   ];
 
-  static Locale Function(Locale, Iterable<Locale>) localeResolutionCallback =
+  static Locale? Function(Locale?, Iterable<Locale>)? localeResolutionCallback =
       (locale, supportedLocales) {
+    if (locale == null) return supportedLocales.first;
+
     for (var supportedLocale in supportedLocales) {
       if (supportedLocale.languageCode == locale.languageCode &&
           supportedLocale.countryCode == locale.countryCode) {
