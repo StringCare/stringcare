@@ -2,7 +2,7 @@
 <p align="center"><img width="10%" vspace="10" src="https://github.com/StringCare/stringcare/raw/master/images/ic_launcher/res/mipmap-xxxhdpi/ic_launcher.png"></p>
 
 <h2 align="center" style="margin-bottom:30px" vspace="20">Stringcare Flutter</h2>
-<p align="center"><a href="https://landa-app.com/">Land-a dependency</a></p>
+<p align="center"><a href="https://landamessenger.com/">A Landa dependency</a></p>
 
 Flutter plugin for encrypt/decrypt `String` and `Uint8List` objects easily with C++ code. 
 

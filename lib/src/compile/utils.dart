@@ -1,12 +1,13 @@
-import 'package:path/path.dart';
-import 'package:yaml/yaml.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:stringcare/src/compile/stringcare_impl.dart';
+import 'dart:typed_data';
+
+import 'package:path/path.dart';
 import 'package:stringcare/src/compile/c_helper.dart' as helper;
 import 'package:stringcare/src/compile/exceptions.dart';
-import 'dart:typed_data';
+import 'package:stringcare/src/compile/stringcare_impl.dart';
+import 'package:yaml/yaml.dart';
 
 String get slash {
   if (Platform.isWindows) return '\\';
@@ -318,21 +319,21 @@ void buildRFile(
 /// 
 
 // ignore_for_file: non_constant_identifier_names
-class _Assets {
-  _Assets();
+class Assets {
+  Assets();
 
 $assetsContent
 }
 
-class _Strings {
-  _Strings();
+class Strings {
+  Strings();
 
 $langsContent
 }
 
 class $className {
-  static _Assets assets = _Assets();
-  static _Strings strings = _Strings();
+  static Assets assets = Assets();
+  static Strings strings = Strings();
 }
   ''';
 
