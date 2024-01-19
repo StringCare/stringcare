@@ -24,7 +24,7 @@ void main() {
     var webImpl = web.StringcareImpl();
     print("nativeImpl sign: " + nativeImpl.testSign([]));
     print("webImpl sign: " + webImpl.testSign([]));
-    expect(await Stringcare.platformVersion, '42');
+    expect(await Stringcare().platformVersion, '42');
   });
 
   test('init hash match', () async {

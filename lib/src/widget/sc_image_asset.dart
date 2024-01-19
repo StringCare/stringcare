@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:stringcare/stringcare.dart';
 
-class ScImageAsset extends StatefulWidget {
+class ScImageAsset extends StatelessWidget {
   /// A builder function responsible for creating the widget that represents
   /// this image.
   ///
@@ -281,11 +281,11 @@ class ScImageAsset extends StatefulWidget {
   final double scale;
   final int? cacheWidth;
   final int? cacheHeight;
-  final String? name;
+  final String name;
 
   ScImageAsset({
     Key? key,
-    this.name,
+    required this.name,
     this.frameBuilder,
     this.errorBuilder,
     this.semanticLabel,
@@ -308,48 +308,36 @@ class ScImageAsset extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ScImageAssetState createState() => _ScImageAssetState();
-}
-
-class _ScImageAssetState extends State<ScImageAsset> {
-  Uint8List? image;
-
-  @override
-  void initState() {
-    super.initState();
-    Stringcare.revealAsset(widget.name!).then((data) {
-      setState(() {
-        image = data;
-      });
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    if (image != null) {
-      return Image.memory(
-        image!,
-        width: widget.width,
-        height: widget.height,
-        fit: widget.fit,
-        frameBuilder: widget.frameBuilder,
-        errorBuilder: widget.errorBuilder,
-        semanticLabel: widget.semanticLabel,
-        excludeFromSemantics: widget.excludeFromSemantics,
-        scale: widget.scale,
-        color: widget.color,
-        colorBlendMode: widget.colorBlendMode,
-        alignment: widget.alignment,
-        repeat: widget.repeat,
-        centerSlice: widget.centerSlice,
-        matchTextDirection: widget.matchTextDirection,
-        gaplessPlayback: widget.gaplessPlayback,
-        isAntiAlias: widget.isAntiAlias,
-        filterQuality: widget.filterQuality,
-        cacheWidth: widget.cacheWidth,
-        cacheHeight: widget.cacheHeight,
-      );
-    }
-    return Container();
+    return FutureBuilder<Uint8List?>(
+      future: Stringcare().revealAsset(name),
+      builder: (context, promiseData) {
+        if (!promiseData.hasData) {
+          return Container();
+        }
+        return Image.memory(
+          promiseData.data!,
+          width: width,
+          height: height,
+          fit: fit,
+          frameBuilder: frameBuilder,
+          errorBuilder: errorBuilder,
+          semanticLabel: semanticLabel,
+          excludeFromSemantics: excludeFromSemantics,
+          scale: scale,
+          color: color,
+          colorBlendMode: colorBlendMode,
+          alignment: alignment,
+          repeat: repeat,
+          centerSlice: centerSlice,
+          matchTextDirection: matchTextDirection,
+          gaplessPlayback: gaplessPlayback,
+          isAntiAlias: isAntiAlias,
+          filterQuality: filterQuality,
+          cacheWidth: cacheWidth,
+          cacheHeight: cacheHeight,
+        );
+      },
+    );
   }
 }

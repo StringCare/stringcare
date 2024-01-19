@@ -4,7 +4,7 @@ description: Demonstrates how to use the stringcare plugin.
 publish_to: 'none'
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.19.6 <3.0.0'
 
 dependencies:
   flutter:
@@ -14,7 +14,7 @@ dependencies:
   stringcare:
     path: ../
 
-  cupertino_icons: ^1.0.5
+  cupertino_icons: ^1.0.6
 
 stringcare:
   assets:
@@ -34,9 +34,7 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
-
   uses-material-design: true
-
   assets:
     - lang/en.json
     - lang/es.json
