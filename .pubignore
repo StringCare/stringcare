@@ -1,0 +1,6 @@
+stringcare.iml
+
+*.lock
+.dart_tool
+.DS_Store
+.idea/
