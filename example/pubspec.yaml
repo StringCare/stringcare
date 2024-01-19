@@ -14,7 +14,7 @@ dependencies:
   stringcare:
     path: ../
 
-  cupertino_icons: ^1.0.0
+  cupertino_icons: ^1.0.5
 
 stringcare:
   assets:
@@ -40,4 +40,8 @@ flutter:
   assets:
     - lang/en.json
     - lang/es.json
+    - lang/es_AR.json
+    - lang/es_ES.json
+    - lang/es_US.json
     - assets/images/voyager.jpeg
+    - assets/images/coding.svg

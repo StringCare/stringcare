@@ -1,12 +1,18 @@
-import 'package:path/path.dart';
-import 'package:yaml/yaml.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:stringcare/src/compile/stringcare_impl.dart';
+import 'dart:typed_data';
+
+import 'package:path/path.dart';
 import 'package:stringcare/src/compile/c_helper.dart' as helper;
 import 'package:stringcare/src/compile/exceptions.dart';
-import 'dart:typed_data';
+import 'package:stringcare/src/compile/stringcare_impl.dart';
+import 'package:yaml/yaml.dart';
+
+String get slash {
+  if (Platform.isWindows) return '\\';
+  return '/';
+}
 
 String introMessage(String version) => '''
   ════════════════════════════════════════════
@@ -16,37 +22,43 @@ String introMessage(String version) => '''
   ════════════════════════════════════════════
   ''';
 
-String infoAssetsObfuscateMessage(String assetsPath, String assetsBasePath) => '''
+String infoAssetsObfuscateMessage(String? assetsPath, String assetsBasePath) =>
+    '''
   Generating obfuscated assets:
    - From "$assetsBasePath"
    - To "$assetsPath"                              
   ''';
 
-String infoLangObfuscateMessage(String langPath, String langBasePath) => '''
+String infoLangObfuscateMessage(String? langPath, String langBasePath) => '''
   Generating obfuscated langs:
    - From "$langBasePath"
    - To "$langPath"                              
   ''';
 
-String infoAssetsFileObfuscationMessage(String originalFile, String obfuscatedFile) => '''
+String infoAssetsFileObfuscationMessage(
+        String originalFile, String obfuscatedFile) =>
+    '''
   Obfuscating:
    - From "$originalFile"
    - To "$obfuscatedFile"                              
   ''';
 
-String infoAssetsRevealedMessage(String assetsPath, String assetsBasePath) => '''
+String infoAssetsRevealedMessage(String? assetsPath, String assetsBasePath) =>
+    '''
   Generating revealed assets:
    - From "$assetsBasePath"
    - To "$assetsPath"                              
   ''';
 
-String infoLangRevealedMessage(String assetsPath, String assetsBasePath) => '''
+String infoLangRevealedMessage(String? assetsPath, String assetsBasePath) => '''
   Generating revealed lang:
    - From "$assetsBasePath"
    - To "$assetsPath"                              
   ''';
 
-String infoAssetsFileRevealedMessage(String originalFile, String revealedFile) => '''
+String infoAssetsFileRevealedMessage(
+        String originalFile, String revealedFile) =>
+    '''
   Revealing:
    - From "$originalFile"
    - To "$revealedFile"                              
@@ -58,10 +70,10 @@ void obfuscateFile(String originalFilePath, String obfuscatedFilePath) {
   var originalFile = File(originalFilePath);
   var obfuscatedFile = File(obfuscatedFilePath);
 
-  Uint8List originalData = originalFile.readAsBytesSync(); 
+  Uint8List originalData = originalFile.readAsBytesSync();
   // print("original hash: ${api.getSignatureOfBytes(originalData)}");
 
-  Uint8List obfuscatedData = api.obfuscateData(originalData);
+  Uint8List obfuscatedData = api.obfuscateData(originalData)!;
   // print("result hash: ${api.getSignatureOfBytes(obfuscatedData)}");
 
   obfuscatedFile.writeAsBytesSync(obfuscatedData);
@@ -73,9 +85,9 @@ void revealFile(String originalFilePath, String revealedFilePath) {
   var originalFile = File(originalFilePath);
   var revealedFile = File(revealedFilePath);
 
-  Uint8List originalData = originalFile.readAsBytesSync(); 
+  Uint8List originalData = originalFile.readAsBytesSync();
 
-  Uint8List revealedData = api.revealData(originalData);
+  Uint8List revealedData = api.revealData(originalData)!;
   revealedFile.writeAsBytesSync(revealedData);
 }
 
@@ -86,7 +98,8 @@ Map<String, dynamic> loadConfigFile() {
   final Map yamlMap = loadYaml(yamlString);
 
   if (!(yamlMap['stringcare'] is Map)) {
-    stderr.writeln(NoConfigFoundException('Check that your config file pubspec.yaml has a `stringcare` section'));
+    stderr.writeln(NoConfigFoundException(
+        'Check that your config file pubspec.yaml has a `stringcare` section'));
     exit(1);
   }
 
@@ -103,13 +116,13 @@ Future<List<FileSystemEntity>> dirContents(String path) {
   final completer = Completer<List<FileSystemEntity>>();
   final lister = Directory(path).list(recursive: true);
   lister.listen((file) {
-    if (!FileSystemEntity.isDirectorySync(file.path))
-      files.add(file);
+    if (!FileSystemEntity.isDirectorySync(file.path)) files.add(file);
   }, onDone: () => completer.complete(files));
   return completer.future;
 }
 
-Future<List<String>> processAssetsObfuscation(Map<String, dynamic> config) async {
+Future<List<String>> processAssetsObfuscation(
+    Map<String, dynamic> config) async {
   var paths = <String>[];
   if (!config.containsKey("assets")) {
     return paths;
@@ -120,7 +133,7 @@ Future<List<String>> processAssetsObfuscation(Map<String, dynamic> config) async
   if (!config["assets"].containsKey("original")) {
     return paths;
   }
-  
+
   var assetsPath = config["assets"]["obfuscated"];
   var assetsBasePath = config["assets"]["original"];
 
@@ -131,14 +144,17 @@ Future<List<String>> processAssetsObfuscation(Map<String, dynamic> config) async
   for (var item in baseFiles) {
     var originalFilePath = item.path;
 
-    var obfuscatedFilePath = "${item.path.replaceAll(assetsBasePath, assetsPath)}";
-    var folderDestiny = Directory(obfuscatedFilePath.replaceAll(basename(item.path), ""));
+    var obfuscatedFilePath =
+        "${item.path.replaceAll(assetsBasePath, assetsPath)}";
+    var folderDestiny =
+        Directory(obfuscatedFilePath.replaceAll(basename(item.path), ""));
 
     if (!folderDestiny.existsSync()) {
-        folderDestiny.createSync();
+      folderDestiny.createSync(recursive: true);
     }
     paths.add("$assetsPath${obfuscatedFilePath.split(assetsPath)[1]}");
-    print(infoAssetsFileObfuscationMessage(originalFilePath, obfuscatedFilePath));
+    print(
+        infoAssetsFileObfuscationMessage(originalFilePath, obfuscatedFilePath));
 
     obfuscateFile(originalFilePath, obfuscatedFilePath);
   }
@@ -166,26 +182,26 @@ Future<List<String>> processLangObfuscation(Map<String, dynamic> config) async {
 
   final baseFiles = await dirContents(langBasePath);
 
-
   for (var item in baseFiles) {
     var originalFilePath = item.path;
-    var obfuscatedFilePath = "${langPath}/${basename(item.path)}";
-    print(infoAssetsFileObfuscationMessage(originalFilePath, obfuscatedFilePath));
+    var obfuscatedFilePath = "$langPath$slash${basename(item.path)}";
+    print(
+        infoAssetsFileObfuscationMessage(originalFilePath, obfuscatedFilePath));
 
     var file = File(originalFilePath);
     var data = await file.readAsBytes();
-    Map<String, dynamic> jsonMap = json.decode(utf8.decode(data, allowMalformed: true));
+    Map<String, dynamic> jsonMap =
+        json.decode(utf8.decode(data, allowMalformed: true));
     for (String key in jsonMap.keys) {
-      if (!keys.contains(key))
-        keys.add(key);
+      if (!keys.contains(key)) keys.add(key);
     }
     obfuscateFile(originalFilePath, obfuscatedFilePath);
   }
-  
+
   return keys;
 }
 
-void processAssetsReveal(Map<String, dynamic> config) async {
+Future<void> processAssetsReveal(Map<String, dynamic> config) async {
   if (!config.containsKey("assets")) {
     return;
   }
@@ -195,7 +211,7 @@ void processAssetsReveal(Map<String, dynamic> config) async {
   if (!config["assets"].containsKey("test")) {
     return;
   }
-    
+
   var assetsPath = config["assets"]["obfuscated"];
   var assetsTestPath = config["assets"]["test"];
 
@@ -206,11 +222,13 @@ void processAssetsReveal(Map<String, dynamic> config) async {
   for (var item in baseFiles) {
     var originalFilePath = item.path;
 
-    var revealedFilePath = "${item.path.replaceAll(assetsPath, assetsTestPath)}";
-    var folderDestiny = Directory(revealedFilePath.replaceAll(basename(item.path), ""));
+    var revealedFilePath =
+        "${item.path.replaceAll(assetsPath, assetsTestPath)}";
+    var folderDestiny =
+        Directory(revealedFilePath.replaceAll(basename(item.path), ""));
 
     if (!folderDestiny.existsSync()) {
-        folderDestiny.createSync();
+      folderDestiny.createSync(recursive: true);
     }
 
     print(infoAssetsFileRevealedMessage(originalFilePath, revealedFilePath));
@@ -219,7 +237,7 @@ void processAssetsReveal(Map<String, dynamic> config) async {
   }
 }
 
-void processLangReveal(Map<String, dynamic> config) async {
+Future<void> processLangReveal(Map<String, dynamic> config) async {
   if (!config.containsKey("lang")) {
     return;
   }
@@ -229,7 +247,7 @@ void processLangReveal(Map<String, dynamic> config) async {
   if (!config["lang"].containsKey("test")) {
     return;
   }
-  
+
   var langPath = config["lang"]["obfuscated"];
   var langTestPath = config["lang"]["test"];
 
@@ -239,16 +257,20 @@ void processLangReveal(Map<String, dynamic> config) async {
 
   for (var item in baseFiles) {
     var originalFilePath = item.path;
-    var revealedFilePath = "${langTestPath}/${basename(item.path)}";
+    var revealedFilePath = "$langTestPath$slash${basename(item.path)}";
     print(infoAssetsFileRevealedMessage(originalFilePath, revealedFilePath));
 
     revealFile(originalFilePath, revealedFilePath);
   }
 }
 
-void buildRFile(Map<String, dynamic> config, List<String> assets, List<String> keys,) {
-  var className = "R";
-  var classDir = "lib";
+void buildRFile(
+  Map<String, dynamic> config,
+  List<String> assets,
+  List<String> keys,
+) {
+  String? className = "R";
+  String? classDir = "lib";
 
   if (config.containsKey("resources")) {
     if (config["resources"].containsKey("class_name")) {
@@ -267,9 +289,14 @@ void buildRFile(Map<String, dynamic> config, List<String> assets, List<String> k
     if (i > 0) {
       assetsContent += "\t";
     }
-    var parts = asset.split("/");
-    var cPart = parts.sublist(1, parts.length).join("/");
-    assetsContent += "String ${cPart.replaceAll("/", "_").replaceAll(".", "_")} = \"$asset\";\n";
+    var parts = asset.split(slash);
+    var cPart = parts.sublist(1, parts.length).join(slash);
+
+    if (Platform.isWindows) {
+      asset = asset.replaceAll("\\", "/");
+    }
+    assetsContent +=
+        "final String ${cPart.replaceAll(slash, "_").replaceAll(".", "_")} = '$asset';\n";
     i++;
   }
 
@@ -281,7 +308,7 @@ void buildRFile(Map<String, dynamic> config, List<String> assets, List<String> k
     if (i > 0) {
       langsContent += "\t";
     }
-    langsContent += "String ${key} = \"$key\";\n";
+    langsContent += "final String $key = '$key';\n";
     i++;
   }
 
@@ -291,6 +318,7 @@ void buildRFile(Map<String, dynamic> config, List<String> assets, List<String> k
 ///      flutter pub run stringcare:obfuscate
 /// 
 
+// ignore_for_file: non_constant_identifier_names
 class Assets {
   Assets();
 
@@ -305,15 +333,15 @@ $langsContent
 
 class $className {
   static Assets assets = Assets();
-  static Strings string = Strings();
+  static Strings strings = Strings();
 }
   ''';
 
   var filePath = "$classDir";
-  if (!filePath.endsWith("/")) {
-    filePath += "/";
-  } 
-  filePath += "${className.toLowerCase()}.dart";
+  if (!filePath.endsWith(slash)) {
+    filePath += slash;
+  }
+  filePath += "${className!.toLowerCase()}.dart";
 
   var file = File(filePath);
   file.writeAsBytesSync(helper.stringToUint8List(content));

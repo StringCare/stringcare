@@ -1,32 +1,49 @@
-import 'dart:ui';
 import 'dart:typed_data';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:stringcare/src/web/stringcare_impl.dart'
     if (dart.library.io) 'package:stringcare/src/native/stringcare_impl.dart';
+
 import 'src/commons/stringcare_commons.dart';
 import 'src/i18n/app_localizations.dart';
 import 'src/i18n/fallback_cupertino_localizations_delegate.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter/src/widgets/localizations.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
+export 'src/extension/stringcare_ext.dart';
+export 'src/widget/sc_asset_image_provider.dart';
+export 'src/widget/sc_image_asset.dart';
+export 'src/widget/sc_svg.dart';
 
 class Stringcare {
   static var langPath = "lang";
-  static var supportedLangs = ['en'];
+
+  static List<Locale> locales = [Locale('en', 'US')];
 
   static List<LocalizationsDelegate<dynamic>> delegates = [
-        FallbackCupertinoLocalisationsDelegate(),
-        // A class which loads the translations from JSON files
-        AppLocalizations.delegate,
-        // Built-in localization of basic text for Material widgets
-        GlobalMaterialLocalizations.delegate,
-        // Built-in localization for text direction LTR/RTL
-        GlobalWidgetsLocalizations.delegate,
-      ];
+    FallbackCupertinoLocalisationsDelegate(),
+    // A class which loads the translations from JSON files
+    AppLocalizations.delegate,
+    // Built-in localization of basic text for Material widgets
+    GlobalMaterialLocalizations.delegate,
+    // Built-in localization for text direction LTR/RTL
+    GlobalWidgetsLocalizations.delegate,
+  ];
 
-  static Locale Function(Locale, Iterable<Locale>) localeResolutionCallback = (locale, supportedLocales) {
+  static Locale? Function(Locale?, Iterable<Locale>)? localeResolutionCallback =
+      (locale, supportedLocales) {
+    if (locale == null) return supportedLocales.first;
+
     for (var supportedLocale in supportedLocales) {
-      if (supportedLocale.languageCode == locale.languageCode) {
+      if (supportedLocale.languageCode == locale.languageCode &&
+          supportedLocale.countryCode == locale.countryCode) {
+        return supportedLocale;
+      }
+    }
+
+    for (var supportedLocale in supportedLocales) {
+      if (supportedLocale.languageCode == locale.languageCode &&
+          supportedLocale.countryCode!.isEmpty) {
         return supportedLocale;
       }
     }
@@ -38,7 +55,7 @@ class Stringcare {
 
   static StringcareCommons api = StringcareImpl();
 
-  static Future<String> get platformVersion async {
+  static Future<String?> get platformVersion async {
     return api.platformVersion;
   }
 
@@ -58,11 +75,11 @@ class Stringcare {
     return api.obfuscateWith(keys, value);
   }
 
-  static Uint8List obfuscateData(Uint8List value) {
+  static Uint8List? obfuscateData(Uint8List value) {
     return api.obfuscateData(value);
   }
 
-  static Uint8List obfuscateDataWith(List<String> keys, Uint8List value) {
+  static Uint8List? obfuscateDataWith(List<String> keys, Uint8List value) {
     return api.obfuscateDataWith(keys, value);
   }
 
@@ -74,11 +91,11 @@ class Stringcare {
     return api.revealWith(keys, value);
   }
 
-  static Uint8List revealData(Uint8List value) {
+  static Uint8List? revealData(Uint8List? value) {
     return api.revealData(value);
   }
 
-  static Uint8List revealDataWith(List<String> keys, Uint8List value) {
+  static Uint8List? revealDataWith(List<String> keys, Uint8List value) {
     return api.revealDataWith(keys, value);
   }
 
@@ -102,17 +119,24 @@ class Stringcare {
     return api.readableObfuscate(value);
   }
 
-  static String translate(BuildContext context, String key, {List<String> values}) {
-    return AppLocalizations.of(context).translate(key, values: values);
+  static String? translate(BuildContext context, String key,
+      {List<String>? values}) {
+    return AppLocalizations.of(context)!.translate(key, values: values);
   }
 
-  static Future<String> translateWithLang(String lang, String key, {List<String> values}) {
+  static Future<String?> translateWithLang(String lang, String key,
+      {List<String>? values}) {
     return AppLocalizations.sTranslate(lang, key, values: values);
   }
 
-  static Future<Uint8List> revealAsset(String key) async {
+  static Future<Uint8List?> revealAsset(String key) async {
     var asset = await rootBundle.load(key);
     var list = asset.buffer.asUint8List();
     return Stringcare.revealData(list);
+  }
+
+  static String? getLang(BuildContext? context) {
+    if (context == null) return null;
+    return AppLocalizations.of(context)?.getLang();
   }
 }

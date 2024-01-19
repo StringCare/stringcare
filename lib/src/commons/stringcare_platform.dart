@@ -11,7 +11,7 @@ abstract class StringcarePlatform {
   /// Constructs a StringcarePlatform.
   StringcarePlatform();
 
-  Future<String> get platformVersion async {
+  Future<String?> get platformVersion async {
     throw UnimplementedError(
         'Future<String> get platformVersion has not been implemented.');
   }
@@ -36,12 +36,12 @@ abstract class StringcarePlatform {
         'String obfuscateWith(List<String> keys, String value) has not been implemented.');
   }
 
-  Uint8List obfuscateData(Uint8List value) {
+  Uint8List? obfuscateData(Uint8List value) {
     throw UnimplementedError(
         'Uint8List obfuscateData(Uint8List value) has not been implemented.');
   }
 
-  Uint8List obfuscateDataWith(List<String> keys, Uint8List value) {
+  Uint8List? obfuscateDataWith(List<String> keys, Uint8List value) {
     throw UnimplementedError(
         'Uint8List obfuscateDataWith(List<String> keys, Uint8List value) has not been implemented.');
   }
@@ -56,12 +56,12 @@ abstract class StringcarePlatform {
         'String revealWith(List<String> keys, String value) has not been implemented.');
   }
 
-  Uint8List revealData(Uint8List value) {
+  Uint8List? revealData(Uint8List value) {
     throw UnimplementedError(
         'Uint8List revealData(Uint8List value) has not been implemented.');
   }
 
-  Uint8List revealDataWith(List<String> keys, Uint8List value) {
+  Uint8List? revealDataWith(List<String> keys, Uint8List? value) {
     throw UnimplementedError(
         'Uint8List revealDataWith(List<String> keys, Uint8List value) has not been implemented.');
   }

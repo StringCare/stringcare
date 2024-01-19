@@ -5,8 +5,7 @@ import 'package:crypto/crypto.dart';
 import 'stringcare_platform.dart';
 
 abstract class StringcareCommons implements StringcarePlatform {
-
-  Future<String> get platformVersion async {
+  Future<String?> get platformVersion async {
     return "version";
   }
 
@@ -14,7 +13,7 @@ abstract class StringcareCommons implements StringcarePlatform {
     return obfuscateWith([], value);
   }
 
-  Uint8List obfuscateData(Uint8List value) {
+  Uint8List? obfuscateData(Uint8List value) {
     return obfuscateDataWith([], value);
   }
 
@@ -22,7 +21,7 @@ abstract class StringcareCommons implements StringcarePlatform {
     return revealWith([], value);
   }
 
-  Uint8List revealData(Uint8List value) {
+  Uint8List? revealData(Uint8List? value) {
     return revealDataWith([], value);
   }
 
@@ -71,7 +70,7 @@ abstract class StringcareCommons implements StringcarePlatform {
   }
 
   bool validSignature(String signature, List<String> keys) {
-    if (keys != null && keys.isNotEmpty && keys.join("").isNotEmpty) {
+    if (keys.isNotEmpty && keys.join("").isNotEmpty) {
       return signature == getSignature(keys);
     }
     return false;

@@ -1,14 +1,14 @@
-import 'dart:typed_data';
-import 'dart:io';
-
 import 'dart:ffi';
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:ffi/ffi.dart';
 import 'package:stringcare/src/commons/stringcare_method_channel.dart';
 
 import 'c_helper.dart';
 
 class StringcareImpl extends StringcareMethodChannel {
-  DynamicLibrary stringcareLib;
+  late DynamicLibrary stringcareLib;
 
   StringcareImpl() {
     if (Platform.isAndroid) {
@@ -21,7 +21,7 @@ class StringcareImpl extends StringcareMethodChannel {
       stringcareLib = DynamicLibrary.open('stringcare.dll');
     } else if (Platform.isLinux) {
       stringcareLib =
-          DynamicLibrary.open(Platform.environment['LIBSTRINGCARE_PATH']);
+          DynamicLibrary.open(Platform.environment['LIBSTRINGCARE_PATH']!);
     }
   }
 
@@ -29,11 +29,11 @@ class StringcareImpl extends StringcareMethodChannel {
   String obfuscateWith(List<String> keys, String value) {
     try {
       var key = "";
-      if (value == null || value.isEmpty) {
+      if (value.isEmpty) {
         return "";
       }
 
-      if (keys != null && keys.isNotEmpty && keys.join("").isNotEmpty) {
+      if (keys.isNotEmpty && keys.join("").isNotEmpty) {
         key = prepareKey(keys);
       }
 
@@ -63,14 +63,14 @@ class StringcareImpl extends StringcareMethodChannel {
   }
 
   @override
-  Uint8List obfuscateDataWith(List<String> keys, Uint8List value) {
+  Uint8List? obfuscateDataWith(List<String> keys, Uint8List value) {
     try {
       var key = "";
-      if (value == null || value.isEmpty) {
+      if (value.isEmpty) {
         return null;
       }
 
-      if (keys != null && keys.isNotEmpty && keys.join("").isNotEmpty) {
+      if (keys.isNotEmpty && keys.join("").isNotEmpty) {
         key = prepareKey(keys);
       }
 
@@ -102,11 +102,11 @@ class StringcareImpl extends StringcareMethodChannel {
   String revealWith(List<String> keys, String value) {
     try {
       var key = "";
-      if (value == null || value.isEmpty) {
+      if (value.isEmpty) {
         return "";
       }
 
-      if (keys != null && keys.isNotEmpty && keys.join("").isNotEmpty) {
+      if (keys.isNotEmpty && keys.join("").isNotEmpty) {
         key = prepareKey(keys);
       }
 
@@ -136,14 +136,14 @@ class StringcareImpl extends StringcareMethodChannel {
   }
 
   @override
-  Uint8List revealDataWith(List<String> keys, Uint8List value) {
+  Uint8List? revealDataWith(List<String> keys, Uint8List? value) {
     try {
       var key = "";
       if (value == null || value.isEmpty) {
         return null;
       }
 
-      if (keys != null && keys.isNotEmpty && keys.join("").isNotEmpty) {
+      if (keys.isNotEmpty && keys.join("").isNotEmpty) {
         key = prepareKey(keys);
       }
 
@@ -175,7 +175,7 @@ class StringcareImpl extends StringcareMethodChannel {
   String testSign(List<String> keys) {
     try {
       var key = "";
-      if (keys != null && keys.isNotEmpty && keys.join("").isNotEmpty) {
+      if (keys.isNotEmpty && keys.join("").isNotEmpty) {
         key = prepareKey(keys);
       }
 
@@ -197,7 +197,7 @@ class StringcareImpl extends StringcareMethodChannel {
   String testHash(List<String> keys) {
     try {
       var key = "";
-      if (keys != null && keys.isNotEmpty && keys.join("").isNotEmpty) {
+      if (keys.isNotEmpty && keys.join("").isNotEmpty) {
         key = prepareKey(keys);
       }
 

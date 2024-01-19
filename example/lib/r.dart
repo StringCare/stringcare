@@ -3,23 +3,25 @@
 ///      flutter pub run stringcare:obfuscate
 /// 
 
-class Assets {
-  Assets();
+// ignore_for_file: non_constant_identifier_names
+class _Assets {
+  _Assets();
 
-  String images_voyager_jpeg = "assets/images/voyager.jpeg";
+  final String images_coding_svg = "assets/images/coding.svg";
+	final String images_voyager_jpeg = "assets/images/voyager.jpeg";
 
 }
 
-class Strings {
-  Strings();
+class _Strings {
+  _Strings();
 
-  String hello_there = "hello_there";
-	String hello_format = "hello_format";
+  final String hello_there = "hello_there";
+	final String hello_format = "hello_format";
 
 }
 
 class R {
-  static Assets assets = Assets();
-  static Strings string = Strings();
+  static _Assets assets = _Assets();
+  static _Strings strings = _Strings();
 }
   

@@ -1,7 +1,8 @@
-import 'dart:typed_data';
 import 'dart:convert';
+import 'dart:typed_data';
 
-String pd = "a6ExQWqgF67n4OTMWgztgPExNjsGx2bsfmvjjtbJOoMiQlkWfwYNLfyPq88GowmvzJ1kdiPGbB5QC1wNc6lPSP0RQxAItqVIRzJTeaPsrCaXByvUesQK1hh5JXjNZraWcW4s4TR5TTOhEJ9UsCJqa3J9erM1s5JjjJMur88ksRJFHaUHUWq0kG76UHwJkMNu6FFrEGJ63kdBeh1qzywvXbIfNYZKDKUIRs1VfCxSMzwszgH2JPMZfrCLDlrZTMCIo0QUWwlnyLAW9ty1OT5jZkcPYoJJ7nFgGJh1OAG7q0CRxTBehOQ6sSBsF2m0rlzoW4d0BskTs2JH6mtldJiI";
+String pd =
+    "a6ExQWqgF67n4OTMWgztgPExNjsGx2bsfmvjjtbJOoMiQlkWfwYNLfyPq88GowmvzJ1kdiPGbB5QC1wNc6lPSP0RQxAItqVIRzJTeaPsrCaXByvUesQK1hh5JXjNZraWcW4s4TR5TTOhEJ9UsCJqa3J9erM1s5JjjJMur88ksRJFHaUHUWq0kG76UHwJkMNu6FFrEGJ63kdBeh1qzywvXbIfNYZKDKUIRs1VfCxSMzwszgH2JPMZfrCLDlrZTMCIo0QUWwlnyLAW9ty1OT5jZkcPYoJJ7nFgGJh1OAG7q0CRxTBehOQ6sSBsF2m0rlzoW4d0BskTs2JH6mtldJiI";
 
 String ba2String(Uint8List data) {
   return utf8.decode(data);
@@ -49,10 +50,10 @@ String sign(String key) {
     int u = 0;
     for (String c in key.split("")) {
       val += c;
-      
+
       u++;
       i++;
-      
+
       if (i % 2 == 0) {
         i = (c.codeUnits.first + (3 * u));
       } else if (u % 2 == 0) {
@@ -60,7 +61,7 @@ String sign(String key) {
       } else {
         i = (u * 2 + c.codeUnits.first + (6 * u));
       }
-      
+
       val += i.toString();
       val = reverse(val);
     }

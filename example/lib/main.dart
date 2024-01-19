@@ -3,14 +3,18 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:stringcare/stringcare.dart';
-import 'package:flutter/services.dart' show ByteData, rootBundle;
-import 'dart:typed_data';
 
 import 'presenter.dart';
 import 'r.dart';
 
 void main() {
-  Stringcare.supportedLangs = ["en", "es"];
+  Stringcare.locales = [
+    Locale('en', ''),
+    Locale('es', ''),
+    Locale('es', 'AR'),
+    Locale('es', 'ES'),
+    Locale('es', 'US')
+  ];
   runApp(MyApp());
 }
 
@@ -22,28 +26,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      supportedLocales: [
-        Locale('en', 'US'),
-        Locale('es', 'ES'),
-      ],
-      localizationsDelegates: Stringcare.delegates,
-      localeResolutionCallback: Stringcare.localeResolutionCallback,
-      home: MyAppPage(presenter: widget.presenter)
-    );
+        supportedLocales: Stringcare.locales,
+        localizationsDelegates: Stringcare.delegates,
+        localeResolutionCallback: Stringcare.localeResolutionCallback,
+        home: MyAppPage(presenter: widget.presenter));
   }
 }
 
 class MyAppPage extends StatefulWidget {
   final Presenter presenter;
 
-  MyAppPage(
-      {Key key,
-      this.presenter})
-      : super(key: key);
+  MyAppPage({Key key, this.presenter}) : super(key: key);
 
   @override
   MyAppPageState createState() => MyAppPageState();
@@ -51,15 +47,13 @@ class MyAppPage extends StatefulWidget {
 
 class MyAppPageState extends State<MyAppPage> {
   String _platformVersion = 'Unknown';
-  Uint8List image;
   String asyncValue = "";
 
   @override
   void initState() {
     super.initState();
     initPlatformState();
-    initImageState();
-    Stringcare.translateWithLang("en", R.string.hello_format, values: ["Tom"]).then((value) {
+    R.strings.hello_format.getLang("es-ES", values: ["Tom"]).then((value) {
       setState(() {
         asyncValue = value;
       });
@@ -85,14 +79,6 @@ class MyAppPageState extends State<MyAppPage> {
       _platformVersion = platformVersion;
     });
   }
-
-  Future<void> initImageState() async {
-    var data = await Stringcare.revealAsset(R.assets.images_voyager_jpeg);
-    setState(() {
-      image = data;
-    });
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -128,11 +114,12 @@ class MyAppPageState extends State<MyAppPage> {
                         ListTile(
                           title: Text("Lang resource"),
                         ),
-                        Text(Stringcare.translate(context, R.string.hello_there)),
+                        Text(R.strings.hello_there.on(context)),
                         ListTile(
                           title: Text("Lang pattern resource"),
                         ),
-                        Text(Stringcare.translate(context, R.string.hello_format, values: ["Tom"])),
+                        Text(R.strings.hello_format
+                            .on(context, values: ["Tom"])),
                         ListTile(
                           title: Text("Retrieving specific lang"),
                         ),
@@ -186,7 +173,7 @@ class MyAppPageState extends State<MyAppPage> {
                         ),
                         Text(obEmoji
                             .getRange(
-                            0, obEmoji.length > 30 ? 30 : obEmoji.length)
+                                0, obEmoji.length > 30 ? 30 : obEmoji.length)
                             .toString()),
                         Padding(padding: EdgeInsets.all(8)),
                         ListTile(
@@ -207,8 +194,8 @@ class MyAppPageState extends State<MyAppPage> {
                         ListTile(
                           title: Text("Same signatureTest"),
                         ),
-                        Text(widget.presenter.sameSignatureTestEmoji
-                            .toString()),
+                        Text(
+                            widget.presenter.sameSignatureTestEmoji.toString()),
                         Padding(padding: EdgeInsets.all(8)),
                         ListTile(
                           title: Text("Other signatureTest"),
@@ -254,8 +241,8 @@ class MyAppPageState extends State<MyAppPage> {
                         ListTile(
                           title: Text("Same signatureTest"),
                         ),
-                        Text(widget.presenter.sameSignatureTestLorem
-                            .toString()),
+                        Text(
+                            widget.presenter.sameSignatureTestLorem.toString()),
                         Padding(padding: EdgeInsets.all(8)),
                         ListTile(
                           title: Text("Other signatureTest"),
@@ -267,27 +254,56 @@ class MyAppPageState extends State<MyAppPage> {
                   ),
                 ),
                 Padding(padding: EdgeInsets.all(8)),
-                if (image != null)
-                  Material(
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0)),
-                    child: Container(
-                      padding: EdgeInsets.all(15),
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: Text("Reveal voyager"),
-                          ),
-                          Image(
-                              width: 400,
-                              height: 400,
-                              image: MemoryImage(image),
-                              fit: BoxFit.fitHeight),
-                        ],
-                      ),
+                Material(
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0)),
+                  child: Container(
+                    padding: EdgeInsets.all(15),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          title: Text("Reveal voyager"),
+                        ),
+                        ScImageAsset(
+                          name: R.assets.images_voyager_jpeg,
+                          height: 400,
+                          width: 400,
+                        ),
+                        Container(
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                              fit: BoxFit.none,
+                              image: ScAssetImageProvider(
+                                  R.assets.images_voyager_jpeg),
+                              repeat: ImageRepeat.repeat,
+                            )),
+                            child: Text("Voyager")),
+                      ],
                     ),
                   ),
+                ),
+                Padding(padding: EdgeInsets.all(8)),
+                Material(
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0)),
+                  child: Container(
+                    padding: EdgeInsets.all(15),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          title: Text("Reveal SVG"),
+                        ),
+                        ScSvg(
+                          R.assets.images_coding_svg,
+                          height: 400,
+                          width: 400,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
