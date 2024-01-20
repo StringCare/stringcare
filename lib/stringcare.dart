@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:global_refresh/global_refresh.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stringcare/src/web/stringcare_impl.dart'
     if (dart.library.io) 'package:stringcare/src/native/stringcare_impl.dart';
@@ -14,6 +15,7 @@ export 'src/i18n/remote_languages.dart';
 export 'src/widget/sc_asset_image_provider.dart';
 export 'src/widget/sc_image_asset.dart';
 export 'src/widget/sc_svg.dart';
+export 'src/widget/sc_state.dart';
 
 class Stringcare {
   static Stringcare? _instance;
@@ -186,5 +188,15 @@ class Stringcare {
   Future<bool> loadWithContext(BuildContext? context) async {
     if (context == null) return false;
     return AppLocalizations.of(context)?.load() ?? Future.value(false);
+  }
+
+  void refreshWithLang(String? lang) {
+    withLang = () => lang;
+    GlobalRefresh().refresh();
+  }
+
+  void refreshWithLocale(Locale? locale) {
+    withLocale = () => locale;
+    GlobalRefresh().refresh();
   }
 }

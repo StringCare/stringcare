@@ -1,3 +1,8 @@
+## 0.1.2
+
+* Added `refreshWithLang(String)` method language change.
+* Added `refreshWithLocale(Locale)` method language change.
+
 ## 0.1.0
 
 * Added `string()` method for getting resources.

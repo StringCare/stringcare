@@ -50,7 +50,7 @@ class MyAppPage extends StatefulWidget {
   MyAppPageState createState() => MyAppPageState();
 }
 
-class MyAppPageState extends State<MyAppPage> {
+class MyAppPageState extends ScState<MyAppPage> {
   String _platformVersion = 'Unknown';
   String asyncValue = "";
 
