@@ -1,3 +1,4 @@
+[![pub package](https://img.shields.io/pub/v/stringcare.svg)](https://pub.dev/packages/stringcare)
 
 <p align="center"><img width="10%" vspace="10" src="https://github.com/StringCare/stringcare/raw/master/images/ic_launcher/res/mipmap-xxxhdpi/ic_launcher.png"></p>
 
