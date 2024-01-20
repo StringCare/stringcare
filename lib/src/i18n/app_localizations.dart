@@ -6,9 +6,35 @@ import 'package:flutter/services.dart';
 import 'package:stringcare/stringcare.dart';
 
 class AppLocalizations {
-  final Locale locale;
+  final Locale systemLocale;
 
-  AppLocalizations(this.locale);
+  final dividerA = '-';
+
+  final dividerB = '_';
+
+  Locale get locale {
+    final locale = Stringcare().withLocale();
+    if (locale != null) {
+      return locale;
+    }
+    final lang = Stringcare().withLang();
+    if (lang != null) {
+      if (lang.contains(dividerA)) {
+        String language = lang.split(dividerA)[0].toLowerCase();
+        String country = lang.split(dividerA)[1].toUpperCase();
+        return Locale(language, country);
+      } else if (lang.contains(dividerB)) {
+        String language = lang.split(dividerB)[0].toLowerCase();
+        String country = lang.split(dividerB)[1].toUpperCase();
+        return Locale(language, country);
+      } else if (lang.isNotEmpty) {
+        return Locale(lang.toLowerCase());
+      }
+    }
+    return systemLocale;
+  }
+
+  AppLocalizations(this.systemLocale);
 
   // Helper method to keep the code in the widgets concise
   // Localizations are accessed using an InheritedWidget "of" syntax
@@ -22,42 +48,93 @@ class AppLocalizations {
 
   late Map<String, String> _localizedStrings;
 
-  Future<bool> load() async {
+  Future<bool> load() => _loadLanguage(
+        locale.languageCode,
+        locale.countryCode ?? '',
+      );
+
+  Future<bool> _loadLanguage(String languageCode, String countryCode) async {
     // Load the language JSON file from the "lang" folder
     Map<String, dynamic>? jsonMap;
 
     try {
       var data;
-      if (locale.countryCode != null && locale.countryCode!.isNotEmpty) {
-        data = await rootBundle.load(
-            '${Stringcare.langPath}/${locale.languageCode}_${locale.countryCode}.json');
+      if (countryCode.isNotEmpty) {
+        data = await rootBundle
+            .load('${Stringcare().langPath}/${languageCode}_$countryCode.json');
       } else {
         data = await rootBundle
-            .load('${Stringcare.langPath}/${locale.languageCode}.json');
+            .load('${Stringcare().langPath}/$languageCode.json');
       }
-      var jsonRevealed = Stringcare.revealData(data.buffer.asUint8List())!;
-      jsonMap = json.decode(utf8.decode(jsonRevealed, allowMalformed: true));
+      var jsonRevealed = Stringcare().revealData(data.buffer.asUint8List());
+      if (jsonRevealed != null) {
+        jsonMap = json.decode(
+          utf8.decode(
+            jsonRevealed,
+            allowMalformed: true,
+          ),
+        );
+      }
     } catch (e) {
       try {
-        var data = await rootBundle
-            .load('${Stringcare.langPath}/${locale.languageCode}.json');
-        var jsonRevealed = Stringcare.revealData(data.buffer.asUint8List())!;
-        jsonMap = json.decode(utf8.decode(jsonRevealed, allowMalformed: true));
+        var data = await rootBundle.load(
+          '${Stringcare().langPath}/$languageCode.json',
+        );
+        var jsonRevealed = Stringcare().revealData(data.buffer.asUint8List());
+        if (jsonRevealed != null) {
+          jsonMap = json.decode(
+            utf8.decode(
+              jsonRevealed,
+              allowMalformed: true,
+            ),
+          );
+        }
       } catch (e) {
         _localizedStrings = Map();
-        return true;
       }
     }
 
-    _localizedStrings = jsonMap!.map((key, value) {
-      return MapEntry(key, value.toString());
-    });
+    _localizedStrings = jsonMap?.map(
+          (key, value) {
+            return MapEntry(key, value.toString());
+          },
+        ) ??
+        Map<String, String>();
+
+    var asyncLoad = false;
+
+    var language =
+        RemoteLanguages().localizedStrings['$languageCode-$countryCode'] ??
+            RemoteLanguages().localizedStrings['$languageCode'] ??
+            Map();
+
+    if (language.isNotEmpty) {
+      for (var entry in language.entries.toList()) {
+        _localizedStrings[entry.key] = language[entry.key] ?? '';
+      }
+      asyncLoad = true;
+    }
+
+    if (!asyncLoad) {
+      for (var lang in RemoteLanguages().localizedStrings.keys.toList()) {
+        if (lang.contains('$languageCode-')) {
+          var language = RemoteLanguages().localizedStrings[lang] ?? Map();
+          for (var entry in language.entries.toList()) {
+            _localizedStrings[entry.key] = language[entry.key] ?? '';
+          }
+          break;
+        }
+      }
+    }
 
     return true;
   }
 
-  static Future<String?> sTranslate(String language, String key,
-      {List<String>? values}) async {
+  static Future<String?> sTranslate(
+    String language,
+    String key, {
+    List<String>? values,
+  }) async {
     // Load the language JSON file from the "lang" folder
     var lang;
     var country = "";
@@ -77,16 +154,16 @@ class AppLocalizations {
       var data;
       if (country.isNotEmpty) {
         data = await rootBundle
-            .load('${Stringcare.langPath}/${lang}_$country.json');
+            .load('${Stringcare().langPath}/${lang}_$country.json');
       } else {
-        data = await rootBundle.load('${Stringcare.langPath}/$lang.json');
+        data = await rootBundle.load('${Stringcare().langPath}/$lang.json');
       }
-      var jsonRevealed = Stringcare.revealData(data.buffer.asUint8List())!;
+      var jsonRevealed = Stringcare().revealData(data.buffer.asUint8List())!;
       jsonMap = json.decode(utf8.decode(jsonRevealed, allowMalformed: true));
     } catch (e) {
       try {
-        var data = await rootBundle.load('${Stringcare.langPath}/$lang.json');
-        var jsonRevealed = Stringcare.revealData(data.buffer.asUint8List())!;
+        var data = await rootBundle.load('${Stringcare().langPath}/$lang.json');
+        var jsonRevealed = Stringcare().revealData(data.buffer.asUint8List())!;
         jsonMap = json.decode(utf8.decode(jsonRevealed, allowMalformed: true));
       } catch (e) {
         return "";
@@ -133,7 +210,8 @@ class AppLocalizations {
     if (delegate.isSupported(locale)) {
       return "${locale.languageCode}_${locale.countryCode}";
     }
-    return "${Stringcare.locales[0].languageCode}_${Stringcare.locales[0].countryCode}";
+    final defaultLocale = Stringcare().locales[0];
+    return "${defaultLocale.languageCode}_${defaultLocale.countryCode}";
   }
 }
 
@@ -145,7 +223,7 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) {
-    for (Locale supportedLocale in Stringcare.locales) {
+    for (Locale supportedLocale in Stringcare().locales) {
       if (supportedLocale.languageCode == locale.languageCode &&
           supportedLocale.countryCode == locale.countryCode) {
         return true;
@@ -157,10 +235,17 @@ class _AppLocalizationsDelegate
   @override
   Future<AppLocalizations> load(Locale locale) async {
     AppLocalizations localizations = new AppLocalizations(locale);
+    RemoteLanguages().localizations = localizations;
     await localizations.load();
     return localizations;
   }
 
   @override
-  bool shouldReload(_AppLocalizationsDelegate old) => false;
+  bool shouldReload(_AppLocalizationsDelegate old) {
+    if (RemoteLanguages().shouldReload) {
+      RemoteLanguages().shouldReload = false;
+      return true;
+    }
+    return false;
+  }
 }

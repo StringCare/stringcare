@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
-import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
@@ -21,7 +20,8 @@ abstract class ScAssetBundleImageProvider
   /// Converts a key into an [ImageStreamCompleter], and begins fetching the
   /// image.
   @override
-  ImageStreamCompleter load(AssetBundleImageKey key, DecoderCallback decode) {
+  ImageStreamCompleter loadImage(
+      AssetBundleImageKey key, ImageDecoderCallback decode) {
     InformationCollector? collector;
     assert(() {
       collector = () sync* {
@@ -31,10 +31,11 @@ abstract class ScAssetBundleImageProvider
       return true;
     }());
     return MultiFrameImageStreamCompleter(
-        codec: _loadAsync(key, decode),
-        scale: key.scale,
-        debugLabel: key.name,
-        informationCollector: collector);
+      codec: _loadAsync(key, decode),
+      scale: key.scale,
+      debugLabel: key.name,
+      informationCollector: collector,
+    );
   }
 
   /// Fetches the image from the asset bundle, decodes it, and returns a
@@ -43,19 +44,19 @@ abstract class ScAssetBundleImageProvider
   /// This function is used by [load].
   @protected
   Future<ui.Codec> _loadAsync(
-      AssetBundleImageKey key, DecoderCallback decode) async {
+      AssetBundleImageKey key, ImageDecoderCallback decode) async {
     ByteData data;
     // Hot reload/restart could change whether an asset bundle or key in a
     // bundle are available, or if it is a network backed bundle.
     Uint8List? bytes;
     try {
       data = await key.bundle.load(key.name);
-      bytes = Stringcare.revealData(data.buffer.asUint8List());
+      bytes = Stringcare().revealData(data.buffer.asUint8List());
     } on FlutterError {
       PaintingBinding.instance.imageCache.evict(key);
       rethrow;
     }
-    return await decode(bytes!);
+    return await decode(await ImmutableBuffer.fromUint8List(bytes!));
   }
 }
 

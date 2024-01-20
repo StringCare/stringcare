@@ -4,24 +4,24 @@
 /// 
 
 // ignore_for_file: non_constant_identifier_names
-class _Assets {
-  _Assets();
+class Assets {
+  Assets();
 
-  final String images_coding_svg = "assets/images/coding.svg";
-	final String images_voyager_jpeg = "assets/images/voyager.jpeg";
+  final String images_coding_svg = 'assets/images/coding.svg';
+	final String images_voyager_jpeg = 'assets/images/voyager.jpeg';
 
 }
 
-class _Strings {
-  _Strings();
+class Strings {
+  Strings();
 
-  final String hello_there = "hello_there";
-	final String hello_format = "hello_format";
+  final String hello_there = 'hello_there';
+	final String hello_format = 'hello_format';
 
 }
 
 class R {
-  static _Assets assets = _Assets();
-  static _Strings strings = _Strings();
+  static Assets assets = Assets();
+  static Strings strings = Strings();
 }
   

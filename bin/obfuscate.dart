@@ -1,7 +1,7 @@
 import 'package:stringcare/src/compile/utils.dart';
 
 void main(List<String> arguments) async {
-  print(introMessage('0.0.2'));
+  print(introMessage('0.1.0'));
 
   var config = loadConfigFile();
 

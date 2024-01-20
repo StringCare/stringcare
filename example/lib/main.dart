@@ -8,7 +8,7 @@ import 'presenter.dart';
 import 'r.dart';
 
 void main() {
-  Stringcare.locales = [
+  Stringcare().locales = [
     Locale('en', ''),
     Locale('es', ''),
     Locale('es', 'AR'),
@@ -29,17 +29,22 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-        supportedLocales: Stringcare.locales,
-        localizationsDelegates: Stringcare.delegates,
-        localeResolutionCallback: Stringcare.localeResolutionCallback,
-        home: MyAppPage(presenter: widget.presenter));
+      navigatorKey: Stringcare().navigatorKey,
+      supportedLocales: Stringcare().locales,
+      localizationsDelegates: Stringcare().delegates,
+      localeResolutionCallback: Stringcare().localeResolutionCallback,
+      home: MyAppPage(presenter: widget.presenter),
+    );
   }
 }
 
 class MyAppPage extends StatefulWidget {
   final Presenter presenter;
 
-  MyAppPage({Key key, this.presenter}) : super(key: key);
+  MyAppPage({
+    Key? key,
+    required this.presenter,
+  }) : super(key: key);
 
   @override
   MyAppPageState createState() => MyAppPageState();
@@ -62,10 +67,10 @@ class MyAppPageState extends State<MyAppPage> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
-    String platformVersion;
+    String? platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      platformVersion = await Stringcare.platformVersion;
+      platformVersion = await Stringcare().platformVersion;
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -76,7 +81,7 @@ class MyAppPageState extends State<MyAppPage> {
     if (!mounted) return;
 
     setState(() {
-      _platformVersion = platformVersion;
+      _platformVersion = platformVersion ?? '';
     });
   }
 
@@ -106,20 +111,23 @@ class MyAppPageState extends State<MyAppPage> {
                         ListTile(
                           title: Text("Test hash"),
                         ),
-                        Text(Stringcare.testHash([])),
+                        Text(Stringcare().testHash([])),
                         ListTile(
                           title: Text("Test sign"),
                         ),
-                        Text(Stringcare.testSign([])),
+                        Text(Stringcare().testSign([])),
                         ListTile(
                           title: Text("Lang resource"),
                         ),
-                        Text(R.strings.hello_there.on(context)),
+                        Text(R.strings.hello_there.string()),
                         ListTile(
                           title: Text("Lang pattern resource"),
                         ),
-                        Text(R.strings.hello_format
-                            .on(context, values: ["Tom"])),
+                        Text(
+                          R.strings.hello_format.string(
+                            values: ["Tom"],
+                          ),
+                        ),
                         ListTile(
                           title: Text("Retrieving specific lang"),
                         ),
@@ -271,14 +279,18 @@ class MyAppPageState extends State<MyAppPage> {
                           width: 400,
                         ),
                         Container(
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
+                          height: 400,
+                          width: 400,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
                               fit: BoxFit.none,
                               image: ScAssetImageProvider(
                                   R.assets.images_voyager_jpeg),
                               repeat: ImageRepeat.repeat,
-                            )),
-                            child: Text("Voyager")),
+                            ),
+                          ),
+                          child: Text("Voyager"),
+                        ),
                       ],
                     ),
                   ),

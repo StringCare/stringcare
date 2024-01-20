@@ -4,7 +4,6 @@ import 'package:stringcare/src/commons/stringcare_method_channel.dart';
 import 'package:stringcare/src/compile/stringcare_impl.dart' as compile;
 
 class StringcareImpl extends StringcareMethodChannel {
-
   final compile.StringcareImpl compiler = compile.StringcareImpl();
 
   StringcareImpl();
