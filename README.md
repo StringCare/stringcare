@@ -13,7 +13,6 @@ Flutter plugin for encrypt/decrypt `String` and `Uint8List` objects easily with 
 
 -----
 
-```
 Retrieve any string resource quickly and easily, anywhere:
 
 `en.json`
@@ -32,6 +31,7 @@ Simplify the way you work with secured resources, Strings and Uint8List objects:
 
 ```dart
 "my_secret".obfuscate();
+```
 
 -----
 
