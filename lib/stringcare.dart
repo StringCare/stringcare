@@ -190,13 +190,37 @@ class Stringcare {
     return AppLocalizations.of(context)?.load() ?? Future.value(false);
   }
 
-  void refreshWithLang(String? lang) {
+  Future<void> refreshWithLang(String? lang) async {
     withLang = () => lang;
-    GlobalRefresh().refresh();
+    if (await Stringcare().load()) {
+      GlobalRefresh().refresh();
+    }
   }
 
-  void refreshWithLocale(Locale? locale) {
+  Future<void> refreshWithLocale(Locale? locale) async {
     withLocale = () => locale;
-    GlobalRefresh().refresh();
+    if (await Stringcare().load()) {
+      GlobalRefresh().refresh();
+    }
+  }
+
+  Future<void> refreshWithLangWithContext(
+    BuildContext? context,
+    String? lang,
+  ) async {
+    withLang = () => lang;
+    if (await Stringcare().loadWithContext(context)) {
+      GlobalRefresh().refresh();
+    }
+  }
+
+  Future<void> refreshWithLocaleWithContext(
+    BuildContext? context,
+    Locale? locale,
+  ) async {
+    withLocale = () => locale;
+    if (await Stringcare().loadWithContext(context)) {
+      GlobalRefresh().refresh();
+    }
   }
 }

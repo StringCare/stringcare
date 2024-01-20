@@ -1,7 +1,13 @@
+## 0.1.3
+
+* Fixed refresh languages method.
+* Added `refreshWithLangWithContext(BuildContext, String)` method for language change.
+* Added `refreshWithLocaleWithContext(BuildContext, Locale)` method for language change.
+
 ## 0.1.2
 
-* Added `refreshWithLang(String)` method language change.
-* Added `refreshWithLocale(Locale)` method language change.
+* Added `refreshWithLang(String)` method language for change.
+* Added `refreshWithLocale(Locale)` method language for change.
 
 ## 0.1.0
 
