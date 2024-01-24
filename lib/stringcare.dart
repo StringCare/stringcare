@@ -14,8 +14,8 @@ export 'src/extension/stringcare_ext.dart';
 export 'src/i18n/remote_languages.dart';
 export 'src/widget/sc_asset_image_provider.dart';
 export 'src/widget/sc_image_asset.dart';
-export 'src/widget/sc_svg.dart';
 export 'src/widget/sc_state.dart';
+export 'src/widget/sc_svg.dart';
 
 class Stringcare {
   static Stringcare? _instance;
@@ -190,20 +190,6 @@ class Stringcare {
     return AppLocalizations.of(context)?.load() ?? Future.value(false);
   }
 
-  Future<void> refreshWithLang(String? lang) async {
-    withLang = () => lang;
-    if (await Stringcare().load()) {
-      GlobalRefresh().refresh();
-    }
-  }
-
-  Future<void> refreshWithLocale(Locale? locale) async {
-    withLocale = () => locale;
-    if (await Stringcare().load()) {
-      GlobalRefresh().refresh();
-    }
-  }
-
   Future<void> refreshWithLangWithContext(
     BuildContext? context,
     String? lang,
@@ -223,4 +209,10 @@ class Stringcare {
       GlobalRefresh().refresh();
     }
   }
+
+  Future<void> refreshWithLang(String? lang) =>
+      refreshWithLangWithContext(context, lang);
+
+  Future<void> refreshWithLocale(Locale? locale) =>
+      refreshWithLocaleWithContext(context, locale);
 }

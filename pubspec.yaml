@@ -1,6 +1,6 @@
 name: stringcare
 description: Flutter plugin for obfuscate and reveal strings and any other data.
-version: 0.1.3
+version: 0.1.4
 homepage: https://github.com/StringCare/stringcare
 repository: https://github.com/StringCare/stringcare
 

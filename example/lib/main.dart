@@ -9,8 +9,8 @@ import 'r.dart';
 
 void main() {
   Stringcare().locales = [
-    Locale('en', ''),
-    Locale('es', ''),
+    Locale('en'),
+    Locale('es'),
     Locale('es', 'AR'),
     Locale('es', 'ES'),
     Locale('es', 'US')
