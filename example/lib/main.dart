@@ -9,8 +9,8 @@ import 'r.dart';
 
 void main() {
   Stringcare().locales = [
-    Locale('en', ''),
-    Locale('es', ''),
+    Locale('en'),
+    Locale('es'),
     Locale('es', 'AR'),
     Locale('es', 'ES'),
     Locale('es', 'US')
@@ -50,7 +50,7 @@ class MyAppPage extends StatefulWidget {
   MyAppPageState createState() => MyAppPageState();
 }
 
-class MyAppPageState extends State<MyAppPage> {
+class MyAppPageState extends ScState<MyAppPage> {
   String _platformVersion = 'Unknown';
   String asyncValue = "";
 

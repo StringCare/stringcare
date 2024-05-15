@@ -38,15 +38,19 @@ Simplify the way you work with secured resources, Strings and Uint8List objects:
 
 ### [Home](https://github.com/StringCare/stringcare/wiki)
 
-### [Setup](https://github.com/StringCare/stringcare/wiki/Setup)
+### [Basic setup, not secured](https://github.com/StringCare/stringcare/wiki/Basic-setup,-not-secured)
 
-[- Prepare your private repository](https://github.com/StringCare/stringcare/wiki/Setup#prepare-your-private-repository)
+[- iOS macOS Setup](https://github.com/StringCare/stringcare/wiki/Basic-setup,-not-secured#ios-and-macos-setup)
 
-[- iOS macOS Setup](https://github.com/StringCare/stringcare/wiki/Setup#ios-and-macos-setup)
+### [Secured Setup](https://github.com/StringCare/stringcare/wiki/Secured-Setup)
 
-[- Key Setup](https://github.com/StringCare/stringcare/wiki/Setup#key-setup)
+[- Prepare your private repository](https://github.com/StringCare/stringcare/wiki/Secured-Setup#prepare-your-private-repository)
 
-[- Finish The Setup](https://github.com/StringCare/stringcare/wiki/Setup#finish-the-setup)
+[- iOS macOS Setup](https://github.com/StringCare/stringcare/wiki/Secured-Setup#ios-and-macos-setup)
+
+[- Key Setup](https://github.com/StringCare/stringcare/wiki/Secured-Setup#key-setup)
+
+[- Finish The Setup](https://github.com/StringCare/stringcare/wiki/Secured-Setup#finish-the-setup)
 
 ### [String Usage](https://github.com/StringCare/stringcare/wiki/String-Usage)
 

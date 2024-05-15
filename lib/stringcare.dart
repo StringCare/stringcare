@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:global_refresh/global_refresh.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stringcare/src/web/stringcare_impl.dart'
     if (dart.library.io) 'package:stringcare/src/native/stringcare_impl.dart';
@@ -13,6 +14,7 @@ export 'src/extension/stringcare_ext.dart';
 export 'src/i18n/remote_languages.dart';
 export 'src/widget/sc_asset_image_provider.dart';
 export 'src/widget/sc_image_asset.dart';
+export 'src/widget/sc_state.dart';
 export 'src/widget/sc_svg.dart';
 
 class Stringcare {
@@ -187,4 +189,30 @@ class Stringcare {
     if (context == null) return false;
     return AppLocalizations.of(context)?.load() ?? Future.value(false);
   }
+
+  Future<void> refreshWithLangWithContext(
+    BuildContext? context,
+    String? lang,
+  ) async {
+    withLang = () => lang;
+    if (await Stringcare().loadWithContext(context)) {
+      GlobalRefresh().refresh();
+    }
+  }
+
+  Future<void> refreshWithLocaleWithContext(
+    BuildContext? context,
+    Locale? locale,
+  ) async {
+    withLocale = () => locale;
+    if (await Stringcare().loadWithContext(context)) {
+      GlobalRefresh().refresh();
+    }
+  }
+
+  Future<void> refreshWithLang(String? lang) =>
+      refreshWithLangWithContext(context, lang);
+
+  Future<void> refreshWithLocale(Locale? locale) =>
+      refreshWithLocaleWithContext(context, locale);
 }
