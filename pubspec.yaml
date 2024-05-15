@@ -1,11 +1,11 @@
 name: stringcare
 description: Flutter plugin for obfuscate and reveal strings and any other data.
-version: 0.1.4
+version: 0.1.6
 homepage: https://github.com/StringCare/stringcare
 repository: https://github.com/StringCare/stringcare
 
 environment:
-  sdk: '>=2.19.6 <4.0.0'
+  sdk: '>=3.2.0 <4.0.0'
   flutter: ">=1.20.0"
 
 dependencies:
@@ -16,11 +16,11 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
   crypto: ^3.0.3
-  flutter_svg: ^2.0.9                           # android   ios   linux   macos         windows
-  ffi: ^2.1.0
+  flutter_svg: ^2.0.10+1                          # android   ios   linux   macos         windows
+  ffi: ^2.1.2
   global_refresh: ^1.0.0                        # android   ios   linux   macos   web   windows
-  go_router: ^13.0.1                            # android   ios   linux   macos   web   windows
-  path: ^1.8.3
+  go_router: ^14.1.1                            # android   ios   linux   macos   web   windows
+  path: ^1.9.0
   yaml: ^3.1.2
 
 dev_dependencies:
