@@ -3,6 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:global_refresh/global_refresh.dart';
 import 'package:go_router/go_router.dart';
+import 'package:stringcare/src/compile/stringcare_impl.dart' as compile;
+import 'package:stringcare/src/i18n/app_localizations_interface.dart';
+import 'package:stringcare/src/i18n/app_localizations_test.dart';
 import 'package:stringcare/src/web/stringcare_impl.dart'
     if (dart.library.io) 'package:stringcare/src/native/stringcare_impl.dart';
 
@@ -40,7 +43,18 @@ class Stringcare {
     return _instance!;
   }
 
+  /// Disables native libs (.so and .dylib) and uses the Dart implementation.
+  var disableNative = false;
+
+  /// Defines the origin of the text resources. When the encrypted mode is TRUE,
+  /// the encrypted resources are consumed, otherwise the original unencrypted
+  /// resources are used.
+  var useEncrypted = true;
+
   var langPath = "lang";
+  var langBasePath = "lang_base";
+
+  String get languageOrigin => useEncrypted ? langPath : langBasePath;
 
   String? Function() withLang = () {
     return null;
@@ -52,15 +66,27 @@ class Stringcare {
 
   List<Locale> locales = [Locale('en')];
 
-  List<LocalizationsDelegate<dynamic>> delegates = [
+  List<LocalizationsDelegate<dynamic>> commonDelegates = [
     FallbackCupertinoLocalisationsDelegate(),
-    // A class which loads the translations from JSON files
-    AppLocalizations.delegate,
     // Built-in localization of basic text for Material widgets
     GlobalMaterialLocalizations.delegate,
     // Built-in localization for text direction LTR/RTL
     GlobalWidgetsLocalizations.delegate,
   ];
+
+  List<LocalizationsDelegate<dynamic>> get delegates {
+    final list = <LocalizationsDelegate<dynamic>>[];
+    for (var delegate in commonDelegates) {
+      list.add(delegate);
+    }
+    // A class which loads the translations from JSON files
+    if (useEncrypted) {
+      list.add(AppLocalizations.delegate);
+    } else {
+      list.add(AppLocalizationsTest.delegate);
+    }
+    return list;
+  }
 
   final Locale? Function(Locale?, Iterable<Locale>)? localeResolutionCallback =
       (locale, supportedLocales) {
@@ -92,83 +118,67 @@ class Stringcare {
     return supportedLocales.first;
   };
 
-  final StringcareCommons api = StringcareImpl();
+  final StringcareCommons _productionApi = StringcareImpl();
 
-  Future<String?> get platformVersion async {
-    return api.platformVersion;
-  }
+  final StringcareCommons _testApi = compile.StringcareImpl();
 
-  String testHash(List<String> keys) {
-    return api.testHash(keys);
-  }
+  StringcareCommons get _api => disableNative ? _testApi : _productionApi;
 
-  String testSign(List<String> keys) {
-    return api.testSign(keys);
-  }
+  Future<String?> get platformVersion => _api.platformVersion;
 
-  String obfuscate(String value) {
-    return api.obfuscate(value);
-  }
+  String testHash(List<String> keys) => _api.testHash(keys);
 
-  String obfuscateWith(List<String> keys, String value) {
-    return api.obfuscateWith(keys, value);
-  }
+  String testSign(List<String> keys) => _api.testSign(keys);
 
-  Uint8List? obfuscateData(Uint8List value) {
-    return api.obfuscateData(value);
-  }
+  String obfuscate(String value) => _api.obfuscate(value);
 
-  Uint8List? obfuscateDataWith(List<String> keys, Uint8List value) {
-    return api.obfuscateDataWith(keys, value);
-  }
+  String obfuscateWith(List<String> keys, String value) =>
+      _api.obfuscateWith(keys, value);
 
-  String reveal(String value) {
-    return api.reveal(value);
-  }
+  Uint8List? obfuscateData(Uint8List value) => _api.obfuscateData(value);
 
-  String revealWith(List<String> keys, String value) {
-    return api.revealWith(keys, value);
-  }
+  Uint8List? obfuscateDataWith(List<String> keys, Uint8List value) =>
+      _api.obfuscateDataWith(keys, value);
 
-  Uint8List? revealData(Uint8List? value) {
-    return api.revealData(value);
-  }
+  String reveal(String value) => _api.reveal(value);
 
-  Uint8List? revealDataWith(List<String> keys, Uint8List value) {
-    return api.revealDataWith(keys, value);
-  }
+  String revealWith(List<String> keys, String value) =>
+      _api.revealWith(keys, value);
 
-  String getSignature(List<String> keys) {
-    return api.getSignature(keys);
-  }
+  Uint8List? revealData(Uint8List? value) => _api.revealData(value);
 
-  String getSignatureOfValue(String value) {
-    return api.getSignatureOfValue(value);
-  }
+  Uint8List? revealDataWith(List<String> keys, Uint8List value) =>
+      _api.revealDataWith(keys, value);
 
-  String getSignatureOfBytes(List<int> data) {
-    return api.getSignatureOfBytes(data);
-  }
+  String getSignature(List<String> keys) => _api.getSignature(keys);
 
-  bool validSignature(String signature, List<String> keys) {
-    return api.validSignature(signature, keys);
-  }
+  String getSignatureOfValue(String value) => _api.getSignatureOfValue(value);
 
-  String readableObfuscate(String value) {
-    return api.readableObfuscate(value);
-  }
+  String getSignatureOfBytes(List<int> data) => _api.getSignatureOfBytes(data);
 
-  String? translate(BuildContext context, String key, {List<String>? values}) {
-    return AppLocalizations.of(context)!.translate(
-      key,
-      values: values,
-    );
-  }
+  bool validSignature(String signature, List<String> keys) =>
+      _api.validSignature(signature, keys);
 
-  Future<String?> translateWithLang(String lang, String key,
-      {List<String>? values}) {
-    return AppLocalizations.sTranslate(lang, key, values: values);
-  }
+  String readableObfuscate(String value) => _api.readableObfuscate(value);
+
+  String? translate(
+    BuildContext context,
+    String key, {
+    List<String>? values,
+  }) =>
+      appLocalizations?.translate(
+        key,
+        values: values,
+      );
+
+  Future<String?> translateWithLang(
+    String lang,
+    String key, {
+    List<String>? values,
+  }) =>
+      useEncrypted
+          ? AppLocalizations.sTranslate(lang, key, values: values)
+          : AppLocalizationsTest.sTranslate(lang, key, values: values);
 
   Future<Uint8List?> revealAsset(String key) async {
     var asset = await rootBundle.load(key);
@@ -180,14 +190,18 @@ class Stringcare {
 
   String? getLangWithContext(BuildContext? context) {
     if (context == null) return null;
-    return AppLocalizations.of(context)?.getLang();
+    return appLocalizations?.getLang();
   }
 
   Future<bool> load() => loadWithContext(context);
 
+  AppLocalizationsInterface? get appLocalizations => useEncrypted
+      ? AppLocalizations.of(context)
+      : AppLocalizationsTest.of(context);
+
   Future<bool> loadWithContext(BuildContext? context) async {
     if (context == null) return false;
-    return AppLocalizations.of(context)?.load() ?? Future.value(false);
+    return appLocalizations?.load() ?? Future.value(false);
   }
 
   Future<void> refreshWithLangWithContext(

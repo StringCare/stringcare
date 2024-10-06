@@ -1,3 +1,7 @@
+## 1.0.0
+
+* Stable version. Added `disableNative` and `useEncrypted` for testing purposes.
+
 ## 0.1.7
 
 * Dependencies updated

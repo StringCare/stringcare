@@ -246,7 +246,7 @@ class ScAssetImageProvider extends ScAssetBundleImageProvider {
   }
 
   @override
-  int get hashCode => hashValues(keyName, bundle);
+  int get hashCode => Object.hash(keyName, bundle);
 
   @override
   String toString() =>
