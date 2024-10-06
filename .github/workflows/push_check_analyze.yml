@@ -1,0 +1,67 @@
+name: Push Analyze Check
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  push_check_analyze:
+
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+
+      - name: Install Landa Messenger CLI
+        run: npm install @landamessenger/landa-messenger-api -g
+
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
+          flutter-version: '3.24.3'
+
+      - run: flutter pub get
+
+      - run: flutter analyze
+
+      - name: Handle job completion
+        if: always()
+        run: |
+          if [ "${{ job.status }}" == "failure" ]; then
+            landa-messenger-api chat-send \
+              --id "${{ secrets.CHAT_ID }}" \
+              --api_key "${{ secrets.CHAT_KEY }}" \
+              --title "🔴 Analysis Failed" \
+              --body "${{ github.repository }}: ${{ github.event.head_commit.message }}" \
+              --url "https://github.com/stringcare/stringcare/actions/workflows/push_check_analyze.yml" \
+              --image "https://avatars.githubusercontent.com/u/63705403?s=200&v=4" \
+              --background_color "#55000000" \
+              --text_color "#FFFFFFFF"
+          elif [ "${{ job.status }}" == "cancelled" ]; then
+            landa-messenger-api chat-send \
+              --id "${{ secrets.CHAT_ID }}" \
+              --api_key "${{ secrets.CHAT_KEY }}" \
+              --title "🟠 Analysis Canceled" \
+              --body "${{ github.repository }}: ${{ github.event.head_commit.message }}" \
+              --url "https://github.com/stringcare/stringcare/actions/workflows/push_check_analyze.yml" \
+              --image "https://avatars.githubusercontent.com/u/63705403?s=200&v=4" \
+              --background_color "#55000000" \
+              --text_color "#FFFFFFFF"
+          else
+            landa-messenger-api chat-send \
+              --id "${{ secrets.CHAT_ID }}" \
+              --api_key "${{ secrets.CHAT_KEY }}" \
+              --title "🟢 Analysis Passed" \
+              --body "${{ github.repository }}: ${{ github.event.head_commit.message }}" \
+              --url "https://github.com/stringcare/stringcare/actions/workflows/push_check_analyze.yml" \
+              --image "https://avatars.githubusercontent.com/u/63705403?s=200&v=4" \
+              --background_color "#55000000" \
+              --text_color "#FFFFFFFF"
+          fi
+

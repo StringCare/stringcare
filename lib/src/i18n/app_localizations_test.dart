@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
 
@@ -7,7 +8,7 @@ import 'package:stringcare/stringcare.dart';
 
 import 'app_localizations_interface.dart';
 
-class AppLocalizations extends AppLocalizationsInterface {
+class AppLocalizationsTest extends AppLocalizationsInterface {
   final Locale systemLocale;
 
   final dividerA = '-';
@@ -36,17 +37,18 @@ class AppLocalizations extends AppLocalizationsInterface {
     return systemLocale;
   }
 
-  AppLocalizations(this.systemLocale);
+  AppLocalizationsTest(this.systemLocale);
 
   // Helper method to keep the code in the widgets concise
   // Localizations are accessed using an InheritedWidget "of" syntax
-  static AppLocalizations? of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations);
+  static AppLocalizationsTest? of(BuildContext context) {
+    return Localizations.of<AppLocalizationsTest>(
+        context, AppLocalizationsTest);
   }
 
   // Static member to have a simple access to the delegate from the MaterialApp
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizationsTest> delegate =
+      _AppLocalizationsDelegateTest();
 
   late Map<String, String> _localizedStrings;
 
@@ -63,35 +65,27 @@ class AppLocalizations extends AppLocalizationsInterface {
     try {
       var data;
       if (countryCode.isNotEmpty) {
-        data = await rootBundle
-            .load('${Stringcare().languageOrigin}/${languageCode}_$countryCode.json');
+        final file = File('${Stringcare().languageOrigin}/${languageCode}_$countryCode.json');
+        data = file.readAsBytesSync();
       } else {
-        data = await rootBundle
-            .load('${Stringcare().languageOrigin}/$languageCode.json');
+        final file = File('${Stringcare().languageOrigin}/${languageCode}.json');
+        data = file.readAsBytesSync();
       }
-      var jsonRevealed = Stringcare().revealData(data.buffer.asUint8List());
-      if (jsonRevealed != null) {
+      jsonMap = json.decode(
+        utf8.decode(
+          data,
+          allowMalformed: true,
+        ),
+      );
+    } catch (e) {
+      try {
+        final file = File('${Stringcare().languageOrigin}/$languageCode.json');
         jsonMap = json.decode(
           utf8.decode(
-            jsonRevealed,
+            file.readAsBytesSync(),
             allowMalformed: true,
           ),
         );
-      }
-    } catch (e) {
-      try {
-        var data = await rootBundle.load(
-          '${Stringcare().languageOrigin}/$languageCode.json',
-        );
-        var jsonRevealed = Stringcare().revealData(data.buffer.asUint8List());
-        if (jsonRevealed != null) {
-          jsonMap = json.decode(
-            utf8.decode(
-              jsonRevealed,
-              allowMalformed: true,
-            ),
-          );
-        }
       } catch (e) {
         _localizedStrings = Map();
       }
@@ -159,15 +153,17 @@ class AppLocalizations extends AppLocalizationsInterface {
         data = await rootBundle
             .load('${Stringcare().languageOrigin}/${lang}_$country.json');
       } else {
-        data = await rootBundle.load('${Stringcare().languageOrigin}/$lang.json');
+        data =
+            await rootBundle.load('${Stringcare().languageOrigin}/$lang.json');
       }
-      var jsonRevealed = Stringcare().revealData(data.buffer.asUint8List())!;
-      jsonMap = json.decode(utf8.decode(jsonRevealed, allowMalformed: true));
+      jsonMap = json
+          .decode(utf8.decode(data.buffer.asUint8List(), allowMalformed: true));
     } catch (e) {
       try {
-        var data = await rootBundle.load('${Stringcare().languageOrigin}/$lang.json');
-        var jsonRevealed = Stringcare().revealData(data.buffer.asUint8List())!;
-        jsonMap = json.decode(utf8.decode(jsonRevealed, allowMalformed: true));
+        var data =
+            await rootBundle.load('${Stringcare().languageOrigin}/$lang.json');
+        jsonMap = json.decode(
+            utf8.decode(data.buffer.asUint8List(), allowMalformed: true));
       } catch (e) {
         return "";
       }
@@ -220,11 +216,11 @@ class AppLocalizations extends AppLocalizationsInterface {
   }
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegateTest
+    extends LocalizationsDelegate<AppLocalizationsTest> {
   // This delegate instance will never change (it doesn't even have fields!)
   // It can provide a constant constructor.
-  const _AppLocalizationsDelegate();
+  const _AppLocalizationsDelegateTest();
 
   @override
   bool isSupported(Locale locale) {
@@ -238,15 +234,15 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  Future<AppLocalizations> load(Locale locale) async {
-    AppLocalizations localizations = new AppLocalizations(locale);
+  Future<AppLocalizationsTest> load(Locale locale) async {
+    AppLocalizationsTest localizations = new AppLocalizationsTest(locale);
     RemoteLanguages().localizations = localizations;
     await localizations.load();
     return localizations;
   }
 
   @override
-  bool shouldReload(_AppLocalizationsDelegate old) {
+  bool shouldReload(_AppLocalizationsDelegateTest old) {
     if (RemoteLanguages().shouldReload) {
       RemoteLanguages().shouldReload = false;
       return true;

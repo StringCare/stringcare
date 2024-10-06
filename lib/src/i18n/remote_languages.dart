@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
-
-import 'app_localizations.dart';
+import 'package:stringcare/src/i18n/app_localizations_interface.dart';
 
 class RemoteLanguages {
   static RemoteLanguages? _instance;
@@ -15,7 +14,7 @@ class RemoteLanguages {
   }
 
   Map<String, Map<String, String>> localizedStrings = Map();
-  AppLocalizations? localizations;
+  AppLocalizationsInterface? localizations;
 
   Future<void> addLanguage(String language, Map<String, String> values) async {
     localizedStrings[language] = values;
